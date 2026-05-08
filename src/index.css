@@ -1,0 +1,48 @@
+:root {
+  /* Primary Colors */
+  --color-primary: #9B1F28;
+  --color-primary-light: #C4404A;
+  --color-primary-dark: #6B1219;
+
+  /* Secondary Colors */
+  --color-secondary: #C2D4C4;
+  --color-accent: #C4A04A;
+
+  /* Background Colors */
+  --color-bg-primary: #F5EFE0;
+  --color-bg-secondary: #C2D4C4;
+  --color-bg-card: #FAF6EE;
+
+  /* Text Colors */
+  --color-text-primary: #1E1E1E;
+  --color-text-secondary: #5C4A3A;
+  --color-text-muted: #8B7355;
+
+  /* Border / Outline */
+  --color-border: #B8A898;
+  --color-border-dark: #8B7355;
+
+  /* Interactive Colors */
+  --color-button-primary: #9B1F28;
+  --color-button-hover: #6B1219;
+  --color-link: #9B1F28;
+  --color-link-hover: #C4A04A;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
