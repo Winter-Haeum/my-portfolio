@@ -10,29 +10,34 @@ function AboutMeSection() {
     <Box
       component='section'
       sx={{
-        bgcolor: 'var(--color-bg-primary)',
+        bgcolor: 'var(--color-bg-secondary)',
         py: { xs: 6, md: 10 },
-        borderBottom: '1px solid var(--color-border)',
+        borderBottom: '2px solid var(--color-border)',
       }}
     >
       <Container maxWidth='md'>
-        <Typography
-          variant='h2'
+        <Box
           sx={{
-            fontSize: { xs: '1.6rem', md: '2.2rem' },
-            color: 'var(--color-primary)',
-            mb: 3,
-            textAlign: 'center',
+            display: 'inline-block',
+            bgcolor: 'var(--color-secondary)',
+            border: '2px solid var(--color-border)',
+            boxShadow: '4px 4px 0px var(--color-border)',
+            px: 3,
+            py: 1,
+            mb: 4,
           }}
         >
-          About Me
-        </Typography>
+          <Typography
+            variant='h2'
+            sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+          >
+            About Me
+          </Typography>
+        </Box>
         <Card
           sx={{
             bgcolor: 'var(--color-bg-card)',
-            border: '1px solid var(--color-border)',
-            boxShadow: 'none',
-            mb: 3,
+            mb: 4,
           }}
         >
           <CardContent sx={{ p: { xs: 3, md: 4 } }}>
@@ -46,6 +51,7 @@ function AboutMeSection() {
             variant='contained'
             sx={{
               bgcolor: 'var(--color-button-primary)',
+              color: 'var(--color-text-primary)',
               '&:hover': { bgcolor: 'var(--color-button-hover)' },
               px: 4,
               py: 1.2,

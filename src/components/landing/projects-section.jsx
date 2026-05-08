@@ -17,31 +17,31 @@ function ProjectsSection() {
     <Box
       component='section'
       sx={{
-        bgcolor: 'var(--color-bg-primary)',
+        bgcolor: 'var(--color-bg-secondary)',
         py: { xs: 6, md: 10 },
-        borderBottom: '1px solid var(--color-border)',
+        borderBottom: '2px solid var(--color-border)',
       }}
     >
       <Container maxWidth='md'>
-        <Typography
-          variant='h2'
+        <Box
           sx={{
-            fontSize: { xs: '1.6rem', md: '2.2rem' },
-            color: 'var(--color-primary)',
-            mb: 1,
-            textAlign: 'center',
+            display: 'inline-block',
+            bgcolor: 'var(--color-primary)',
+            border: '2px solid var(--color-border)',
+            boxShadow: '4px 4px 0px var(--color-border)',
+            px: 3,
+            py: 1,
+            mb: 2,
           }}
         >
-          Projects
-        </Typography>
-        <Typography
-          sx={{
-            color: 'var(--color-text-muted)',
-            textAlign: 'center',
-            mb: 4,
-            fontSize: '0.95rem',
-          }}
-        >
+          <Typography
+            variant='h2'
+            sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+          >
+            Projects
+          </Typography>
+        </Box>
+        <Typography sx={{ color: 'var(--color-text-muted)', mb: 4, fontSize: '0.95rem' }}>
           여기는 Projects 섹션입니다. 대표작 썸네일 3-4개와 &apos;더 보기&apos; 버튼이 들어갈 예정입니다.
         </Typography>
         <Grid container spacing={3} sx={{ mb: 4 }}>
@@ -50,8 +50,6 @@ function ProjectsSection() {
               <Card
                 sx={{
                   bgcolor: 'var(--color-bg-card)',
-                  border: '1px solid var(--color-border)',
-                  boxShadow: 'none',
                   height: 140,
                   display: 'flex',
                   alignItems: 'center',
@@ -59,7 +57,7 @@ function ProjectsSection() {
                 }}
               >
                 <CardContent>
-                  <Typography sx={{ color: 'var(--color-text-secondary)', fontWeight: 600 }}>
+                  <Typography sx={{ color: 'var(--color-text-primary)', fontWeight: 700 }}>
                     {project.title}
                   </Typography>
                 </CardContent>
@@ -69,11 +67,11 @@ function ProjectsSection() {
         </Grid>
         <Box sx={{ textAlign: 'center' }}>
           <Button
-            variant='outlined'
+            variant='contained'
             sx={{
-              borderColor: 'var(--color-primary)',
-              color: 'var(--color-primary)',
-              '&:hover': { borderColor: 'var(--color-button-hover)', color: 'var(--color-button-hover)' },
+              bgcolor: 'var(--color-accent)',
+              color: 'var(--color-text-primary)',
+              '&:hover': { bgcolor: 'var(--color-primary)' },
               px: 4,
               py: 1.2,
             }}

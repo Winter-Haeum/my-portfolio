@@ -1,32 +1,37 @@
 :root {
   /* Primary Colors */
-  --color-primary: #9B1F28;
-  --color-primary-light: #C4404A;
-  --color-primary-dark: #6B1219;
+  --color-primary: #F4845F;
+  --color-primary-light: #F9A88A;
+  --color-primary-dark: #D4623D;
 
   /* Secondary Colors */
-  --color-secondary: #C2D4C4;
-  --color-accent: #C4A04A;
+  --color-secondary: #4BAE76;
+  --color-accent: #F5C842;
 
   /* Background Colors */
-  --color-bg-primary: #F5EFE0;
-  --color-bg-secondary: #C2D4C4;
-  --color-bg-card: #FAF6EE;
+  --color-bg-primary: #FAF0E8;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-card: #FFFFFF;
 
   /* Text Colors */
-  --color-text-primary: #1E1E1E;
-  --color-text-secondary: #5C4A3A;
-  --color-text-muted: #8B7355;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #555555;
+  --color-text-muted: #888888;
 
   /* Border / Outline */
-  --color-border: #B8A898;
-  --color-border-dark: #8B7355;
+  --color-border: #1A1A1A;
+  --color-border-light: #E0D8D0;
 
   /* Interactive Colors */
-  --color-button-primary: #9B1F28;
-  --color-button-hover: #6B1219;
-  --color-link: #9B1F28;
-  --color-link-hover: #C4A04A;
+  --color-button-primary: #F4845F;
+  --color-button-hover: #D4623D;
+  --color-link: #4BAE76;
+  --color-link-hover: #F4845F;
+
+  /* Extra Colors */
+  --color-profile-bg: #A855C8;
+  --color-tech-stack: #A0D0F0;
+  --color-contact: #F5C842;
 }
 
 * {

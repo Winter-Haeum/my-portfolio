@@ -13,9 +13,28 @@ const NAV_ITEMS = [
 
 function NavBar() {
   return (
-    <AppBar position='sticky' sx={{ bgcolor: 'var(--color-primary)', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
+    <AppBar
+      position='sticky'
+      sx={{
+        bgcolor: 'var(--color-bg-primary)',
+        borderBottom: '2px solid var(--color-border)',
+        boxShadow: '0 2px 0px var(--color-border)',
+      }}
+    >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Typography variant='h6' sx={{ fontWeight: 700, color: 'var(--color-bg-primary)', letterSpacing: 1 }}>
+        <Typography
+          variant='h6'
+          sx={{
+            fontWeight: 900,
+            color: 'var(--color-text-primary)',
+            letterSpacing: 1,
+            px: 1.5,
+            py: 0.5,
+            border: '2px solid var(--color-border)',
+            bgcolor: 'var(--color-primary)',
+            boxShadow: '3px 3px 0px var(--color-border)',
+          }}
+        >
           Portfolio
         </Typography>
         <Box sx={{ display: 'flex', gap: 1 }}>
@@ -26,14 +45,21 @@ function NavBar() {
               to={item.to}
               end={item.to === '/'}
               sx={{
-                color: 'var(--color-bg-primary)',
-                fontWeight: 500,
-                '&.active': {
-                  color: 'var(--color-accent)',
-                  borderBottom: '2px solid var(--color-accent)',
-                  borderRadius: 0,
+                color: 'var(--color-text-primary)',
+                fontWeight: 700,
+                border: '2px solid transparent',
+                boxShadow: 'none',
+                '&:hover': {
+                  boxShadow: 'none',
+                  transform: 'none',
+                  bgcolor: 'var(--color-primary-light)',
+                  border: '2px solid var(--color-border)',
                 },
-                '&:hover': { color: 'var(--color-accent)' },
+                '&.active': {
+                  bgcolor: 'var(--color-secondary)',
+                  border: '2px solid var(--color-border)',
+                  boxShadow: '2px 2px 0px var(--color-border)',
+                },
               }}
             >
               {item.label}
