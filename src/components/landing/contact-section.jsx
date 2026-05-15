@@ -3,6 +3,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Divider from '@mui/material/Divider';
+import EmailCopyArea from './email-copy-area';
+import SnsButtons from './sns-buttons';
+import GuestbookSection from './guestbook-section';
 
 function ContactSection() {
   return (
@@ -14,6 +18,7 @@ function ContactSection() {
       }}
     >
       <Container maxWidth='md'>
+        {/* 섹션 제목 */}
         <Box
           sx={{
             display: 'inline-block',
@@ -32,11 +37,56 @@ function ContactSection() {
             Contact
           </Typography>
         </Box>
-        <Card sx={{ bgcolor: 'var(--color-bg-card)' }}>
-          <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-            <Typography sx={{ color: 'var(--color-text-secondary)', lineHeight: 1.8 }}>
-              여기는 Contact 섹션입니다. 연락처, SNS, 간단한 메시지 폼이 들어갈 예정입니다.
+
+        {/* 메인 카드 */}
+        <Card
+          sx={{
+            bgcolor: 'var(--color-bg-card)',
+            border: '2px solid var(--color-border-light)',
+            boxShadow: 'none',
+          }}
+        >
+          <CardContent sx={{ p: { xs: 3, md: 5 } }}>
+
+            {/* 소개 메시지 */}
+            <Typography
+              sx={{
+                color: 'var(--color-text-secondary)',
+                fontSize: { xs: '1rem', md: '1.05rem' },
+                lineHeight: 1.8,
+                mb: 3,
+              }}
+            >
+              기록하며 성장하는 프론트엔드 개발자,
+              <br />
+              작은 성장들을 꾸준히 쌓아가는 중입니다 🌱
             </Typography>
+
+            <Divider sx={{ mb: 3, borderColor: 'var(--color-border-light)' }} />
+
+            {/* 이메일 영역 */}
+            <Box sx={{ mb: 1 }}>
+              <Typography
+                sx={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', mb: 1.5, letterSpacing: '0.05em', textTransform: 'uppercase' }}
+              >
+                Email
+              </Typography>
+              <EmailCopyArea />
+            </Box>
+
+            {/* SNS 버튼 영역 */}
+            <Box sx={{ mt: 3 }}>
+              <Typography
+                sx={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', mb: 1.5, letterSpacing: '0.05em', textTransform: 'uppercase' }}
+              >
+                Links
+              </Typography>
+              <SnsButtons />
+            </Box>
+
+            {/* 방명록 영역 */}
+            <GuestbookSection />
+
           </CardContent>
         </Card>
       </Container>
