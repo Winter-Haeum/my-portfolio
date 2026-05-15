@@ -33,10 +33,12 @@
   --color-tech-stack: #A0D0F0;
   --color-contact: #F5C842;
 
-  /* Button Colors (1안 크림 화이트) */
-  --color-btn-base: #FFFDF9;
-  --color-btn-hover: #F0EDE8;
-  --color-contact-deep: #D4A000;
+  /* Button Colors */
+  --color-btn-base: #FFFFFF;
+  --color-btn-hover: #F5F5F5;
+  --color-btn-active: #FFD84D;
+  --color-btn-active-hover: #FFC93C;
+  --color-contact-deep: #FFC93C;
 }
 
 * {

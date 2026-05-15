@@ -67,7 +67,7 @@ function ContactSection() {
             {/* 이메일 + SNS 묶음 영역 */}
             <Box
               sx={{
-                bgcolor: 'var(--color-btn-base)',
+                bgcolor: '#F8F8F8',
                 border: '1.5px solid var(--color-border-light)',
                 borderRadius: 1,
                 p: { xs: 2, md: 2.5 },

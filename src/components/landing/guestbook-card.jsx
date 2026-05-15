@@ -54,7 +54,7 @@ function GuestbookCard({ name, message, emoji = '🌱', keyword, role, created_a
               px: 1,
               py: 0.3,
               border: '1.5px solid var(--color-border)',
-              bgcolor: 'var(--color-contact)',
+              bgcolor: 'var(--color-btn-active)',
               color: 'var(--color-text-primary)',
               fontWeight: 700,
             }}

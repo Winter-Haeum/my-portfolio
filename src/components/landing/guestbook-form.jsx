@@ -102,13 +102,13 @@ function GuestbookForm({ onSubmitSuccess }) {
                   border: '2px solid',
                   borderColor: form.emoji === emoji ? 'var(--color-border)' : 'var(--color-border-light)',
                   borderRadius: 1,
-                  bgcolor: form.emoji === emoji ? 'var(--color-contact)' : 'var(--color-btn-base)',
+                  bgcolor: form.emoji === emoji ? 'var(--color-btn-active)' : 'var(--color-btn-base)',
                   boxShadow: form.emoji === emoji ? '2px 2px 0px var(--color-border)' : 'none',
                   transition: 'border-color 0.15s, background-color 0.15s, box-shadow 0.15s',
                   lineHeight: 1,
                   '&:hover': {
                     borderColor: 'var(--color-border)',
-                    bgcolor: form.emoji === emoji ? 'var(--color-contact)' : 'var(--color-btn-hover)',
+                    bgcolor: form.emoji === emoji ? 'var(--color-btn-active)' : 'var(--color-btn-hover)',
                   },
                 }}
               >
@@ -178,13 +178,13 @@ function GuestbookForm({ onSubmitSuccess }) {
                   border: '2px solid',
                   borderColor: form.keyword === kw ? 'var(--color-border)' : 'var(--color-border-light)',
                   cursor: 'pointer',
-                  bgcolor: form.keyword === kw ? 'var(--color-contact)' : 'var(--color-btn-base)',
+                  bgcolor: form.keyword === kw ? 'var(--color-btn-active)' : 'var(--color-btn-base)',
                   boxShadow: form.keyword === kw ? '2px 2px 0px var(--color-border)' : 'none',
                   transition: 'background-color 0.15s, border-color 0.15s, box-shadow 0.15s',
                   fontWeight: 600,
                   '&:hover': {
                     borderColor: 'var(--color-border)',
-                    bgcolor: form.keyword === kw ? 'var(--color-contact)' : 'var(--color-btn-hover)',
+                    bgcolor: form.keyword === kw ? 'var(--color-btn-active)' : 'var(--color-btn-hover)',
                   },
                 }}
               >
@@ -201,7 +201,7 @@ function GuestbookForm({ onSubmitSuccess }) {
             alignSelf: 'flex-end',
             border: '2px solid var(--color-border)',
             borderRadius: 1,
-            bgcolor: 'var(--color-contact)',
+            bgcolor: 'var(--color-btn-active)',
             color: 'var(--color-text-primary)',
             fontWeight: 700,
             fontSize: '0.9rem',
@@ -210,8 +210,8 @@ function GuestbookForm({ onSubmitSuccess }) {
             py: 1,
             boxShadow: '3px 3px 0px var(--color-border)',
             '&:hover': {
-              bgcolor: 'var(--color-contact-deep)',
-              color: '#fff',
+              bgcolor: 'var(--color-btn-active-hover)',
+              color: 'var(--color-text-primary)',
               boxShadow: '1px 1px 0px var(--color-border)',
               transform: 'translate(1px, 1px)',
             },
