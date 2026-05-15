@@ -64,24 +64,37 @@ function ContactSection() {
 
             <Divider sx={{ mb: 3, borderColor: 'var(--color-border-light)' }} />
 
-            {/* 이메일 영역 */}
-            <Box sx={{ mb: 1 }}>
-              <Typography
-                sx={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', mb: 1.5, letterSpacing: '0.05em', textTransform: 'uppercase' }}
-              >
-                Email
-              </Typography>
-              <EmailCopyArea />
-            </Box>
+            {/* 이메일 + SNS 묶음 영역 */}
+            <Box
+              sx={{
+                bgcolor: 'var(--color-btn-base)',
+                border: '1.5px solid var(--color-border-light)',
+                borderRadius: 1,
+                p: { xs: 2, md: 2.5 },
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2.5,
+              }}
+            >
+              {/* 이메일 */}
+              <Box>
+                <Typography
+                  sx={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-muted)', mb: 1.2, letterSpacing: '0.06em', textTransform: 'uppercase' }}
+                >
+                  Email
+                </Typography>
+                <EmailCopyArea />
+              </Box>
 
-            {/* SNS 버튼 영역 */}
-            <Box sx={{ mt: 3 }}>
-              <Typography
-                sx={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', mb: 1.5, letterSpacing: '0.05em', textTransform: 'uppercase' }}
-              >
-                Links
-              </Typography>
-              <SnsButtons />
+              {/* SNS 버튼 */}
+              <Box>
+                <Typography
+                  sx={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-muted)', mb: 1.2, letterSpacing: '0.06em', textTransform: 'uppercase' }}
+                >
+                  Links
+                </Typography>
+                <SnsButtons />
+              </Box>
             </Box>
 
             {/* 방명록 영역 */}

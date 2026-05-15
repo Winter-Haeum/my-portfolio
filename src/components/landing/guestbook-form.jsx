@@ -98,12 +98,18 @@ function GuestbookForm({ onSubmitSuccess }) {
                 sx={{
                   fontSize: '1.4rem',
                   cursor: 'pointer',
-                  p: 0.5,
+                  p: 0.6,
                   border: '2px solid',
-                  borderColor: form.emoji === emoji ? 'var(--color-border)' : 'transparent',
+                  borderColor: form.emoji === emoji ? 'var(--color-border)' : 'var(--color-border-light)',
                   borderRadius: 1,
-                  transition: 'border-color 0.15s',
+                  bgcolor: form.emoji === emoji ? 'var(--color-contact)' : 'var(--color-btn-base)',
+                  boxShadow: form.emoji === emoji ? '2px 2px 0px var(--color-border)' : 'none',
+                  transition: 'border-color 0.15s, background-color 0.15s, box-shadow 0.15s',
                   lineHeight: 1,
+                  '&:hover': {
+                    borderColor: 'var(--color-border)',
+                    bgcolor: form.emoji === emoji ? 'var(--color-contact)' : 'var(--color-btn-hover)',
+                  },
                 }}
               >
                 {emoji}
@@ -169,11 +175,17 @@ function GuestbookForm({ onSubmitSuccess }) {
                   fontSize: '0.8rem',
                   px: 1.5,
                   py: 0.5,
-                  border: '2px solid var(--color-border)',
+                  border: '2px solid',
+                  borderColor: form.keyword === kw ? 'var(--color-border)' : 'var(--color-border-light)',
                   cursor: 'pointer',
-                  bgcolor: form.keyword === kw ? 'var(--color-contact)' : 'var(--color-bg-primary)',
-                  transition: 'background-color 0.15s',
+                  bgcolor: form.keyword === kw ? 'var(--color-contact)' : 'var(--color-btn-base)',
+                  boxShadow: form.keyword === kw ? '2px 2px 0px var(--color-border)' : 'none',
+                  transition: 'background-color 0.15s, border-color 0.15s, box-shadow 0.15s',
                   fontWeight: 600,
+                  '&:hover': {
+                    borderColor: 'var(--color-border)',
+                    bgcolor: form.keyword === kw ? 'var(--color-contact)' : 'var(--color-btn-hover)',
+                  },
                 }}
               >
                 {kw}
@@ -192,11 +204,14 @@ function GuestbookForm({ onSubmitSuccess }) {
             bgcolor: 'var(--color-contact)',
             color: 'var(--color-text-primary)',
             fontWeight: 700,
+            fontSize: '0.9rem',
+            textTransform: 'none',
             px: 3,
             py: 1,
             boxShadow: '3px 3px 0px var(--color-border)',
             '&:hover': {
-              bgcolor: 'var(--color-accent)',
+              bgcolor: 'var(--color-contact-deep)',
+              color: '#fff',
               boxShadow: '1px 1px 0px var(--color-border)',
               transform: 'translate(1px, 1px)',
             },
