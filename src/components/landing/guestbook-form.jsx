@@ -22,10 +22,11 @@ function GuestbookForm({ onSubmitSuccess }) {
   const [form, setForm] = useState({
     name: '',
     message: '',
-    email: '',
     role: '',
     emoji: '🌱',
     keyword: '',
+    is_private: false,
+    private_password: '',
   });
   const [loading, setLoading] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, msg: '' });
@@ -42,6 +43,10 @@ function GuestbookForm({ onSubmitSuccess }) {
     setForm((prev) => ({ ...prev, keyword: prev.keyword === keyword ? '' : keyword }));
   };
 
+  const handlePrivateToggle = () => {
+    setForm((prev) => ({ ...prev, is_private: !prev.is_private, private_password: '' }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.message.trim()) return;
@@ -51,10 +56,11 @@ function GuestbookForm({ onSubmitSuccess }) {
       {
         name: form.name.trim(),
         message: form.message.trim(),
-        email: form.email.trim() || null,
         role: form.role.trim() || null,
         emoji: form.emoji,
         keyword: form.keyword || null,
+        is_private: form.is_private,
+        private_password: form.is_private ? (form.private_password.trim() || null) : null,
       },
     ]);
     setLoading(false);
@@ -65,7 +71,7 @@ function GuestbookForm({ onSubmitSuccess }) {
     }
 
     setSnackbar({ open: true, msg: '방명록이 등록되었어요 🌱' });
-    setForm({ name: '', message: '', email: '', role: '', emoji: '🌱', keyword: '' });
+    setForm({ name: '', message: '', role: '', emoji: '🌱', keyword: '', is_private: false, private_password: '' });
     onSubmitSuccess();
   };
 
@@ -78,12 +84,11 @@ function GuestbookForm({ onSubmitSuccess }) {
     },
   };
 
+  const isSubmittable = form.name.trim() && form.message.trim();
+
   return (
     <>
       <Box component='form' onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Typography sx={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-text-secondary)' }}>
-          방명록 남기기
-        </Typography>
 
         {/* 이모지 선택 */}
         <Box>
@@ -151,16 +156,6 @@ function GuestbookForm({ onSubmitSuccess }) {
           sx={inputSx}
         />
 
-        {/* 이메일 (선택, 비공개) */}
-        <TextField
-          label='이메일 (선택 · 비공개 저장)'
-          value={form.email}
-          onChange={handleChange('email')}
-          size='small'
-          type='email'
-          sx={inputSx}
-        />
-
         {/* 키워드 선택 */}
         <Box>
           <Typography sx={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', mb: 0.8 }}>
@@ -194,37 +189,84 @@ function GuestbookForm({ onSubmitSuccess }) {
           </Box>
         </Box>
 
-        <Button
-          type='submit'
-          disabled={loading || !form.name.trim() || !form.message.trim()}
-          sx={{
-            alignSelf: 'flex-end',
-            border: '2px solid var(--color-border)',
-            borderRadius: 1,
-            bgcolor: 'var(--color-btn-active)',
-            color: 'var(--color-text-primary)',
-            fontWeight: 700,
-            fontSize: '0.9rem',
-            textTransform: 'none',
-            px: 3,
-            py: 1,
-            boxShadow: '3px 3px 0px var(--color-border)',
-            '&:hover': {
-              bgcolor: 'var(--color-btn-active-hover)',
-              color: 'var(--color-text-primary)',
-              boxShadow: '1px 1px 0px var(--color-border)',
-              transform: 'translate(1px, 1px)',
-            },
-            '&:disabled': {
-              bgcolor: 'var(--color-border-light)',
-              color: 'var(--color-text-muted)',
-              boxShadow: 'none',
-            },
-            transition: 'all 0.15s',
-          }}
-        >
-          {loading ? '등록 중...' : '방명록 남기기'}
-        </Button>
+        {/* 비공개 옵션 */}
+        <Box>
+          <Box
+            onClick={handlePrivateToggle}
+            sx={{ display: 'flex', alignItems: 'center', gap: 1, cursor: 'pointer', width: 'fit-content' }}
+          >
+            <Box
+              sx={{
+                width: 18,
+                height: 18,
+                border: '2px solid var(--color-border)',
+                bgcolor: form.is_private ? 'var(--color-btn-active)' : '#FFFFFF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                transition: 'background-color 0.15s',
+              }}
+            >
+              {form.is_private && (
+                <Box component='span' sx={{ fontSize: '0.65rem', fontWeight: 900, lineHeight: 1, color: '#222' }}>
+                  ✓
+                </Box>
+              )}
+            </Box>
+            <Typography sx={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', userSelect: 'none' }}>
+              비공개로 작성하기 🔒
+            </Typography>
+          </Box>
+
+          {form.is_private && (
+            <TextField
+              label='비공개 글 확인용 비밀번호 (선택)'
+              value={form.private_password}
+              onChange={handleChange('private_password')}
+              size='small'
+              type='password'
+              placeholder='관리자 확인용 비밀번호'
+              sx={{ ...inputSx, mt: 1.5, width: '100%' }}
+            />
+          )}
+        </Box>
+
+        {/* 제출 버튼 */}
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            type='submit'
+            disabled={loading || !isSubmittable}
+            sx={{
+              border: '2px solid #222',
+              borderRadius: '8px',
+              bgcolor: '#FFD84D',
+              color: '#222',
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              textTransform: 'none',
+              px: 4,
+              py: 1.2,
+              boxShadow: '3px 3px 0px #222',
+              transition: 'background-color 0.18s, box-shadow 0.18s, transform 0.15s',
+              '&:hover': {
+                bgcolor: '#FFC93C',
+                color: '#222',
+                boxShadow: '1px 1px 0px #222',
+                transform: 'translate(1px, 1px)',
+              },
+              '&:disabled': {
+                bgcolor: '#FFD84D',
+                color: '#222',
+                opacity: 0.4,
+                boxShadow: 'none',
+                border: '2px solid #222',
+              },
+            }}
+          >
+            {loading ? '등록 중...' : '방명록 남기기'}
+          </Button>
+        </Box>
       </Box>
 
       <Snackbar
