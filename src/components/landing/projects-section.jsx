@@ -69,11 +69,22 @@ function ProjectsSection() {
           <Button
             variant='contained'
             sx={{
-              bgcolor: 'var(--color-accent)',
-              color: 'var(--color-text-primary)',
-              '&:hover': { bgcolor: 'var(--color-primary)' },
+              bgcolor: '#FFB36B',
+              color: '#222',
+              border: '2px solid #222',
+              borderRadius: '8px',
+              boxShadow: '3px 3px 0px #222',
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              textTransform: 'none',
               px: 4,
               py: 1.2,
+              transition: 'background-color 0.18s, box-shadow 0.18s, transform 0.15s',
+              '&:hover': {
+                bgcolor: '#FFC58A',
+                boxShadow: '1px 1px 0px #222',
+                transform: 'translate(1px, 1px)',
+              },
             }}
           >
             더 보기

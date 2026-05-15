@@ -250,7 +250,7 @@ function GuestbookForm({ onSubmitSuccess }) {
               boxShadow: '3px 3px 0px #222',
               transition: 'background-color 0.18s, box-shadow 0.18s, transform 0.15s',
               '&:hover': {
-                bgcolor: '#FFC93C',
+                bgcolor: '#FFE27A',
                 color: '#222',
                 boxShadow: '1px 1px 0px #222',
                 transform: 'translate(1px, 1px)',
