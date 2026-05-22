@@ -14,8 +14,11 @@ import TechBadge from '../components/ui/tech-badge';
 
 const PROJECT_DETAILS = {
   WinterLog: {
-    overview:
-      '공부 기록을 자유롭게 남기고 공유할 수 있는 커뮤니티 스타일 웹 프로젝트입니다. 사용자가 게시글 형태로 학습 기록을 남기고, 카테고리와 상태 태그를 통해 기록을 구분할 수 있도록 구성했습니다.',
+    overview: [
+      '공부 기록을 자유롭게 남기고 공유할 수 있는 커뮤니티 스타일 웹 프로젝트입니다.',
+      '사용자가 게시글 형태로 학습 기록을 남기고,',
+      '카테고리와 상태 태그를 통해 기록을 구분할 수 있도록 구성했습니다.',
+    ],
     features: [
       '공부 기록 게시글 UI',
       '카테고리 사이드 메뉴',
@@ -24,10 +27,10 @@ const PROJECT_DETAILS = {
       '반응형 커뮤니티 레이아웃',
     ],
     techReasons: [
-      { tech: 'React', reason: '화면을 컴포넌트 단위로 나누어 관리하기 위해 사용' },
-      { tech: 'JavaScript', reason: '사용자 인터랙션과 데이터 흐름 구현' },
-      { tech: 'MUI', reason: 'UI 요소를 빠르게 구성하기 위해 사용' },
-      { tech: 'Supabase', reason: '데이터 저장과 백엔드 기능 연결을 위해 사용' },
+      { tech: 'React', reason: '화면을 컴포넌트 단위로 나누어 관리하기 위해 사용했습니다.' },
+      { tech: 'JavaScript', reason: '사용자 인터랙션과 데이터 흐름을 구현하기 위해 사용했습니다.' },
+      { tech: 'MUI', reason: 'UI 요소를 빠르게 구성하기 위해 사용했습니다.' },
+      { tech: 'Supabase', reason: '데이터 저장과 백엔드 기능 연결을 위해 사용했습니다.' },
     ],
     implementationPoints: [
       '게시글 카드 구조 설계',
@@ -35,12 +38,18 @@ const PROJECT_DETAILS = {
       '커뮤니티 서비스처럼 보이는 화면 흐름 구성',
       '학습 기록을 보기 쉽게 정리하는 UI 구성',
     ],
-    learnings:
-      'React 컴포넌트 구조를 나누는 방법을 익혔습니다. 게시글 중심 UI를 만들며 데이터가 화면에 배치되는 흐름을 이해했습니다. 추후에는 검색, 댓글, 좋아요 기능을 더 안정적으로 개선할 예정입니다.',
+    learnings: [
+      'React 컴포넌트 구조를 나누는 방법을 익혔습니다.',
+      '게시글 중심 UI를 만들며 데이터가 화면에 배치되는 흐름을 이해했습니다.',
+      '추후에는 검색, 댓글, 좋아요 기능을 더 안정적으로 개선할 예정입니다.',
+    ],
   },
   FitBuddy: {
-    overview:
-      '운동 기록과 운동 SNS 기능을 중심으로 기획한 모바일 운동 웹 프로젝트입니다. 운동 시간 기록, 식단 관리, 캐릭터 성장 요소를 통해 사용자가 운동을 꾸준히 이어갈 수 있도록 구성했습니다.',
+    overview: [
+      '운동 기록과 운동 SNS 기능을 중심으로 기획한 모바일 운동 웹 프로젝트입니다.',
+      '운동 시간 기록, 식단 관리, 캐릭터 성장 요소를 통해',
+      '사용자가 운동을 꾸준히 이어갈 수 있도록 구성했습니다.',
+    ],
     features: [
       '로그인 화면',
       '운동 기록',
@@ -51,10 +60,10 @@ const PROJECT_DETAILS = {
       '캐릭터 성장 시스템',
     ],
     techReasons: [
-      { tech: 'React', reason: '모바일 화면을 컴포넌트 단위로 구성하기 위해 사용' },
-      { tech: 'Vite', reason: '빠른 개발 환경 구성을 위해 사용' },
-      { tech: 'MUI', reason: '폼과 카드 UI를 빠르게 구성하기 위해 사용' },
-      { tech: 'Supabase', reason: '로그인과 데이터 저장 기능을 연결하기 위해 사용' },
+      { tech: 'React', reason: '모바일 화면을 컴포넌트 단위로 구성하기 위해 사용했습니다.' },
+      { tech: 'Vite', reason: '빠른 개발 환경 구성을 위해 사용했습니다.' },
+      { tech: 'MUI', reason: '폼과 카드 UI를 빠르게 구성하기 위해 사용했습니다.' },
+      { tech: 'Supabase', reason: '로그인과 데이터 저장 기능을 연결하기 위해 사용했습니다.' },
     ],
     implementationPoints: [
       '모바일 퍼스트 화면 구성',
@@ -62,8 +71,11 @@ const PROJECT_DETAILS = {
       '운동 기록 데이터를 보여주는 카드형 UI 설계',
       '캐릭터 성장형 서비스 구조 기획',
     ],
-    learnings:
-      '모바일 화면 기준으로 UI를 설계하는 방법을 연습했습니다. 사용자가 꾸준히 앱을 사용하도록 만드는 서비스 흐름을 고민했습니다. 추후에는 만보기, 챌린지, 1대1 채팅 기능을 확장할 예정입니다.',
+    learnings: [
+      '모바일 화면 기준으로 UI를 설계하는 방법을 연습했습니다.',
+      '사용자가 꾸준히 앱을 사용하도록 만드는 서비스 흐름을 고민했습니다.',
+      '추후에는 만보기, 챌린지, 1대1 채팅 기능을 확장할 예정입니다.',
+    ],
   },
 };
 
@@ -314,9 +326,14 @@ function ProjectDetailPage() {
           <>
             {/* 프로젝트 개요 */}
             <SectionBlock label='프로젝트 개요' labelColor='#F4845F'>
-              <Typography sx={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.9 }}>
-                {details.overview}
-              </Typography>
+              {details.overview.map((sentence, i) => (
+                <Typography
+                  key={i}
+                  sx={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.9, mb: i < details.overview.length - 1 ? 0.8 : 0 }}
+                >
+                  {sentence}
+                </Typography>
+              ))}
             </SectionBlock>
 
             {/* 주요 기능 */}
@@ -333,16 +350,14 @@ function ProjectDetailPage() {
                   key={tech}
                   sx={{
                     display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 1.5,
-                    mb: 1.8,
+                    flexDirection: 'column',
+                    gap: 0.7,
+                    mb: 2.2,
                     '&:last-child': { mb: 0 },
                   }}
                 >
-                  <Box sx={{ flexShrink: 0, pt: 0.1 }}>
-                    <TechBadge tech={tech} size='md' />
-                  </Box>
-                  <Typography sx={{ color: '#555', fontSize: '0.9rem', lineHeight: 1.7 }}>
+                  <TechBadge tech={tech} size='md' />
+                  <Typography sx={{ color: '#555', fontSize: '0.9rem', lineHeight: 1.75, pl: 0.5 }}>
                     {reason}
                   </Typography>
                 </Box>
@@ -358,9 +373,14 @@ function ProjectDetailPage() {
 
             {/* 배운 점 / 개선한 점 */}
             <SectionBlock label='배운 점 / 개선한 점' labelColor='#F5C842'>
-              <Typography sx={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.9 }}>
-                {details.learnings}
-              </Typography>
+              {details.learnings.map((sentence, i) => (
+                <Typography
+                  key={i}
+                  sx={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.9, mb: i < details.learnings.length - 1 ? 0.8 : 0 }}
+                >
+                  {sentence}
+                </Typography>
+              ))}
             </SectionBlock>
           </>
         ) : (

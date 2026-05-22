@@ -5,10 +5,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
-import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import StarIcon from '@mui/icons-material/Star';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -20,8 +18,14 @@ function slugify(title) {
   return title.toLowerCase().replace(/\s+/g, '-');
 }
 
+/* 프로젝트별 썸네일 object-position 설정 */
+const IMAGE_POSITIONS = {
+  WinterLog: 'top center',
+  FitBuddy: 'center center',
+};
+
 /**
- * ProjectCard - 통합 프로젝트 카드 (2열 그리드)
+ * ProjectCard - 가로형 프로젝트 카드 (세로 리스트 배치)
  *
  * Props:
  * @param {object} project - 프로젝트 데이터 [Required]
@@ -32,19 +36,20 @@ function slugify(title) {
  */
 function ProjectCard({ project, onNavigate }) {
   const [imgError, setImgError] = useState(false);
+  const imagePosition = IMAGE_POSITIONS[project.title] || 'center center';
 
   return (
     <Card
       onClick={() => onNavigate(project)}
       sx={{
-        height: '100%',
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: { xs: 'column', md: 'row' },
         cursor: 'pointer',
+        overflow: 'hidden',
         transition: 'all 0.18s ease',
         '&:hover': {
-          transform: 'translate(-4px, -4px)',
-          boxShadow: '8px 8px 0px #1A1A1A',
+          transform: 'translate(-3px, -3px)',
+          boxShadow: '7px 7px 0px #1A1A1A',
         },
         '&:active': {
           transform: 'translate(0px, 0px)',
@@ -53,33 +58,45 @@ function ProjectCard({ project, onNavigate }) {
       }}
     >
       {/* 이미지 영역 */}
-      <Box sx={{ position: 'relative', overflow: 'hidden', flexShrink: 0 }}>
+      <Box
+        sx={{
+          width: { xs: '100%', md: 280 },
+          height: { xs: 200, md: 'auto' },
+          flexShrink: 0,
+          position: 'relative',
+          overflow: 'hidden',
+          minHeight: { md: 210 },
+        }}
+      >
         {!imgError ? (
-          <CardMedia
+          <Box
             component='img'
-            image={project.thumbnail_url}
+            src={project.thumbnail_url}
             alt={project.title}
             loading='lazy'
             onError={() => setImgError(true)}
             sx={{
-              height: 240,
+              width: '100%',
+              height: '100%',
               objectFit: 'cover',
-              objectPosition: 'top center',
+              objectPosition: imagePosition,
+              display: 'block',
               transition: 'transform 0.3s ease',
-              '&:hover': { transform: 'scale(1.02)' },
+              '&:hover': { transform: 'scale(1.03)' },
             }}
           />
         ) : (
           <Box
             sx={{
-              height: 240,
+              width: '100%',
+              height: '100%',
               bgcolor: '#FAF0E8',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Typography sx={{ color: '#1A1A1A22', fontSize: '3rem' }}>🖥️</Typography>
+            <Typography sx={{ color: '#1A1A1A22', fontSize: '2.5rem' }}>🖥️</Typography>
           </Box>
         )}
         {project.is_featured && (
@@ -87,7 +104,7 @@ function ProjectCard({ project, onNavigate }) {
             <StarIcon
               sx={{
                 color: '#F4845F',
-                fontSize: '1.4rem',
+                fontSize: '1.3rem',
                 filter: 'drop-shadow(1px 1px 0px rgba(0,0,0,0.35))',
               }}
             />
@@ -95,14 +112,14 @@ function ProjectCard({ project, onNavigate }) {
         )}
       </Box>
 
-      {/* 카드 내용 */}
+      {/* 콘텐츠 영역 */}
       <CardContent
         sx={{
-          p: { xs: 2.5, md: 3 },
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
           gap: 1.5,
+          p: { xs: 2.5, md: 3 },
         }}
       >
         {/* 제목 + 타입 */}
@@ -110,14 +127,14 @@ function ProjectCard({ project, onNavigate }) {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'flex-start',
             gap: 1,
           }}
         >
           <Typography
             sx={{
               fontWeight: 800,
-              fontSize: { xs: '1.1rem', md: '1.2rem' },
+              fontSize: { xs: '1.1rem', md: '1.25rem' },
               color: '#1A1A1A',
               lineHeight: 1.3,
             }}
@@ -139,12 +156,7 @@ function ProjectCard({ project, onNavigate }) {
 
         {/* 설명 */}
         <Typography
-          sx={{
-            color: '#555',
-            lineHeight: 1.7,
-            fontSize: '0.88rem',
-            flex: 1,
-          }}
+          sx={{ color: '#555', lineHeight: 1.75, fontSize: '0.9rem', flex: 1 }}
         >
           {project.description}
         </Typography>
@@ -158,7 +170,7 @@ function ProjectCard({ project, onNavigate }) {
 
         {/* 버튼 — stopPropagation으로 카드 클릭과 분리 */}
         <Box
-          sx={{ display: 'flex', gap: 1, pt: 0.5 }}
+          sx={{ display: 'flex', gap: 1 }}
           onClick={(e) => e.stopPropagation()}
         >
           {project.detail_url && (
@@ -243,7 +255,8 @@ function ProjectsPage() {
         py: { xs: 4, md: 8 },
       }}
     >
-      <Container maxWidth='lg'>
+      <Container maxWidth='md'>
+        {/* 타이틀 */}
         <Box
           sx={{
             display: 'inline-block',
@@ -268,20 +281,17 @@ function ProjectsPage() {
             <CircularProgress color='primary' />
           </Box>
         ) : (
-          <Grid container spacing={3}>
+          /* 세로 리스트 */
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
             {projects.map((project) => (
-              <Grid key={project.id} size={{ xs: 12, sm: 6 }}>
-                <ProjectCard project={project} onNavigate={handleNavigate} />
-              </Grid>
+              <ProjectCard key={project.id} project={project} onNavigate={handleNavigate} />
             ))}
             {projects.length === 0 && (
-              <Grid size={{ xs: 12 }}>
-                <Typography sx={{ color: 'text.secondary', textAlign: 'center', py: 6 }}>
-                  등록된 프로젝트가 없습니다.
-                </Typography>
-              </Grid>
+              <Typography sx={{ color: 'text.secondary', textAlign: 'center', py: 6 }}>
+                등록된 프로젝트가 없습니다.
+              </Typography>
             )}
-          </Grid>
+          </Box>
         )}
       </Container>
     </Box>

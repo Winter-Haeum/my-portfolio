@@ -22,6 +22,11 @@ function slugify(title) {
   return title.toLowerCase().replace(/\s+/g, '-');
 }
 
+const IMAGE_POSITIONS = {
+  WinterLog: 'top center',
+  FitBuddy: 'center center',
+};
+
 /**
  * ProjectCard - 홈 Projects 섹션 카드
  *
@@ -34,6 +39,7 @@ function slugify(title) {
  */
 function ProjectCard({ project, onNavigate }) {
   const [imgError, setImgError] = useState(false);
+  const imagePosition = IMAGE_POSITIONS[project.title] || 'center center';
 
   return (
     <Card
@@ -65,7 +71,7 @@ function ProjectCard({ project, onNavigate }) {
             sx={{
               height: 200,
               objectFit: 'cover',
-              objectPosition: 'top center',
+              objectPosition: imagePosition,
               transition: 'transform 0.3s ease',
               '&:hover': { transform: 'scale(1.02)' },
             }}
