@@ -17,7 +17,7 @@ function ContactSection() {
         py: { xs: 6, md: 10 },
       }}
     >
-      <Container maxWidth='md'>
+      <Container maxWidth='lg'>
         {/* 섹션 제목 */}
         <Box
           sx={{

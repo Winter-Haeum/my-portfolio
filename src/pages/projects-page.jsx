@@ -64,6 +64,7 @@ function ProjectCard({ project, onNavigate }) {
             sx={{
               height: 240,
               objectFit: 'cover',
+              objectPosition: 'top center',
               transition: 'transform 0.3s ease',
               '&:hover': { transform: 'scale(1.02)' },
             }}

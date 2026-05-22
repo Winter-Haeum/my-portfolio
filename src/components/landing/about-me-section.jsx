@@ -15,7 +15,7 @@ function AboutMeSection() {
         borderBottom: '2px solid var(--color-border)',
       }}
     >
-      <Container maxWidth='md'>
+      <Container maxWidth='lg'>
         <Box
           sx={{
             display: 'inline-block',
