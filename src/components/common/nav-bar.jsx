@@ -3,7 +3,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
@@ -23,6 +23,8 @@ function NavBar() {
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Typography
+          component={Link}
+          to='/'
           variant='h6'
           sx={{
             fontWeight: 900,
@@ -33,9 +35,16 @@ function NavBar() {
             border: '2px solid var(--color-border)',
             bgcolor: 'var(--color-primary)',
             boxShadow: '3px 3px 0px var(--color-border)',
+            textDecoration: 'none',
+            display: 'inline-block',
+            transition: 'all 0.15s ease',
+            '&:hover': {
+              boxShadow: '5px 5px 0px var(--color-border)',
+              transform: 'translate(-1px, -1px)',
+            },
           }}
         >
-          Portfolio
+          Winter Haeum
         </Typography>
         <Box sx={{ display: 'flex', gap: 1 }}>
           {NAV_ITEMS.map((item) => (

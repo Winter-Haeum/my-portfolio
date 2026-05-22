@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -12,58 +13,80 @@ import CircularProgress from '@mui/material/CircularProgress';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { supabase } from '../utils/supabase-client';
+import TechBadge from '../components/ui/tech-badge';
 
-const CARD_SX = {
-  transition: 'all 0.15s ease',
+function slugify(title) {
+  return title.toLowerCase().replace(/\s+/g, '-');
+}
+
+const CARD_HOVER_SX = {
+  transition: 'all 0.18s ease',
+  cursor: 'pointer',
   '&:hover': {
-    transform: 'translate(-3px, -3px)',
-    boxShadow: '7px 7px 0px #1A1A1A',
+    transform: 'translate(-4px, -4px)',
+    boxShadow: '8px 8px 0px #1A1A1A',
+  },
+  '&:active': {
+    transform: 'translate(0px, 0px)',
+    boxShadow: '2px 2px 0px #1A1A1A',
   },
 };
 
-function TechBadge({ tech }) {
+/**
+ * ActionButtons - Live Demo / GitHub 버튼
+ *
+ * Props:
+ * @param {string} detailUrl - 라이브 데모 URL [Optional]
+ * @param {string} githubUrl - GitHub URL [Optional]
+ */
+function ActionButtons({ detailUrl, githubUrl }) {
   return (
-    <Chip
-      label={tech}
-      size='small'
-      sx={{
-        bgcolor: 'var(--color-primary, #F4845F)',
-        color: '#1A1A1A',
-        border: '1.5px solid #1A1A1A',
-        fontWeight: 700,
-        fontSize: '0.7rem',
-        height: 22,
-      }}
-    />
-  );
-}
-
-function ProjectButtons({ detailUrl, githubUrl }) {
-  return (
-    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+    <Box
+      sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}
+      onClick={(e) => e.stopPropagation()}
+    >
       {detailUrl && (
         <Button
-          variant='contained'
-          color='primary'
           size='small'
           startIcon={<OpenInNewIcon />}
           href={detailUrl}
           target='_blank'
           rel='noopener noreferrer'
-          sx={{ fontSize: '0.75rem' }}
+          sx={{
+            bgcolor: '#fff',
+            color: '#1A1A1A',
+            border: '2px solid #1A1A1A',
+            boxShadow: '3px 3px 0px #1A1A1A',
+            fontSize: '0.75rem',
+            '&:hover': {
+              bgcolor: '#F4845F',
+              boxShadow: '1px 1px 0px #1A1A1A',
+              transform: 'translate(2px, 2px)',
+            },
+          }}
         >
           Live Demo
         </Button>
       )}
       {githubUrl && (
         <Button
-          variant='outlined'
           size='small'
           startIcon={<GitHubIcon />}
           href={githubUrl}
           target='_blank'
           rel='noopener noreferrer'
-          sx={{ fontSize: '0.75rem' }}
+          sx={{
+            bgcolor: '#fff',
+            color: '#1A1A1A',
+            border: '2px solid #1A1A1A',
+            boxShadow: '3px 3px 0px #1A1A1A',
+            fontSize: '0.75rem',
+            '&:hover': {
+              bgcolor: '#E5E5E5',
+              boxShadow: '1px 1px 0px #1A1A1A',
+              transform: 'translate(2px, 2px)',
+            },
+          }}
         >
           GitHub
         </Button>
@@ -73,13 +96,17 @@ function ProjectButtons({ detailUrl, githubUrl }) {
 }
 
 /**
- * FeaturedCard - 대표 프로젝트 카드 (전체 너비, 이미지 420px)
+ * FeaturedCard - 대표 프로젝트 카드 (전체 너비)
+ *
+ * Props:
+ * @param {object} project - 프로젝트 데이터 [Required]
+ * @param {function} onNavigate - 카드 클릭 시 호출 함수 [Required]
  */
-function FeaturedCard({ project }) {
+function FeaturedCard({ project, onNavigate }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <Card sx={{ mb: 4, ...CARD_SX }}>
+    <Card sx={{ mb: 4, ...CARD_HOVER_SX }} onClick={() => onNavigate(project)}>
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
         {!imgError ? (
           <CardMedia
@@ -92,27 +119,27 @@ function FeaturedCard({ project }) {
               height: { xs: 220, md: 420 },
               objectFit: 'cover',
               transition: 'transform 0.3s ease',
-              '&:hover': { transform: 'scale(1.03)' },
+              '&:hover': { transform: 'scale(1.02)' },
             }}
           />
         ) : (
           <Box
             sx={{
               height: { xs: 220, md: 420 },
-              bgcolor: '#F4845F22',
+              bgcolor: '#FAF0E8',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Typography sx={{ color: '#1A1A1A66', fontSize: '3rem' }}>🖥️</Typography>
+            <Typography sx={{ color: '#1A1A1A33', fontSize: '3.5rem' }}>🖥️</Typography>
           </Box>
         )}
         <Box
           sx={{
             position: 'absolute',
-            top: 12,
-            left: 12,
+            top: 14,
+            left: 14,
             bgcolor: '#F4845F',
             border: '2px solid #1A1A1A',
             boxShadow: '2px 2px 0px #1A1A1A',
@@ -120,42 +147,75 @@ function FeaturedCard({ project }) {
             py: 0.3,
           }}
         >
-          <Typography sx={{ fontWeight: 700, fontSize: '0.75rem', color: '#1A1A1A' }}>
+          <Typography sx={{ fontWeight: 700, fontSize: '0.73rem', color: '#1A1A1A' }}>
             ⭐ Featured
           </Typography>
         </Box>
       </Box>
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 1, mb: 1 }}>
-          <Typography variant='h3' sx={{ fontWeight: 700, fontSize: { xs: '1.3rem', md: '1.6rem' } }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            gap: 1,
+            mb: 1.5,
+          }}
+        >
+          <Typography
+            variant='h3'
+            sx={{ fontWeight: 800, fontSize: { xs: '1.3rem', md: '1.7rem' } }}
+          >
             {project.title}
           </Typography>
           <Chip
             label={project.project_type}
             size='small'
-            sx={{ border: '1.5px solid #1A1A1A', bgcolor: 'transparent', fontWeight: 600, fontSize: '0.7rem' }}
+            sx={{
+              border: '1.5px solid #1A1A1A',
+              bgcolor: 'transparent',
+              fontWeight: 600,
+              fontSize: '0.7rem',
+            }}
           />
         </Box>
-        <Typography sx={{ color: 'text.secondary', lineHeight: 1.7, mb: 2, fontSize: { xs: '0.9rem', md: '1rem' } }}>
+        <Typography
+          sx={{
+            color: 'text.secondary',
+            lineHeight: 1.75,
+            mb: 2.5,
+            fontSize: { xs: '0.9rem', md: '0.98rem' },
+          }}
+        >
           {project.description}
         </Typography>
         <Box sx={{ display: 'flex', gap: 0.7, flexWrap: 'wrap', mb: 2.5 }}>
-          {project.tech_stack?.map((tech) => <TechBadge key={tech} tech={tech} />)}
+          {project.tech_stack?.map((tech) => (
+            <TechBadge key={tech} tech={tech} />
+          ))}
         </Box>
-        <ProjectButtons detailUrl={project.detail_url} githubUrl={project.github_url} />
+        <ActionButtons detailUrl={project.detail_url} githubUrl={project.github_url} />
       </CardContent>
     </Card>
   );
 }
 
 /**
- * ProjectCard - 일반 프로젝트 카드 (그리드 배치, 이미지 260px)
+ * ProjectCard - 일반 프로젝트 카드 (그리드)
+ *
+ * Props:
+ * @param {object} project - 프로젝트 데이터 [Required]
+ * @param {function} onNavigate - 카드 클릭 시 호출 함수 [Required]
  */
-function ProjectCard({ project }) {
+function ProjectCard({ project, onNavigate }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', ...CARD_SX }}>
+    <Card
+      sx={{ height: '100%', display: 'flex', flexDirection: 'column', ...CARD_HOVER_SX }}
+      onClick={() => onNavigate(project)}
+    >
       <Box sx={{ overflow: 'hidden' }}>
         {!imgError ? (
           <CardMedia
@@ -165,36 +225,66 @@ function ProjectCard({ project }) {
             loading='lazy'
             onError={() => setImgError(true)}
             sx={{
-              height: 260,
+              height: 220,
               objectFit: 'cover',
               transition: 'transform 0.3s ease',
-              '&:hover': { transform: 'scale(1.03)' },
+              '&:hover': { transform: 'scale(1.02)' },
             }}
           />
         ) : (
-          <Box sx={{ height: 260, bgcolor: '#F4845F22', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Typography sx={{ color: '#1A1A1A66', fontSize: '2.5rem' }}>🖥️</Typography>
+          <Box
+            sx={{
+              height: 220,
+              bgcolor: '#FAF0E8',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography sx={{ color: '#1A1A1A33', fontSize: '2.5rem' }}>🖥️</Typography>
           </Box>
         )}
       </Box>
       <CardContent sx={{ p: 2.5, flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 0.5 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            mb: 0.5,
+          }}
+        >
           <Typography variant='h3' sx={{ fontWeight: 700, fontSize: '1.15rem' }}>
             {project.title}
           </Typography>
           <Chip
             label={project.project_type}
             size='small'
-            sx={{ border: '1.5px solid #1A1A1A', bgcolor: 'transparent', fontWeight: 600, fontSize: '0.65rem' }}
+            sx={{
+              border: '1.5px solid #1A1A1A',
+              bgcolor: 'transparent',
+              fontWeight: 600,
+              fontSize: '0.65rem',
+            }}
           />
         </Box>
-        <Typography sx={{ color: 'text.secondary', lineHeight: 1.6, mb: 1.5, fontSize: '0.88rem', flex: 1 }}>
+        <Typography
+          sx={{
+            color: 'text.secondary',
+            lineHeight: 1.65,
+            mb: 1.5,
+            fontSize: '0.88rem',
+            flex: 1,
+          }}
+        >
           {project.description}
         </Typography>
         <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', mb: 2 }}>
-          {project.tech_stack?.map((tech) => <TechBadge key={tech} tech={tech} />)}
+          {project.tech_stack?.map((tech) => (
+            <TechBadge key={tech} tech={tech} />
+          ))}
         </Box>
-        <ProjectButtons detailUrl={project.detail_url} githubUrl={project.github_url} />
+        <ActionButtons detailUrl={project.detail_url} githubUrl={project.github_url} />
       </CardContent>
     </Card>
   );
@@ -203,6 +293,7 @@ function ProjectCard({ project }) {
 function ProjectsPage() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     supabase
@@ -215,6 +306,10 @@ function ProjectsPage() {
         setLoading(false);
       });
   }, []);
+
+  const handleNavigate = (project) => {
+    navigate(`/projects/${slugify(project.title)}`, { state: { project } });
+  };
 
   const featured = projects.filter((p) => p.is_featured);
   const rest = projects.filter((p) => !p.is_featured);
@@ -229,7 +324,6 @@ function ProjectsPage() {
       }}
     >
       <Container maxWidth='lg'>
-        {/* 섹션 타이틀 */}
         <Box
           sx={{
             display: 'inline-block',
@@ -255,12 +349,10 @@ function ProjectsPage() {
           </Box>
         ) : (
           <>
-            {/* Featured 프로젝트 */}
             {featured.map((project) => (
-              <FeaturedCard key={project.id} project={project} />
+              <FeaturedCard key={project.id} project={project} onNavigate={handleNavigate} />
             ))}
 
-            {/* 일반 프로젝트 그리드 */}
             {rest.length > 0 && (
               <>
                 <Box
@@ -281,7 +373,7 @@ function ProjectsPage() {
                 <Grid container spacing={3}>
                   {rest.map((project) => (
                     <Grid key={project.id} size={{ xs: 12, sm: 6, lg: 4 }}>
-                      <ProjectCard project={project} />
+                      <ProjectCard project={project} onNavigate={handleNavigate} />
                     </Grid>
                   ))}
                 </Grid>
