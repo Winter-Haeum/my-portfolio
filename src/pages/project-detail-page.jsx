@@ -245,41 +245,39 @@ function ProjectDetailPage() {
           Back
         </Button>
 
-        {/* 대표 이미지 */}
-        {!imgError ? (
-          <Box
-            component='img'
-            src={project.thumbnail_url}
-            alt={project.title}
-            loading='lazy'
-            onError={() => setImgError(true)}
-            sx={{
-              width: '100%',
-              height: { xs: 220, md: 440 },
-              objectFit: 'cover',
-              display: 'block',
-              border: '2px solid #1A1A1A',
-              boxShadow: '6px 6px 0px #1A1A1A',
-              mb: 4,
-            }}
-          />
-        ) : (
-          <Box
-            sx={{
-              width: '100%',
-              height: { xs: 220, md: 440 },
-              bgcolor: '#FAF0E8',
-              border: '2px solid #1A1A1A',
-              boxShadow: '6px 6px 0px #1A1A1A',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              mb: 4,
-            }}
-          >
+        {/* 대표 이미지 — contain으로 전체 화면 표시 */}
+        <Box
+          sx={{
+            width: '100%',
+            bgcolor: '#FAF0E8',
+            border: '2px solid #1A1A1A',
+            boxShadow: '6px 6px 0px #1A1A1A',
+            mb: 4,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            p: { xs: 1.5, md: 2.5 },
+            minHeight: { xs: 200, md: 320 },
+          }}
+        >
+          {!imgError ? (
+            <Box
+              component='img'
+              src={project.thumbnail_url}
+              alt={project.title}
+              loading='lazy'
+              onError={() => setImgError(true)}
+              sx={{
+                width: '100%',
+                maxHeight: { xs: 340, md: 600 },
+                objectFit: 'contain',
+                display: 'block',
+              }}
+            />
+          ) : (
             <Typography sx={{ color: '#1A1A1A22', fontSize: '4rem' }}>🖥️</Typography>
-          </Box>
-        )}
+          )}
+        </Box>
 
         {/* 제목 + 타입 */}
         <Box
