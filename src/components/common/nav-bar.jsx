@@ -3,7 +3,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
@@ -11,7 +11,21 @@ const NAV_ITEMS = [
   { label: 'Projects', to: '/projects' },
 ];
 
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
 function NavBar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      scrollToTop();
+    } else {
+      navigate('/');
+      scrollToTop();
+    }
+  };
+
   return (
     <AppBar
       position='sticky'
@@ -23,8 +37,7 @@ function NavBar() {
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Typography
-          component={Link}
-          to='/'
+          onClick={handleLogoClick}
           variant='h6'
           sx={{
             fontWeight: 900,
@@ -37,6 +50,7 @@ function NavBar() {
             boxShadow: '3px 3px 0px var(--color-border)',
             textDecoration: 'none',
             display: 'inline-block',
+            cursor: 'pointer',
             transition: 'all 0.15s ease',
             '&:hover': {
               boxShadow: '5px 5px 0px var(--color-border)',

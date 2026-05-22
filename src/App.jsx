@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import NavBar from './components/common/nav-bar';
+import ScrollToTopButton from './components/ui/scroll-to-top-button';
 import HomePage from './pages/home-page';
 import AboutMePage from './pages/about-me-page';
 import ProjectsPage from './pages/projects-page';
@@ -19,6 +20,7 @@ function App() {
             <Route path='/projects/:slug' element={<ProjectDetailPage />} />
           </Routes>
         </Box>
+        <ScrollToTopButton />
       </Box>
     </BrowserRouter>
   );
