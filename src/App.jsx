@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import NavBar from './components/common/nav-bar';
 import ScrollToTopButton from './components/ui/scroll-to-top-button';
@@ -7,9 +8,18 @@ import AboutMePage from './pages/about-me-page';
 import ProjectsPage from './pages/projects-page';
 import ProjectDetailPage from './pages/project-detail-page';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter basename='/my-portfolio'>
+      <ScrollToTop />
       <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', bgcolor: 'background.default' }}>
         <NavBar />
         <Box component='main' sx={{ flex: 1 }}>

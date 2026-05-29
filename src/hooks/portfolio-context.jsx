@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile-id.webp';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import PaletteIcon from '@mui/icons-material/Palette';
 import BoltIcon from '@mui/icons-material/Bolt';
@@ -55,7 +55,7 @@ const aboutMeData = {
       id: 'personal',
       title: '개인적인 이야기',
       showInHome: false,
-      content: '운동과 자기계발에 관심이 많고, 공부한 내용을 기록하며 성장하는 과정을 좋아합니다. 최근에는 AI 도구를 활용한 개발 학습에도 관심을 가지고 있습니다.',
+      content: '육아와 학습을 병행하며 하루하루 성장 중입니다. 기록하는 걸 좋아해서 직접 WinterLog라는 블로그 서비스를 만들었고, 운동을 꾸준히 이어가고 싶어서 FitBuddy라는 운동 SNS도 개발했습니다. 일상의 불편함을 코드로 해결해가는 경험이 쌓일수록 개발이 점점 더 즐거워지고 있습니다. 지금은 AI 도구를 활용한 개발 방식을 익히며, 교사 시절에 길러온 사람을 이해하는 감각을 개발에 녹이는 방법을 탐구하고 있습니다.',
     },
   ],
   skills: [

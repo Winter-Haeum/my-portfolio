@@ -3,11 +3,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import characterImg from '../../assets/character.png';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import characterImg from '../../assets/character-hero.webp';
 
 const TECH_BADGES = [
   'React',
@@ -26,8 +28,11 @@ function HeroSection() {
       component='section'
       sx={{
         bgcolor: 'var(--color-bg-primary)',
+        backgroundImage: 'radial-gradient(circle, rgba(26,26,26,0.07) 1px, transparent 1px)',
+        backgroundSize: '28px 28px',
         py: { xs: 8, md: 14 },
         borderBottom: '2px solid var(--color-border)',
+        position: 'relative',
       }}
     >
       <Container maxWidth='lg'>
@@ -129,10 +134,13 @@ function HeroSection() {
                 프로젝트 보기
               </Button>
               <Button
-                endIcon={ <PersonIcon sx={{ fontSize: '1.1rem !important' }} /> }
-                onClick={ () => navigate('/about') }
+                endIcon={ <EmailIcon sx={{ fontSize: '1.1rem !important' }} /> }
+                onClick={ () => {
+                  const el = document.getElementById('contact-section');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
                 sx={{
-                  bgcolor: '#fff',
+                  bgcolor: 'var(--color-bg-card)',
                   color: 'var(--color-text-primary)',
                   border: '2px solid var(--color-border)',
                   borderRadius: '4px',
@@ -148,10 +156,11 @@ function HeroSection() {
                   },
                 }}
               >
-                About Me
+                연락하기
               </Button>
               <Button
                 startIcon={ <GitHubIcon /> }
+                className='hero-github-btn'
                 onClick={ () => window.open('https://github.com/Winter-Haeum', '_blank') }
                 sx={{
                   bgcolor: 'var(--color-text-primary)',
@@ -186,7 +195,7 @@ function HeroSection() {
                     boxShadow: '2px 2px 0px var(--color-border)',
                   }}
                 >
-                  <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-muted)' }}>
+                  <Typography sx={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-secondary)' }}>
                     { badge }
                   </Typography>
                 </Box>
@@ -228,6 +237,52 @@ function HeroSection() {
           </Grid>
 
         </Grid>
+
+        {/* 스크롤 인디케이터 */}
+        <Box
+          sx={{
+            textAlign: 'center',
+            mt: { xs: 5, md: 8 },
+          }}
+        >
+          <Box
+            onClick={ () => window.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' }) }
+            sx={{
+              display: 'inline-flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 0.4,
+              cursor: 'pointer',
+              opacity: 0.55,
+              transition: 'opacity 0.2s',
+              '&:hover': { opacity: 1 },
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: '0.65rem',
+                fontWeight: 700,
+                color: 'var(--color-text-muted)',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+              }}
+            >
+              scroll
+            </Typography>
+            <KeyboardArrowDownIcon
+              sx={{
+                color: 'var(--color-primary)',
+                fontSize: '1.6rem',
+                '@keyframes bounce': {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(6px)' },
+                },
+                animation: 'bounce 1.6s ease-in-out infinite',
+              }}
+            />
+          </Box>
+        </Box>
+
       </Container>
     </Box>
   );

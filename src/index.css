@@ -41,6 +41,90 @@
   --color-contact-deep: #FFC93C;
 }
 
+[data-theme="dark"] {
+  /* Primary Colors - 유지 */
+  --color-primary: #F4845F;
+  --color-primary-light: #F9A88A;
+  --color-primary-dark: #D4623D;
+
+  /* Secondary Colors - 유지 */
+  --color-secondary: #4BAE76;
+  --color-accent: #F5C842;
+
+  /* Background Colors - 따뜻한 다크 (너무 어둡지 않게) */
+  --color-bg-primary: #22201D;
+  --color-bg-secondary: #2E2A26;
+  --color-bg-card: #383330;
+
+  /* Text Colors - 따뜻한 밝은 톤 */
+  --color-text-primary: #F0EAE2;
+  --color-text-secondary: #BEB6AE;
+  --color-text-muted: #8A8278;
+
+  /* Border / Outline - 다크 배경에서 가시성 확보 */
+  --color-border: #6A6460;
+  --color-border-light: #4A4642;
+
+  /* Interactive Colors */
+  --color-button-primary: #F4845F;
+  --color-button-hover: #D4623D;
+  --color-link: #4BAE76;
+  --color-link-hover: #F4845F;
+
+  /* Extra Colors */
+  --color-profile-bg: #A855C8;
+  --color-tech-stack: #2A4060;
+  --color-contact: #D4A800;
+
+  /* Button Colors */
+  --color-btn-base: #383330;
+  --color-btn-hover: #443E3A;
+  --color-btn-active: #FFD84D;
+  --color-btn-active-hover: #FFC93C;
+  --color-contact-deep: #FFC93C;
+}
+
+/* ── 다크모드 전역 보정 ─────────────────────── */
+[data-theme="dark"] body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* MUI Card / Dialog 등 Paper 기반 컴포넌트 */
+[data-theme="dark"] .MuiCard-root {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+
+/* MUI Chip 텍스트 */
+[data-theme="dark"] .MuiChip-root {
+  color: var(--color-text-primary);
+}
+
+/* Hero GitHub 버튼 — 라이트 모드 검정 유지, 다크 모드에서만 교체 */
+[data-theme="dark"] .hero-github-btn.MuiButton-root {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+[data-theme="dark"] .hero-github-btn.MuiButton-root:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+/* MUI TextField / Input */
+[data-theme="dark"] .MuiInputBase-root {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+[data-theme="dark"] .MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-border) !important;
+}
+[data-theme="dark"] .MuiInputLabel-root {
+  color: var(--color-text-muted);
+}
+[data-theme="dark"] .MuiInputLabel-root.Mui-focused {
+  color: var(--color-primary);
+}
+
 * {
   box-sizing: border-box;
 }

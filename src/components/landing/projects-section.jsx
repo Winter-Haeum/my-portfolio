@@ -15,6 +15,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { supabase } from '../../utils/supabase-client';
 import TechBadge from '../ui/tech-badge';
+import characterProjectsImg from '../../assets/character-projects.webp';
 
 const HOME_CARD_LIMIT = 3;
 
@@ -49,14 +50,15 @@ function ProjectCard({ project, onNavigate }) {
         display: 'flex',
         flexDirection: 'column',
         cursor: 'pointer',
+        bgcolor: 'var(--color-bg-card)',
         transition: 'all 0.18s ease',
         '&:hover': {
           transform: 'translate(-4px, -4px)',
-          boxShadow: '8px 8px 0px #1A1A1A',
+          boxShadow: '8px 8px 0px var(--color-border)',
         },
         '&:active': {
           transform: 'translate(0px, 0px)',
-          boxShadow: '2px 2px 0px #1A1A1A',
+          boxShadow: '2px 2px 0px var(--color-border)',
         },
       }}
     >
@@ -80,13 +82,13 @@ function ProjectCard({ project, onNavigate }) {
           <Box
             sx={{
               height: 200,
-              bgcolor: '#FAF0E8',
+              bgcolor: 'var(--color-bg-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Typography sx={{ color: '#1A1A1A22', fontSize: '2.5rem' }}>🖥️</Typography>
+            <Typography sx={{ color: 'var(--color-border-light)', fontSize: '2.5rem' }}>🖥️</Typography>
           </Box>
         )}
         {project.is_featured && (
@@ -113,7 +115,7 @@ function ProjectCard({ project, onNavigate }) {
       >
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
           <Typography
-            sx={{ fontWeight: 800, fontSize: { xs: '1rem', md: '1.1rem' }, color: '#1A1A1A', lineHeight: 1.3 }}
+            sx={{ fontWeight: 800, fontSize: { xs: '1rem', md: '1.1rem' }, color: 'var(--color-text-primary)', lineHeight: 1.3 }}
           >
             {project.title}
           </Typography>
@@ -121,8 +123,9 @@ function ProjectCard({ project, onNavigate }) {
             label={project.project_type}
             size='small'
             sx={{
-              border: '1.5px solid #1A1A1A',
+              border: '1.5px solid var(--color-border)',
               bgcolor: 'transparent',
+              color: 'var(--color-text-primary)',
               fontWeight: 600,
               fontSize: '0.62rem',
               flexShrink: 0,
@@ -130,7 +133,7 @@ function ProjectCard({ project, onNavigate }) {
           />
         </Box>
 
-        <Typography sx={{ color: '#555', lineHeight: 1.65, fontSize: '0.85rem', flex: 1 }}>
+        <Typography sx={{ color: 'var(--color-text-secondary)', lineHeight: 1.65, fontSize: '0.85rem', flex: 1 }}>
           {project.description}
         </Typography>
 
@@ -152,14 +155,15 @@ function ProjectCard({ project, onNavigate }) {
               target='_blank'
               rel='noopener noreferrer'
               sx={{
-                bgcolor: '#fff',
-                color: '#1A1A1A',
-                border: '2px solid #1A1A1A',
-                boxShadow: '3px 3px 0px #1A1A1A',
+                bgcolor: 'var(--color-bg-card)',
+                color: 'var(--color-text-primary)',
+                border: '2px solid var(--color-border)',
+                boxShadow: '3px 3px 0px var(--color-border)',
                 fontSize: '0.72rem',
                 '&:hover': {
                   bgcolor: '#F4845F',
-                  boxShadow: '1px 1px 0px #1A1A1A',
+                  color: '#fff',
+                  boxShadow: '1px 1px 0px var(--color-border)',
                   transform: 'translate(2px, 2px)',
                 },
               }}
@@ -175,14 +179,14 @@ function ProjectCard({ project, onNavigate }) {
               target='_blank'
               rel='noopener noreferrer'
               sx={{
-                bgcolor: '#fff',
-                color: '#1A1A1A',
-                border: '2px solid #1A1A1A',
-                boxShadow: '3px 3px 0px #1A1A1A',
+                bgcolor: 'var(--color-bg-card)',
+                color: 'var(--color-text-primary)',
+                border: '2px solid var(--color-border)',
+                boxShadow: '3px 3px 0px var(--color-border)',
                 fontSize: '0.72rem',
                 '&:hover': {
-                  bgcolor: '#E5E5E5',
-                  boxShadow: '1px 1px 0px #1A1A1A',
+                  bgcolor: 'var(--color-bg-secondary)',
+                  boxShadow: '1px 1px 0px var(--color-border)',
                   transform: 'translate(2px, 2px)',
                 },
               }}
@@ -204,9 +208,9 @@ function ComingSoonCard() {
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        border: '2px dashed #C8BEB5',
+        border: '2px dashed var(--color-border-light)',
         boxShadow: 'none',
-        bgcolor: '#F5EDE5',
+        bgcolor: 'var(--color-bg-primary)',
         cursor: 'default',
       }}
     >
@@ -216,11 +220,11 @@ function ComingSoonCard() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          bgcolor: '#EFE5DC',
+          bgcolor: 'var(--color-bg-secondary)',
           flexShrink: 0,
         }}
       >
-        <Typography sx={{ color: '#C8BEB5', fontSize: '2.5rem' }}>🚀</Typography>
+        <Typography sx={{ color: 'var(--color-border-light)', fontSize: '2.5rem' }}>🚀</Typography>
       </Box>
       <Box
         sx={{
@@ -233,10 +237,10 @@ function ComingSoonCard() {
           gap: 0.8,
         }}
       >
-        <Typography sx={{ fontWeight: 800, fontSize: '1.05rem', color: '#C8BEB5' }}>
+        <Typography sx={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--color-border-light)' }}>
           Coming Soon
         </Typography>
-        <Typography sx={{ fontSize: '0.82rem', color: '#C8BEB5', textAlign: 'center', lineHeight: 1.5 }}>
+        <Typography sx={{ fontSize: '0.82rem', color: 'var(--color-border-light)', textAlign: 'center', lineHeight: 1.5 }}>
           다음 프로젝트를 준비 중입니다
         </Typography>
       </Box>
@@ -279,23 +283,35 @@ function ProjectsSection() {
       }}
     >
       <Container maxWidth='lg'>
-        <Box
-          sx={{
-            display: 'inline-block',
-            bgcolor: 'var(--color-primary)',
-            border: '2px solid var(--color-border)',
-            boxShadow: '4px 4px 0px var(--color-border)',
-            px: 3,
-            py: 1,
-            mb: 4,
-          }}
-        >
-          <Typography
-            variant='h2'
-            sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', mb: 4 }}>
+          <Box
+            sx={{
+              display: 'inline-block',
+              bgcolor: 'var(--color-primary)',
+              border: '2px solid var(--color-border)',
+              boxShadow: '4px 4px 0px var(--color-border)',
+              px: 3,
+              py: 1,
+            }}
           >
-            Projects
-          </Typography>
+            <Typography
+              variant='h2'
+              sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+            >
+              Projects
+            </Typography>
+          </Box>
+          <Box
+            component='img'
+            src={ characterProjectsImg }
+            alt='Projects 캐릭터'
+            sx={{
+              width: { xs: 112, md: 168 },
+              height: 'auto',
+              objectFit: 'contain',
+              flexShrink: 0,
+            }}
+          />
         </Box>
 
         {loading ? (
@@ -322,11 +338,11 @@ function ProjectsSection() {
           <Button
             onClick={() => navigate('/projects')}
             sx={{
-              bgcolor: '#FFB36B',
-              color: '#222',
-              border: '2px solid #222',
-              borderRadius: '8px',
-              boxShadow: '3px 3px 0px #222',
+              bgcolor: 'var(--color-accent)',
+              color: 'var(--color-text-primary)',
+              border: '2px solid var(--color-border)',
+              borderRadius: '4px',
+              boxShadow: '3px 3px 0px var(--color-border)',
               fontWeight: 700,
               fontSize: '0.95rem',
               textTransform: 'none',
@@ -334,8 +350,8 @@ function ProjectsSection() {
               py: 1.2,
               transition: 'background-color 0.18s, box-shadow 0.18s, transform 0.15s',
               '&:hover': {
-                bgcolor: '#FFC58A',
-                boxShadow: '1px 1px 0px #222',
+                bgcolor: 'var(--color-contact-deep)',
+                boxShadow: '1px 1px 0px var(--color-border)',
                 transform: 'translate(1px, 1px)',
               },
             }}

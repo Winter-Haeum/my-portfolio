@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import characterAboutImg from '../../assets/character-about.webp';
 
 const JOURNEY_STEPS = [
   { emoji: '👩‍🏫', label: '교사' },
@@ -104,7 +105,7 @@ function AboutMeSection() {
                     boxShadow: '3px 3px 0px var(--color-border)',
                     px: { xs: 1.2, md: 2 },
                     py: { xs: 1, md: 1.3 },
-                    bgcolor: '#fff',
+                    bgcolor: 'var(--color-bg-card)',
                     minWidth: { xs: 54, md: 72 },
                   }}
                 >
@@ -144,9 +145,53 @@ function AboutMeSection() {
         {/* ── 2단 그리드 ── */}
         <Grid container spacing={3} alignItems='flex-start' sx={{ mb: 4 }}>
 
-          {/* 왼쪽: 강점 */}
+          {/* 왼쪽: 캐릭터 + 강점 */}
           <Grid size={{ xs: 12, md: 4 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+
+              {/* 캐릭터 카드 */}
+              <Box
+                sx={{
+                  border: '2px solid var(--color-border)',
+                  boxShadow: '4px 4px 0px var(--color-border)',
+                  bgcolor: 'var(--color-bg-primary)',
+                  p: 2.5,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 1.5,
+                }}
+              >
+                <Box
+                  sx={{
+                    width: '100%',
+                    maxWidth: 150,
+                    aspectRatio: '3 / 4',
+                    bgcolor: 'var(--color-bg-secondary)',
+                    border: '2px solid var(--color-border)',
+                    borderRadius: '4px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Box
+                    component='img'
+                    src={ characterAboutImg }
+                    alt='겨울하음 About Me 캐릭터'
+                    sx={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
+                  />
+                </Box>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography sx={{ fontWeight: 900, fontSize: '1.05rem', color: 'var(--color-text-primary)', mb: 0.4 }}>
+                    장미진
+                  </Typography>
+                  <Typography sx={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.65 }}>
+                    꾸준함을 무기로 성장하는<br />프론트엔드 개발자
+                  </Typography>
+                </Box>
+              </Box>
 
               {/* 강점 목록 (3개) */}
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -158,7 +203,7 @@ function AboutMeSection() {
                       alignItems: 'center',
                       gap: 1.2,
                       px: 1.5, py: 0.9,
-                      bgcolor: '#fff',
+                      bgcolor: 'var(--color-bg-card)',
                       border: '2px solid var(--color-border)',
                       boxShadow: '2px 2px 0px var(--color-border)',
                     }}
@@ -214,7 +259,7 @@ function AboutMeSection() {
                     ? 'var(--color-accent)'
                     : item.isHighlight
                     ? 'var(--color-secondary)'
-                    : '#fff';
+                    : 'var(--color-bg-card)';
 
                   return (
                     <Box key={ idx } sx={{ display: 'flex', gap: 1.5, alignItems: 'stretch' }}>
@@ -316,17 +361,17 @@ function AboutMeSection() {
             onClick={ () => navigate('/about') }
             sx={{
               bgcolor: 'var(--color-secondary)',
-              color: '#222',
-              border: '2px solid #222',
+              color: 'var(--color-text-primary)',
+              border: '2px solid var(--color-border)',
               borderRadius: '4px',
-              boxShadow: '3px 3px 0px #222',
+              boxShadow: '3px 3px 0px var(--color-border)',
               fontWeight: 700,
               fontSize: '0.95rem',
               textTransform: 'none',
               px: 4, py: 1.2,
               '&:hover': {
                 bgcolor: '#5CC47B',
-                boxShadow: '1px 1px 0px #222',
+                boxShadow: '1px 1px 0px var(--color-border)',
                 transform: 'translate(2px, 2px)',
               },
             }}

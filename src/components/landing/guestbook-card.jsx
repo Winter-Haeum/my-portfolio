@@ -38,7 +38,7 @@ function GuestbookCard({ name, message, emoji = '🌱', keyword, role, created_a
   /* 비공개 + 비관리자: 내용 가림 */
   if (is_private && !isAdmin) {
     return (
-      <Box sx={{ ...cardBaseSx, bgcolor: '#F8F8F8' }}>
+      <Box sx={{ ...cardBaseSx, bgcolor: 'var(--color-bg-secondary)' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Typography sx={{ fontSize: '0.9rem', color: 'var(--color-text-muted)' }}>
             비공개 방명록입니다 🔒

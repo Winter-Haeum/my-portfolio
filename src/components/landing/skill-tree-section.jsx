@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../../hooks/portfolio-context';
+import characterSkillImg from '../../assets/character-skill.webp';
 
 function SkillTreeSection() {
   const navigate = useNavigate();
@@ -22,24 +23,36 @@ function SkillTreeSection() {
       }}
     >
       <Container maxWidth='lg'>
-        {/* 섹션 타이틀 */}
-        <Box
-          sx={{
-            display: 'inline-block',
-            bgcolor: 'var(--color-tech-stack)',
-            border: '2px solid var(--color-border)',
-            boxShadow: '4px 4px 0px var(--color-border)',
-            px: 3,
-            py: 1,
-            mb: 4,
-          }}
-        >
-          <Typography
-            variant='h2'
-            sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+        {/* 섹션 타이틀 + 캐릭터 */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', mb: 4 }}>
+          <Box
+            sx={{
+              display: 'inline-block',
+              bgcolor: 'var(--color-tech-stack)',
+              border: '2px solid var(--color-border)',
+              boxShadow: '4px 4px 0px var(--color-border)',
+              px: 3,
+              py: 1,
+            }}
           >
-            Skill Tree
-          </Typography>
+            <Typography
+              variant='h2'
+              sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+            >
+              Skill Tree
+            </Typography>
+          </Box>
+          <Box
+            component='img'
+            src={ characterSkillImg }
+            alt='Skill 캐릭터'
+            sx={{
+              width: { xs: 144, md: 216 },
+              height: 'auto',
+              objectFit: 'contain',
+              flexShrink: 0,
+            }}
+          />
         </Box>
 
         {/* 상위 4개 스킬 카드 그리드 */}
@@ -57,7 +70,7 @@ function SkillTreeSection() {
                     p: { xs: 2, md: 3 },
                     border: '2px solid var(--color-border)',
                     boxShadow: '4px 4px 0px var(--color-border)',
-                    bgcolor: '#fff',
+                    bgcolor: 'var(--color-bg-card)',
                     transition: 'transform 0.15s, box-shadow 0.15s',
                     '&:hover': {
                       transform: 'translate(-2px, -2px)',
@@ -132,10 +145,10 @@ function SkillTreeSection() {
             onClick={ () => navigate('/about') }
             sx={{
               bgcolor: 'var(--color-tech-stack)',
-              color: '#222',
-              border: '2px solid #222',
+              color: 'var(--color-text-primary)',
+              border: '2px solid var(--color-border)',
               borderRadius: '4px',
-              boxShadow: '3px 3px 0px #222',
+              boxShadow: '3px 3px 0px var(--color-border)',
               fontWeight: 700,
               fontSize: '0.95rem',
               textTransform: 'none',
@@ -143,7 +156,7 @@ function SkillTreeSection() {
               py: 1.2,
               '&:hover': {
                 bgcolor: '#8AC8E8',
-                boxShadow: '1px 1px 0px #222',
+                boxShadow: '1px 1px 0px var(--color-border)',
                 transform: 'translate(2px, 2px)',
               },
             }}

@@ -7,10 +7,12 @@ import Divider from '@mui/material/Divider';
 import EmailCopyArea from './email-copy-area';
 import SnsButtons from './sns-buttons';
 import GuestbookSection from './guestbook-section';
+import characterContactImg from '../../assets/character-contact.webp';
 
 function ContactSection() {
   return (
     <Box
+      id='contact-section'
       component='section'
       sx={{
         bgcolor: 'var(--color-bg-primary)',
@@ -19,23 +21,35 @@ function ContactSection() {
     >
       <Container maxWidth='lg'>
         {/* 섹션 제목 */}
-        <Box
-          sx={{
-            display: 'inline-block',
-            bgcolor: 'var(--color-contact)',
-            border: '2px solid var(--color-border)',
-            boxShadow: '4px 4px 0px var(--color-border)',
-            px: 3,
-            py: 1,
-            mb: 4,
-          }}
-        >
-          <Typography
-            variant='h2'
-            sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', mb: 4 }}>
+          <Box
+            sx={{
+              display: 'inline-block',
+              bgcolor: 'var(--color-contact)',
+              border: '2px solid var(--color-border)',
+              boxShadow: '4px 4px 0px var(--color-border)',
+              px: 3,
+              py: 1,
+            }}
           >
-            Contact
-          </Typography>
+            <Typography
+              variant='h2'
+              sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
+            >
+              Contact
+            </Typography>
+          </Box>
+          <Box
+            component='img'
+            src={ characterContactImg }
+            alt='Contact 캐릭터'
+            sx={{
+              width: { xs: 104, md: 156 },
+              height: 'auto',
+              objectFit: 'contain',
+              flexShrink: 0,
+            }}
+          />
         </Box>
 
         {/* 메인 카드 */}
@@ -67,7 +81,7 @@ function ContactSection() {
             {/* 이메일 + SNS 묶음 영역 */}
             <Box
               sx={{
-                bgcolor: '#F8F8F8',
+                bgcolor: 'var(--color-bg-secondary)',
                 border: '1.5px solid var(--color-border-light)',
                 borderRadius: 1,
                 p: { xs: 2, md: 2.5 },
