@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import PersonIcon from '@mui/icons-material/Person';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import characterImg from '../../assets/character.png';
 
 const TECH_BADGES = [
@@ -14,6 +15,7 @@ const TECH_BADGES = [
   'HTML / CSS',
   'MUI',
   'Git',
+  'AI 활용',
 ];
 
 function HeroSection() {
@@ -97,8 +99,8 @@ function HeroSection() {
                   lineHeight: 1.85,
                 }}
               >
-                유치원 교사에서 프론트엔드 개발자로 전향했습니다.<br />
-                꾸준히 배우고 직접 만들며 성장하는 개발자입니다.
+                교사의 섬세함으로 사용자를 이해하고,<br />
+                개발자의 시선으로 문제를 해결합니다.
               </Typography>
             </Box>
 
@@ -148,6 +150,28 @@ function HeroSection() {
               >
                 About Me
               </Button>
+              <Button
+                startIcon={ <GitHubIcon /> }
+                onClick={ () => window.open('https://github.com/Winter-Haeum', '_blank') }
+                sx={{
+                  bgcolor: 'var(--color-text-primary)',
+                  color: '#fff',
+                  border: '2px solid var(--color-border)',
+                  borderRadius: '4px',
+                  boxShadow: '4px 4px 0px var(--color-border)',
+                  fontWeight: 700,
+                  fontSize: '0.95rem',
+                  textTransform: 'none',
+                  px: 3, py: 1.2,
+                  '&:hover': {
+                    bgcolor: '#333',
+                    boxShadow: '1px 1px 0px var(--color-border)',
+                    transform: 'translate(3px, 3px)',
+                  },
+                }}
+              >
+                GitHub
+              </Button>
             </Box>
 
             {/* 기술 스택 배지 */}
@@ -172,7 +196,7 @@ function HeroSection() {
           </Grid>
 
           {/* ── 오른쪽: 캐릭터 이미지 ── */}
-          <Grid size={{ xs: 12, md: 5 }}>
+          <Grid size={{ xs: 12, md: 5 }} sx={{ order: { xs: -1, md: 0 } }}>
             <Box
               sx={{
                 display: 'flex',
