@@ -1,27 +1,39 @@
+import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import characterImg from '../../assets/character.png';
-import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../../hooks/portfolio-context';
+
+const JOURNEY_STEPS = [
+  { emoji: '👩‍🏫', label: '교사' },
+  { emoji: '🎨', label: '웹디자인' },
+  { emoji: '💻', label: '프론트엔드' },
+  { emoji: '🤖', label: 'AI 개발' },
+];
+
+const STORY_PARAGRAPHS = [
+  '유아교육을 전공하고 유치원 교사로 근무했습니다.',
+  '포토샵을 활용하는 선생님을 보며 디자인에 관심을 갖게 되었고, 그 관심은 웹디자인 공부로 이어졌습니다.',
+  '웹디자인을 배우던 중 프론트엔드 개발을 추천받았고, 개발이라는 새로운 분야에 도전하게 되었습니다.',
+  '오르미 프론트엔드 개발 과정을 수료하며 HTML, CSS, JavaScript, React를 학습했고, 프로젝트를 수행하며 개발 경험을 쌓았습니다.',
+  '현재는 WinterLog, FitBuddy, My Portfolio 프로젝트를 직접 개발하며 성장하고 있으며, AI 기반 개발 흐름을 배우기 위해 바이브 웹 과정도 함께 학습하고 있습니다.',
+];
 
 const HIGHLIGHTS = [
-  { emoji: '🏆', text: '학습부문 우수상 수상' },
+  { emoji: '🏆', text: '학습부문 우수상' },
   { emoji: '🎤', text: '프로젝트 발표 담당 3회' },
-  { emoji: '🚀', text: 'WinterLog 개발 중' },
-  { emoji: '🚀', text: 'FitBuddy 개발 중' },
+  { emoji: '🤝', text: '팀 프로젝트 리딩 경험' },
+  { emoji: '🚀', text: 'WinterLog 개발' },
+  { emoji: '🏃', text: 'FitBuddy 개발' },
+  { emoji: '🤖', text: 'AI 기반 개발 학습 중' },
 ];
 
 function AboutMeSection() {
   const navigate = useNavigate();
-  const { homeData } = usePortfolio();
-  const { basicInfo, devStorySummary, topSkills } = homeData;
 
   return (
     <Box
@@ -33,183 +45,235 @@ function AboutMeSection() {
       }}
     >
       <Container maxWidth='lg'>
-        {/* 섹션 타이틀 */}
+
+        {/* 섹션 뱃지 */}
         <Box
           sx={{
             display: 'inline-block',
             bgcolor: 'var(--color-secondary)',
             border: '2px solid var(--color-border)',
             boxShadow: '4px 4px 0px var(--color-border)',
-            px: 3,
-            py: 1,
-            mb: 4,
+            px: 3, py: 1, mb: 4,
           }}
         >
-          <Typography
-            variant='h2'
-            sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}
-          >
+          <Typography variant='h2' sx={{ fontSize: { xs: '1.4rem', md: '1.9rem' }, color: 'var(--color-text-primary)', m: 0 }}>
             About Me
           </Typography>
         </Box>
 
-        {/* 메인 그리드 */}
-        <Grid container spacing={3} alignItems='stretch' sx={{ mb: 4 }}>
+        {/* ── Chapter 헤더 (풀 너비) ── */}
+        <Box sx={{ mb: 5 }}>
+          {/* 챕터 레이블 */}
+          <Typography
+            sx={{
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              color: 'var(--color-text-muted)',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              mb: 1,
+            }}
+          >
+            CHAPTER 01 — 시작
+          </Typography>
 
-          {/* ── 왼쪽: 개발 스토리 + 스킬 뱃지 ── */}
-          <Grid size={{ xs: 12, md: 7 }}>
-            <Card sx={{ bgcolor: 'var(--color-bg-card)', height: '100%' }}>
-              <CardContent sx={{ p: { xs: 3, md: 4 }, height: '100%', display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+          {/* 메인 타이틀 */}
+          <Typography
+            variant='h2'
+            sx={{
+              fontSize: { xs: '2rem', md: '2.8rem' },
+              fontWeight: 900,
+              color: 'var(--color-text-primary)',
+              lineHeight: 1.15,
+              mb: { xs: 3, md: 4 },
+            }}
+          >
+            교사에서 개발자로
+          </Typography>
 
-                {/* 나의 개발 스토리 */}
-                <Box>
-                  <Box
-                    sx={{
-                      display: 'inline-block',
-                      bgcolor: 'var(--color-accent)',
-                      border: '2px solid var(--color-border)',
-                      boxShadow: '2px 2px 0px var(--color-border)',
-                      px: 1.8,
-                      py: 0.4,
-                      mb: 2,
-                    }}
-                  >
-                    <Typography sx={{ fontWeight: 700, fontSize: '0.8rem', color: 'var(--color-text-primary)' }}>
-                      나의 개발 스토리
-                    </Typography>
-                  </Box>
+          {/* 여정 아이콘 */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.8, md: 1.5 }, flexWrap: 'wrap' }}>
+            { JOURNEY_STEPS.map((step, i) => (
+              <Fragment key={ step.label }>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 0.5,
+                    border: '2px solid var(--color-border)',
+                    boxShadow: '3px 3px 0px var(--color-border)',
+                    px: { xs: 1.2, md: 2 },
+                    py: { xs: 1, md: 1.3 },
+                    bgcolor: '#fff',
+                    minWidth: { xs: 54, md: 72 },
+                  }}
+                >
+                  <Typography sx={{ fontSize: { xs: '1.3rem', md: '1.6rem' }, lineHeight: 1 }}>
+                    { step.emoji }
+                  </Typography>
                   <Typography
                     sx={{
+                      fontSize: { xs: '0.62rem', md: '0.72rem' },
+                      fontWeight: 700,
                       color: 'var(--color-text-secondary)',
-                      lineHeight: 1.95,
-                      fontSize: { xs: '0.93rem', md: '1rem' },
+                      textAlign: 'center',
+                      lineHeight: 1.3,
                     }}
                   >
-                    { devStorySummary }
+                    { step.label }
                   </Typography>
                 </Box>
-
-                <Divider sx={{ borderColor: 'var(--color-border-light)' }} />
-
-                {/* 주요 스킬 뱃지 */}
-                <Box>
+                { i < JOURNEY_STEPS.length - 1 && (
                   <Typography
-                    sx={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-muted)', mb: 1.2, letterSpacing: '0.05em' }}
+                    sx={{
+                      color: 'var(--color-primary)',
+                      fontWeight: 900,
+                      fontSize: { xs: '1.1rem', md: '1.4rem' },
+                      lineHeight: 1,
+                      userSelect: 'none',
+                    }}
                   >
-                    SKILLS
+                    →
                   </Typography>
-                  <Box sx={{ display: 'flex', gap: 1.2, flexWrap: 'wrap' }}>
-                    { topSkills.map((skill) => (
-                      <Box
-                        key={ skill.id }
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.7,
-                          border: '2px solid var(--color-border)',
-                          boxShadow: '2px 2px 0px var(--color-border)',
-                          bgcolor: 'var(--color-bg-primary)',
-                          px: 1.4,
-                          py: 0.7,
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            color: CATEGORY_COLORS[skill.category] || '#888',
-                            display: 'flex',
-                            alignItems: 'center',
-                            '& svg': { fontSize: 16 },
-                          }}
-                        >
-                          { getSkillIcon(skill.icon) }
-                        </Box>
-                        <Typography sx={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
-                          { skill.name }
-                        </Typography>
-                      </Box>
-                    )) }
-                  </Box>
-                </Box>
+                ) }
+              </Fragment>
+            )) }
+          </Box>
+        </Box>
 
-              </CardContent>
-            </Card>
-          </Grid>
+        {/* ── 2단 그리드 ── */}
+        <Grid container spacing={3} alignItems='flex-start' sx={{ mb: 4 }}>
 
-          {/* ── 오른쪽: 캐릭터 + 핵심 강점 ── */}
-          <Grid size={{ xs: 12, md: 5 }}>
-            <Card sx={{ bgcolor: 'var(--color-bg-card)', height: '100%' }}>
-              <CardContent sx={{ p: { xs: 3, md: 4 }, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+          {/* 왼쪽: 캐릭터 + 강점 */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
 
-                {/* 캐릭터 이미지 */}
+              {/* 캐릭터 카드 */}
+              <Box
+                sx={{
+                  border: '2px solid var(--color-border)',
+                  boxShadow: '4px 4px 0px var(--color-border)',
+                  bgcolor: 'var(--color-bg-primary)',
+                  p: 2.5,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 1.5,
+                }}
+              >
                 <Box
                   sx={{
                     width: '100%',
-                    maxWidth: 160,
+                    maxWidth: 140,
                     aspectRatio: '1 / 1',
+                    bgcolor: 'var(--color-bg-secondary)',
+                    border: '2px solid var(--color-border)',
+                    borderRadius: '4px',
+                    overflow: 'hidden',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    bgcolor: 'var(--color-bg-primary)',
-                    border: '2px solid var(--color-border)',
-                    boxShadow: '4px 4px 0px var(--color-border)',
-                    borderRadius: '4px',
-                    overflow: 'hidden',
-                    mx: 'auto',
                   }}
                 >
                   <Box
                     component='img'
                     src={ characterImg }
                     alt='겨울하음 캐릭터'
-                    sx={{ width: '100%', height: '100%', objectFit: 'contain', p: 1 }}
+                    sx={{ width: '100%', height: '100%', objectFit: 'contain', p: 0.5 }}
                   />
                 </Box>
-
-                {/* 이름 + 태그라인 */}
                 <Box sx={{ textAlign: 'center' }}>
-                  <Typography sx={{ fontWeight: 900, fontSize: '1.1rem', color: 'var(--color-text-primary)', mb: 0.5 }}>
-                    { basicInfo.name }
+                  <Typography sx={{ fontWeight: 900, fontSize: '1.05rem', color: 'var(--color-text-primary)', mb: 0.4 }}>
+                    장미진
                   </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '0.8rem',
-                      color: 'var(--color-text-secondary)',
-                      lineHeight: 1.6,
-                      fontWeight: 500,
-                    }}
-                  >
+                  <Typography sx={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.65 }}>
                     꾸준함을 무기로 성장하는<br />프론트엔드 개발자
                   </Typography>
                 </Box>
+              </Box>
 
-                <Divider sx={{ width: '100%', borderColor: 'var(--color-border-light)' }} />
+              {/* 강점 목록 */}
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                { HIGHLIGHTS.map((item, idx) => (
+                  <Box
+                    key={ idx }
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1.2,
+                      px: 1.5, py: 0.9,
+                      bgcolor: '#fff',
+                      border: '2px solid var(--color-border)',
+                      boxShadow: '2px 2px 0px var(--color-border)',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '1rem', lineHeight: 1 }}>{ item.emoji }</Typography>
+                    <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                      { item.text }
+                    </Typography>
+                  </Box>
+                )) }
+              </Box>
+            </Box>
+          </Grid>
 
-                {/* 핵심 강점 목록 */}
-                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 1 }}>
-                  { HIGHLIGHTS.map((item, idx) => (
+          {/* 오른쪽: 스토리 */}
+          <Grid size={{ xs: 12, md: 8 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+
+              {/* 인용 블록 */}
+              <Box
+                sx={{
+                  bgcolor: 'var(--color-accent)',
+                  border: '2px solid var(--color-border)',
+                  boxShadow: '4px 4px 0px var(--color-border)',
+                  px: 3, py: 2.5,
+                }}
+              >
+                <Typography sx={{ fontSize: { xs: '1.6rem', md: '2rem' }, color: 'var(--color-primary)', lineHeight: 1, mb: 1 }}>
+                  ❝
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: '0.95rem', md: '1.05rem' },
+                    fontWeight: 700,
+                    color: 'var(--color-text-primary)',
+                    lineHeight: 1.75,
+                    fontStyle: 'italic',
+                  }}
+                >
+                  새로운 도전을 두려워하지 않고,<br />꾸준함으로 성장해온 이야기
+                </Typography>
+              </Box>
+
+              {/* 스토리 본문 */}
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.8 }}>
+                { STORY_PARAGRAPHS.map((para, idx) => (
+                  <Box key={ idx } sx={{ display: 'flex', gap: 1.2, alignItems: 'flex-start' }}>
                     <Box
-                      key={ idx }
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 1.2,
-                        px: 1.5,
-                        py: 0.9,
-                        bgcolor: 'var(--color-bg-primary)',
-                        border: '1.5px solid var(--color-border-light)',
-                        borderRadius: '4px',
+                        width: 6, height: 6,
+                        mt: '9px',
+                        bgcolor: 'var(--color-primary)',
+                        border: '1.5px solid var(--color-border)',
+                        borderRadius: '50%',
+                        flexShrink: 0,
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        fontSize: { xs: '0.92rem', md: '1rem' },
+                        color: 'var(--color-text-secondary)',
+                        lineHeight: 1.9,
                       }}
                     >
-                      <Typography sx={{ fontSize: '1rem', lineHeight: 1 }}>{ item.emoji }</Typography>
-                      <Typography sx={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
-                        { item.text }
-                      </Typography>
-                    </Box>
-                  )) }
-                </Box>
-
-              </CardContent>
-            </Card>
+                      { para }
+                    </Typography>
+                  </Box>
+                )) }
+              </Box>
+            </Box>
           </Grid>
         </Grid>
 
@@ -227,8 +291,7 @@ function AboutMeSection() {
               fontWeight: 700,
               fontSize: '0.95rem',
               textTransform: 'none',
-              px: 4,
-              py: 1.2,
+              px: 4, py: 1.2,
               '&:hover': {
                 bgcolor: '#5CC47B',
                 boxShadow: '1px 1px 0px #222',
@@ -239,6 +302,7 @@ function AboutMeSection() {
             더 알아보기
           </Button>
         </Box>
+
       </Container>
     </Box>
   );
