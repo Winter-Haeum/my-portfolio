@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import profileImg from '../assets/profile.jpg';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -28,7 +29,7 @@ const aboutMeData = {
     education: '유아교육 전공',
     major: '프론트엔드 개발 학습 중',
     experience: '신입 프론트엔드 개발자',
-    photo: '',
+    photo: profileImg,
   },
   sections: [
     {
