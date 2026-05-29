@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { supabase } from '../utils/supabase-client';
@@ -51,36 +52,54 @@ const PROJECT_DETAILS = {
     ],
   },
   FitBuddy: {
+    shortDesc: '운동 타이머, 운동 기록, 캐릭터 성장, 챌린지와 피드 기능을 포함한 모바일 운동 웹 프로젝트.',
     overview: [
-      '운동 기록과 운동 SNS 기능을 중심으로 기획한 모바일 운동 웹 프로젝트입니다.',
-      '운동 시간 기록, 식단 관리, 캐릭터 성장 요소를 통해',
-      '사용자가 운동을 꾸준히 이어갈 수 있도록 구성했습니다.',
+      'FitBuddy는 사용자가 운동을 꾸준히 기록하고, 캐릭터와 함께 성장하는 경험을 제공하는 모바일 퍼스트 운동 웹 프로젝트입니다.',
+      '운동 종류별 타이머, 운동 기록 저장, 캐릭터 이미지, 챌린지, 피드 기능을 통해 사용자가 운동 습관을 지속할 수 있도록 구성했습니다.',
+      '단순 운동 기록 앱이 아니라 운동 기록 + 운동 SNS + 캐릭터 성장 요소를 결합한 서비스 형태를 목표로 개발하고 있습니다.',
     ],
     features: [
-      '로그인 화면',
-      '운동 기록',
-      '운동 시간 체크',
-      '칼로리 표시',
-      '운동 일기',
-      '식단 공유',
+      '로그인 / 회원가입',
+      '운동 타이머',
+      '운동 종류 선택',
+      '운동 종류별 캐릭터 표시',
+      '운동 기록 저장',
+      '기록관 운동 기록 조회',
+      '운동 일기 작성',
+      '운동 피드 게시글 조회',
+      '챌린지 기능',
+      '오늘 모임 기능',
+      '프로필 관리',
       '캐릭터 성장 시스템',
+      '식단 공유 기능',
+      '운동 진행 미니 플레이어',
+      '운동 데이터 저장 및 관리',
     ],
     techReasons: [
       { tech: 'React', reason: '모바일 화면을 컴포넌트 단위로 구성하기 위해 사용했습니다.' },
       { tech: 'Vite', reason: '빠른 개발 환경 구성을 위해 사용했습니다.' },
-      { tech: 'MUI', reason: '폼과 카드 UI를 빠르게 구성하기 위해 사용했습니다.' },
-      { tech: 'Supabase', reason: '로그인과 데이터 저장 기능을 연결하기 위해 사용했습니다.' },
+      { tech: 'MUI', reason: '폼, 버튼, 카드 UI를 빠르게 구성하기 위해 사용했습니다.' },
+      { tech: 'Supabase', reason: '로그인, 사용자 정보, 운동 기록, 게시글 데이터를 저장하고 관리하기 위해 사용했습니다.' },
     ],
     implementationPoints: [
-      '모바일 퍼스트 화면 구성',
-      '로그인 UI와 사용자 흐름 구성',
-      '운동 기록 데이터를 보여주는 카드형 UI 설계',
-      '캐릭터 성장형 서비스 구조 기획',
+      '모바일 퍼스트 UI 설계',
+      '로그인 및 회원가입 흐름 구현',
+      '운동 타이머 기능 구현',
+      '운동 데이터 저장 및 기록 관리',
+      '운동 종류별 캐릭터 이미지 연결',
+      '캐릭터 성장 시스템 설계',
+      '운동 진행 상태 유지 기능',
+      '피드 및 SNS 기능 구현',
+      '챌린지 / 오늘 모임 기능 구현',
+      '사용자 프로필 관리 기능 구현',
+      '운동 기록과 캐릭터를 연결한 UX 설계',
     ],
     learnings: [
-      '모바일 화면 기준으로 UI를 설계하는 방법을 연습했습니다.',
-      '사용자가 꾸준히 앱을 사용하도록 만드는 서비스 흐름을 고민했습니다.',
-      '추후에는 만보기, 챌린지, 1대1 채팅 기능을 확장할 예정입니다.',
+      '모바일 환경을 기준으로 UI를 설계하는 방법을 연습했습니다.',
+      '운동 타이머, 운동 기록, 사용자 정보처럼 여러 화면에서 공유되는 데이터를 관리하는 흐름을 고민했습니다.',
+      '초기에는 단순 운동 기록 앱으로 시작했지만, 이후 캐릭터 성장, 운동별 캐릭터, 챌린지, 피드 기능을 추가하면서 서비스 구조로 확장했습니다.',
+      '사용자가 운동을 꾸준히 이어갈 수 있도록 기록, 성장, 커뮤니티 요소를 연결하는 방향으로 개선하고 있습니다.',
+      '앞으로는 만보기, 알림, 추천 루틴, 1대1 채팅 기능까지 확장할 예정입니다.',
     ],
   },
 };
@@ -232,25 +251,47 @@ function ProjectDetailPage() {
       }}
     >
       <Container maxWidth='md'>
-        {/* 뒤로가기 */}
-        <Button
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate(-1)}
-          sx={{
-            mb: 3.5,
-            bgcolor: '#fff',
-            color: '#1A1A1A',
-            border: '2px solid #1A1A1A',
-            boxShadow: '3px 3px 0px #1A1A1A',
-            '&:hover': {
-              bgcolor: '#F5F5F5',
-              boxShadow: '1px 1px 0px #1A1A1A',
-              transform: 'translate(2px, 2px)',
-            },
-          }}
-        >
-          Back
-        </Button>
+        {/* 뒤로가기 + 프로젝트 목록 */}
+        <Box sx={{ display: 'flex', gap: '14px', mb: 3.5 }}>
+          <Button
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate(-1)}
+            sx={{
+              bgcolor: '#fff',
+              color: '#1A1A1A',
+              border: '2px solid #1A1A1A',
+              boxShadow: '3px 3px 0px #1A1A1A',
+              fontWeight: 700,
+              textTransform: 'none',
+              '&:hover': {
+                bgcolor: '#F5F5F5',
+                boxShadow: '1px 1px 0px #1A1A1A',
+                transform: 'translate(2px, 2px)',
+              },
+            }}
+          >
+            Back
+          </Button>
+          <Button
+            startIcon={<FormatListBulletedIcon />}
+            onClick={() => navigate('/projects')}
+            sx={{
+              bgcolor: '#fff',
+              color: '#1A1A1A',
+              border: '2px solid #1A1A1A',
+              boxShadow: '3px 3px 0px #1A1A1A',
+              fontWeight: 700,
+              textTransform: 'none',
+              '&:hover': {
+                bgcolor: '#F5F5F5',
+                boxShadow: '1px 1px 0px #1A1A1A',
+                transform: 'translate(2px, 2px)',
+              },
+            }}
+          >
+            프로젝트 목록
+          </Button>
+        </Box>
 
         {/* 대표 이미지 */}
         {!imgError ? (
@@ -327,7 +368,7 @@ function ProjectDetailPage() {
             mb: 4,
           }}
         >
-          {project.description}
+          {details?.shortDesc || project.description}
         </Typography>
 
         {details ? (
