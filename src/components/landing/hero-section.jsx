@@ -34,7 +34,7 @@ function HeroSection() {
         <Grid container spacing={{ xs: 5, md: 4 }} alignItems='center'>
 
           {/* ── 왼쪽: 텍스트 + 버튼 ── */}
-          <Grid size={{ xs: 12, md: 7 }}>
+          <Grid size={{ xs: 12, md: 6 }}>
 
             {/* 포지션 배지 */}
             <Box
@@ -196,17 +196,17 @@ function HeroSection() {
           </Grid>
 
           {/* ── 오른쪽: 캐릭터 이미지 ── */}
-          <Grid size={{ xs: 12, md: 5 }} sx={{ order: { xs: -1, md: 0 } }}>
+          <Grid size={{ xs: 12, md: 6 }} sx={{ order: { xs: -1, md: 0 } }}>
             <Box
               sx={{
                 display: 'flex',
-                justifyContent: { xs: 'center', md: 'flex-end' },
+                justifyContent: 'center',
               }}
             >
               <Box
                 sx={{
-                  width: { xs: 220, md: 300 },
-                  height: { xs: 220, md: 300 },
+                  width: { xs: 220, md: 320 },
+                  height: { xs: 220, md: 320 },
                   border: '3px solid var(--color-border)',
                   boxShadow: '10px 10px 0px var(--color-border)',
                   bgcolor: 'var(--color-bg-secondary)',
