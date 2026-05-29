@@ -9,10 +9,21 @@ import Grid from '@mui/material/Grid';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import CodeIcon from '@mui/icons-material/Code';
+import DataObjectIcon from '@mui/icons-material/DataObject';
+import PaletteIcon from '@mui/icons-material/Palette';
+import BoltIcon from '@mui/icons-material/Bolt';
+import HubIcon from '@mui/icons-material/Hub';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import DesignServicesIcon from '@mui/icons-material/DesignServices';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import SkillProgressCard from '../components/ui/skill-progress-card';
 
 /**
  * AboutMePage 컴포넌트
@@ -70,6 +81,72 @@ const aboutMeData = {
   ],
 };
 
+const skillsData = [
+  {
+    id: 1,
+    icon: <DataObjectIcon />,
+    name: 'HTML',
+    level: 75,
+    category: 'Frontend',
+    description: '웹 페이지의 기본 구조를 작성할 수 있습니다.',
+    showInHome: true,
+  },
+  {
+    id: 2,
+    icon: <PaletteIcon />,
+    name: 'CSS',
+    level: 70,
+    category: 'Frontend',
+    description: '반응형 레이아웃과 카드형 UI를 구현할 수 있습니다.',
+    showInHome: true,
+  },
+  {
+    id: 3,
+    icon: <BoltIcon />,
+    name: 'JavaScript',
+    level: 55,
+    category: 'Frontend',
+    description: '기본 문법과 이벤트, 배열 메서드를 학습하며 프로젝트에 적용하고 있습니다.',
+    showInHome: true,
+  },
+  {
+    id: 4,
+    icon: <HubIcon />,
+    name: 'React',
+    level: 55,
+    category: 'Framework',
+    description: '컴포넌트 기반 UI를 만들고 상태 관리 흐름을 학습하고 있습니다.',
+    showInHome: true,
+  },
+  {
+    id: 5,
+    icon: <GitHubIcon />,
+    name: 'GitHub',
+    level: 60,
+    category: 'Tool',
+    description: '프로젝트 버전 관리와 협업 흐름을 익히고 있습니다.',
+    showInHome: true,
+  },
+  {
+    id: 6,
+    icon: <DesignServicesIcon />,
+    name: 'Figma',
+    level: 50,
+    category: 'Design',
+    description: '웹 UI 구조와 화면 기획을 정리할 때 활용할 수 있습니다.',
+    showInHome: false,
+  },
+  {
+    id: 7,
+    icon: <AutoAwesomeIcon />,
+    name: 'AI Tools',
+    level: 65,
+    category: 'AI',
+    description: 'Claude와 ChatGPT를 활용해 학습, 기획, 코드 개선 작업을 진행하고 있습니다.',
+    showInHome: true,
+  },
+];
+
 const basicInfoItems = [
   { icon: <PersonIcon />, label: '이름', key: 'name' },
   { icon: <SchoolIcon />, label: '학력', key: 'education' },
@@ -79,12 +156,16 @@ const basicInfoItems = [
 
 function AboutMePage() {
   const [activeTab, setActiveTab] = useState(0);
+  const [showAllSkills, setShowAllSkills] = useState(false);
 
   const handleTabChange = (_, newValue) => {
     setActiveTab(newValue);
   };
 
   const activeSection = aboutMeData.sections[activeTab];
+  const visibleSkills = showAllSkills
+    ? skillsData
+    : skillsData.filter((s) => s.showInHome);
 
   return (
     <Box
@@ -137,7 +218,7 @@ function AboutMePage() {
                     overflow: 'hidden',
                   }}
                 >
-                  {aboutMeData.basicInfo.photo ? (
+                  { aboutMeData.basicInfo.photo ? (
                     <Box
                       component='img'
                       src={ aboutMeData.basicInfo.photo }
@@ -146,7 +227,7 @@ function AboutMePage() {
                     />
                   ) : (
                     <PersonIcon sx={{ fontSize: 56, color: '#fff', opacity: 0.8 }} />
-                  )}
+                  ) }
                 </Box>
               </Grid>
 
@@ -154,10 +235,7 @@ function AboutMePage() {
               <Grid size={{ xs: 12, md: 9 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   { basicInfoItems.map((item) => (
-                    <Box
-                      key={ item.key }
-                      sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}
-                    >
+                    <Box key={ item.key } sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                       <Box
                         sx={{
                           display: 'flex',
@@ -177,21 +255,12 @@ function AboutMePage() {
                       </Box>
                       <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1 }}>
                         <Typography
-                          sx={{
-                            fontSize: '0.8rem',
-                            fontWeight: 700,
-                            color: 'var(--color-text-muted)',
-                            minWidth: 44,
-                          }}
+                          sx={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', minWidth: 44 }}
                         >
                           { item.label }
                         </Typography>
                         <Typography
-                          sx={{
-                            fontSize: { xs: '0.95rem', md: '1rem' },
-                            fontWeight: 600,
-                            color: 'var(--color-text-primary)',
-                          }}
+                          sx={{ fontSize: { xs: '0.95rem', md: '1rem' }, fontWeight: 600, color: 'var(--color-text-primary)' }}
                         >
                           { aboutMeData.basicInfo[item.key] }
                         </Typography>
@@ -205,13 +274,8 @@ function AboutMePage() {
         </Card>
 
         {/* 콘텐츠 섹션 — 탭 네비게이션 */}
-        <Card sx={{ bgcolor: 'var(--color-bg-card)' }}>
-          <Box
-            sx={{
-              borderBottom: '2px solid var(--color-border)',
-              bgcolor: 'var(--color-bg-primary)',
-            }}
-          >
+        <Card sx={{ bgcolor: 'var(--color-bg-card)', mb: 4 }}>
+          <Box sx={{ borderBottom: '2px solid var(--color-border)', bgcolor: 'var(--color-bg-primary)' }}>
             <Tabs
               value={ activeTab }
               onChange={ handleTabChange }
@@ -265,7 +329,6 @@ function AboutMePage() {
           </Box>
 
           <CardContent sx={{ p: { xs: 3, md: 5 } }}>
-            {/* 섹션 제목 */}
             <Box
               sx={{
                 display: 'inline-block',
@@ -285,13 +348,9 @@ function AboutMePage() {
               </Typography>
             </Box>
 
-            {/* 섹션 내용 */}
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               { activeSection.content.map((paragraph, idx) => (
-                <Box
-                  key={ idx }
-                  sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}
-                >
+                <Box key={ idx } sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
                   <Box
                     sx={{
                       width: 6,
@@ -304,16 +363,104 @@ function AboutMePage() {
                     }}
                   />
                   <Typography
-                    sx={{
-                      color: 'var(--color-text-secondary)',
-                      lineHeight: 1.9,
-                      fontSize: { xs: '0.95rem', md: '1.05rem' },
-                    }}
+                    sx={{ color: 'var(--color-text-secondary)', lineHeight: 1.9, fontSize: { xs: '0.95rem', md: '1.05rem' } }}
                   >
                     { paragraph }
                   </Typography>
                 </Box>
               )) }
+            </Box>
+          </CardContent>
+        </Card>
+
+        {/* 스킬 섹션 */}
+        <Card sx={{ bgcolor: 'var(--color-bg-card)' }}>
+          <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+            {/* 스킬 섹션 헤더 */}
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3, flexWrap: 'wrap', gap: 2 }}>
+              <Box
+                sx={{
+                  display: 'inline-block',
+                  bgcolor: 'var(--color-tech-stack)',
+                  border: '2px solid var(--color-border)',
+                  boxShadow: '3px 3px 0px var(--color-border)',
+                  px: 2,
+                  py: 0.5,
+                }}
+              >
+                <Typography
+                  variant='h3'
+                  sx={{ fontSize: { xs: '1.1rem', md: '1.3rem' }, color: 'var(--color-text-primary)', m: 0 }}
+                >
+                  Skills
+                </Typography>
+              </Box>
+
+              {/* 카테고리 범례 */}
+              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                { [
+                  { label: 'Frontend', color: '#F4845F' },
+                  { label: 'Framework', color: '#7AB5E8' },
+                  { label: 'Tool', color: '#888888' },
+                  { label: 'AI', color: '#4BAE76' },
+                  { label: 'Design', color: '#A855C8' },
+                ].map((cat) => (
+                  <Box
+                    key={ cat.label }
+                    sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                  >
+                    <Box
+                      sx={{
+                        width: 10,
+                        height: 10,
+                        bgcolor: cat.color,
+                        border: '1.5px solid var(--color-border)',
+                        borderRadius: '2px',
+                      }}
+                    />
+                    <Typography sx={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
+                      { cat.label }
+                    </Typography>
+                  </Box>
+                )) }
+              </Box>
+            </Box>
+
+            {/* 스킬 카드 그리드 */}
+            <Grid container spacing={2}>
+              { visibleSkills.map((skill, idx) => (
+                <Grid key={ skill.id } size={{ xs: 12, sm: 6, md: 4 }}>
+                  <SkillProgressCard skill={ skill } animationDelay={ idx * 80 } />
+                </Grid>
+              )) }
+            </Grid>
+
+            {/* 더 보기 / 접기 버튼 */}
+            <Box sx={{ textAlign: 'center', mt: 3 }}>
+              <Button
+                onClick={ () => setShowAllSkills((prev) => !prev) }
+                endIcon={ showAllSkills ? <ExpandLessIcon /> : <ExpandMoreIcon /> }
+                sx={{
+                  bgcolor: showAllSkills ? 'var(--color-bg-primary)' : 'var(--color-primary)',
+                  color: showAllSkills ? 'var(--color-text-primary)' : '#fff',
+                  border: '2px solid var(--color-border)',
+                  boxShadow: '3px 3px 0px var(--color-border)',
+                  borderRadius: '4px',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  textTransform: 'none',
+                  px: 3,
+                  py: 1,
+                  transition: 'box-shadow 0.15s, transform 0.15s',
+                  '&:hover': {
+                    boxShadow: '1px 1px 0px var(--color-border)',
+                    transform: 'translate(2px, 2px)',
+                    bgcolor: showAllSkills ? 'var(--color-bg-primary)' : 'var(--color-primary-dark)',
+                  },
+                }}
+              >
+                { showAllSkills ? '스킬 접기' : '스킬 더 보기' }
+              </Button>
             </Box>
           </CardContent>
         </Card>
