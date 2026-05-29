@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Chip from '@mui/material/Chip';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import characterImg from '../../assets/character.png';
 
@@ -15,21 +16,22 @@ const JOURNEY_STEPS = [
   { emoji: '🤖', label: 'AI 개발' },
 ];
 
-const STORY_PARAGRAPHS = [
-  '유아교육을 전공하고 유치원 교사로 근무했습니다.',
-  '포토샵을 활용하는 선생님을 보며 디자인에 관심을 갖게 되었고, 그 관심은 웹디자인 공부로 이어졌습니다.',
-  '웹디자인을 배우던 중 프론트엔드 개발을 추천받았고, 개발이라는 새로운 분야에 도전하게 되었습니다.',
-  '오르미 프론트엔드 개발 과정을 수료하며 HTML, CSS, JavaScript, React를 학습했고, 프로젝트를 수행하며 개발 경험을 쌓았습니다.',
-  '현재는 WinterLog, FitBuddy, My Portfolio 프로젝트를 직접 개발하며 성장하고 있으며, AI 기반 개발 흐름을 배우기 위해 바이브 웹 과정도 함께 학습하고 있습니다.',
+const TIMELINE_ITEMS = [
+  { emoji: '🎓', label: '유아교육 전공' },
+  { emoji: '👩‍🏫', label: '유치원 교사' },
+  { emoji: '🎨', label: '웹디자인 학습' },
+  { emoji: '💻', label: '프론트엔드 개발 입문' },
+  { emoji: '📚', label: '오르미 프론트엔드 과정 수료', isHighlight: true },
+  { emoji: '🏆', label: '학습부문 우수상 수상', isHighlight: true },
+  { emoji: '🚀', label: 'WinterLog 개발' },
+  { emoji: '🏃', label: 'FitBuddy 개발' },
+  { emoji: '🤖', label: 'AI 기반 개발 학습', isCurrent: true },
 ];
 
 const HIGHLIGHTS = [
   { emoji: '🏆', text: '학습부문 우수상' },
   { emoji: '🎤', text: '프로젝트 발표 담당 3회' },
   { emoji: '🤝', text: '팀 프로젝트 리딩 경험' },
-  { emoji: '🚀', text: 'WinterLog 개발' },
-  { emoji: '🏃', text: 'FitBuddy 개발' },
-  { emoji: '🤖', text: 'AI 기반 개발 학습 중' },
 ];
 
 function AboutMeSection() {
@@ -63,7 +65,6 @@ function AboutMeSection() {
 
         {/* ── Chapter 헤더 (풀 너비) ── */}
         <Box sx={{ mb: 5 }}>
-          {/* 챕터 레이블 */}
           <Typography
             sx={{
               fontSize: '0.72rem',
@@ -77,7 +78,6 @@ function AboutMeSection() {
             CHAPTER 01 — 시작
           </Typography>
 
-          {/* 메인 타이틀 */}
           <Typography
             variant='h2'
             sx={{
@@ -193,7 +193,7 @@ function AboutMeSection() {
                 </Box>
               </Box>
 
-              {/* 강점 목록 */}
+              {/* 강점 목록 (3개) */}
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 { HIGHLIGHTS.map((item, idx) => (
                   <Box
@@ -218,61 +218,138 @@ function AboutMeSection() {
             </Box>
           </Grid>
 
-          {/* 오른쪽: 스토리 */}
+          {/* 오른쪽: My Journey Timeline */}
           <Grid size={{ xs: 12, md: 8 }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
 
-              {/* 인용 블록 */}
+              {/* My Journey 헤더 배지 */}
               <Box
                 sx={{
-                  bgcolor: 'var(--color-accent)',
+                  display: 'inline-block',
+                  bgcolor: 'var(--color-primary)',
                   border: '2px solid var(--color-border)',
-                  boxShadow: '4px 4px 0px var(--color-border)',
-                  px: 3, py: 2.5,
+                  boxShadow: '3px 3px 0px var(--color-border)',
+                  px: 2, py: 0.6,
                 }}
               >
-                <Typography sx={{ fontSize: { xs: '1.6rem', md: '2rem' }, color: 'var(--color-primary)', lineHeight: 1, mb: 1 }}>
-                  ❝
-                </Typography>
                 <Typography
                   sx={{
-                    fontSize: { xs: '0.95rem', md: '1.05rem' },
+                    fontSize: '0.78rem',
                     fontWeight: 700,
-                    color: 'var(--color-text-primary)',
-                    lineHeight: 1.75,
-                    fontStyle: 'italic',
+                    color: '#fff',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    m: 0,
                   }}
                 >
-                  새로운 도전을 두려워하지 않고,<br />꾸준함으로 성장해온 이야기
+                  My Journey
                 </Typography>
               </Box>
 
-              {/* 스토리 본문 */}
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.8 }}>
-                { STORY_PARAGRAPHS.map((para, idx) => (
-                  <Box key={ idx } sx={{ display: 'flex', gap: 1.2, alignItems: 'flex-start' }}>
-                    <Box
-                      sx={{
-                        width: 6, height: 6,
-                        mt: '9px',
-                        bgcolor: 'var(--color-primary)',
-                        border: '1.5px solid var(--color-border)',
-                        borderRadius: '50%',
-                        flexShrink: 0,
-                      }}
-                    />
-                    <Typography
-                      sx={{
-                        fontSize: { xs: '0.92rem', md: '1rem' },
-                        color: 'var(--color-text-secondary)',
-                        lineHeight: 1.9,
-                      }}
-                    >
-                      { para }
-                    </Typography>
-                  </Box>
-                )) }
+              {/* 타임라인 */}
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                { TIMELINE_ITEMS.map((item, idx) => {
+                  const isLast = idx === TIMELINE_ITEMS.length - 1;
+                  const dotBg = item.isCurrent
+                    ? 'var(--color-primary)'
+                    : item.isHighlight
+                    ? 'var(--color-secondary)'
+                    : '#fff';
+                  const cardBg = item.isCurrent
+                    ? 'var(--color-accent)'
+                    : item.isHighlight
+                    ? 'var(--color-secondary)'
+                    : '#fff';
+
+                  return (
+                    <Box key={ idx } sx={{ display: 'flex', gap: 1.5, alignItems: 'stretch' }}>
+
+                      {/* 왼쪽: 점 + 연결선 */}
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          width: 20,
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Box sx={{ pt: 1.1 }}>
+                          <Box
+                            sx={{
+                              width: 13,
+                              height: 13,
+                              bgcolor: dotBg,
+                              border: '2px solid var(--color-border)',
+                              borderRadius: '50%',
+                              flexShrink: 0,
+                            }}
+                          />
+                        </Box>
+                        { !isLast && (
+                          <Box
+                            sx={{
+                              flex: 1,
+                              width: 2,
+                              bgcolor: 'var(--color-border)',
+                              mt: 0.5,
+                              minHeight: 14,
+                            }}
+                          />
+                        ) }
+                      </Box>
+
+                      {/* 오른쪽: 카드 */}
+                      <Box sx={{ flex: 1, pb: isLast ? 0 : 1.4 }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.2,
+                            px: 1.5,
+                            py: 1,
+                            bgcolor: cardBg,
+                            border: '2px solid var(--color-border)',
+                            boxShadow: '2px 2px 0px var(--color-border)',
+                          }}
+                        >
+                          <Typography sx={{ fontSize: '1rem', lineHeight: 1, flexShrink: 0 }}>
+                            { item.emoji }
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: { xs: '0.85rem', md: '0.9rem' },
+                              fontWeight: item.isCurrent || item.isHighlight ? 700 : 600,
+                              color: 'var(--color-text-primary)',
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            { item.label }
+                          </Typography>
+                          { item.isCurrent && (
+                            <Chip
+                              label='NOW'
+                              size='small'
+                              sx={{
+                                ml: 'auto',
+                                height: 20,
+                                fontSize: '0.6rem',
+                                fontWeight: 700,
+                                bgcolor: 'var(--color-primary)',
+                                color: '#fff',
+                                border: '1.5px solid var(--color-border)',
+                                '& .MuiChip-label': { px: 0.8 },
+                              }}
+                            />
+                          ) }
+                        </Box>
+                      </Box>
+
+                    </Box>
+                  );
+                }) }
               </Box>
+
             </Box>
           </Grid>
         </Grid>
