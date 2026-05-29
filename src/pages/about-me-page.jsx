@@ -142,7 +142,7 @@ function AboutMePage() {
                       component='img'
                       src={ aboutMeData.basicInfo.photo }
                       alt='프로필 사진'
-                      sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
                     />
                   ) : (
                     <PersonIcon sx={{ fontSize: 56, color: '#fff', opacity: 0.8 }} />
