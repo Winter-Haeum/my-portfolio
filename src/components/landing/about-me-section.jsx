@@ -163,26 +163,17 @@ function AboutMeSection() {
                 }}
               >
                 <Box
+                  component='img'
+                  src={ characterAboutImg }
+                  alt='겨울하음 About Me 캐릭터'
                   sx={{
-                    width: '100%',
-                    maxWidth: 150,
-                    aspectRatio: '3 / 4',
-                    bgcolor: 'var(--color-bg-secondary)',
-                    border: '2px solid var(--color-border)',
-                    borderRadius: '4px',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                    justifyContent: 'center',
+                    width: 175,
+                    maxWidth: '70%',
+                    height: 'auto',
+                    objectFit: 'contain',
+                    display: 'block',
                   }}
-                >
-                  <Box
-                    component='img'
-                    src={ characterAboutImg }
-                    alt='겨울하음 About Me 캐릭터'
-                    sx={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
-                  />
-                </Box>
+                />
                 <Box sx={{ textAlign: 'center' }}>
                   <Typography sx={{ fontWeight: 900, fontSize: '1.05rem', color: 'var(--color-text-primary)', mb: 0.4 }}>
                     장미진

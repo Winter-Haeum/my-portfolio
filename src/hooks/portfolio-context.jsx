@@ -7,6 +7,9 @@ import HubIcon from '@mui/icons-material/Hub';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import StorageIcon from '@mui/icons-material/Storage';
+import CloudIcon from '@mui/icons-material/Cloud';
 
 const ICON_MAP = {
   'orange-diamond': <DataObjectIcon />,
@@ -16,14 +19,19 @@ const ICON_MAP = {
   'github': <GitHubIcon />,
   'figma': <DesignServicesIcon />,
   'sparkles': <AutoAwesomeIcon />,
+  'flow': <AccountTreeIcon />,
+  'storage': <StorageIcon />,
+  'cloud': <CloudIcon />,
 };
 
 export const CATEGORY_COLORS = {
-  Frontend: '#F4845F',
+  Web: '#F4845F',
   Framework: '#7AB5E8',
+  'Planning & UX': '#E8A23E',
   Design: '#A855C8',
-  Tool: '#888888',
-  AI: '#4BAE76',
+  'Backend & Data': '#4BAE76',
+  Tools: '#888888',
+  'AI Workflow': '#2CA6A4',
 };
 
 export function getSkillIcon(iconName) {
@@ -33,59 +41,59 @@ export function getSkillIcon(iconName) {
 const aboutMeData = {
   basicInfo: {
     name: '장미진',
-    education: '유아교육 전공',
-    major: '프론트엔드 개발 학습 중',
-    experience: '신입 프론트엔드 개발자',
+    education: '유아교육학과 졸업',
+    training: '웹디자인·UI/UX · 프론트엔드 · AI 바이브코딩',
+    experience: '신입',
     photo: profileImg,
   },
   sections: [
     {
       id: 'dev-story',
-      title: '나의 개발 스토리',
+      title: '나의 성장 스토리',
       showInHome: true,
-      content: '유아교육을 전공하고 유치원 교사로 근무하던 중 디자인에 관심을 갖게 되었고, 웹디자인 공부를 하다가 프론트엔드 개발을 접하게 되었습니다. 오르미 프론트엔드 개발 과정을 통해 HTML, CSS, JavaScript, React를 학습했고, 현재는 AI 기반 개발 흐름을 배우며 My Portfolio, WinterLog, FitBuddy 프로젝트를 개발하고 있습니다.',
+      content: '유아교육을 전공하고 유치원 교사로 근무하던 중 디자인에 관심을 갖게 되어 웹디자인과 UI/UX를 공부하기 시작했습니다. 이후 화면이 실제로 동작하는 과정에도 흥미가 생겨 프론트엔드 과정을 통해 HTML, CSS, JavaScript, React의 기초를 학습했습니다.\n\n현재는 AI 도구를 활용해 아이디어와 요구사항을 구체화하고 프로젝트를 만들어가고 있습니다. 구현 과정에서는 AI의 설명을 통해 변경 내용을 이해하고, 결과를 직접 실행해 화면과 기능을 확인하며 원하는 방향과 다른 부분을 다시 수정하고 있습니다.\n\nWinterLog, FitBuddy, Winter Dev Archive를 만들며 아이디어를 정리하고, 화면을 구성하고, 실제로 사용해 문제를 발견하고 개선하는 과정을 반복해서 경험하고 있습니다.',
     },
     {
       id: 'philosophy',
-      title: '개발 철학',
+      title: '일하는 방식',
       showInHome: true,
-      content: '저는 빠르게 성장하는 사람보다 꾸준히 성장하는 사람이 되고 싶습니다. 학습 속도가 빠른 편은 아니지만 포기하지 않고 끝까지 해내는 것을 중요하게 생각하며, 사용자 입장에서 생각하고 함께 일하고 싶은 개발자가 되는 것을 목표로 합니다.',
+      content: '좋은 결과물을 만드는 것을 목표로 하되, 실제 사용 과정에서 새롭게 보이는 불편과 개선점도 중요하게 생각합니다. 완성 후에도 직접 사용해 보며 사용자 입장에서 더 나은 흐름이 있는지 살펴보고 필요한 부분을 다듬습니다.\n\nAI의 제안도 그대로 받아들이기보다 결과와 동작을 다시 확인하고, 제가 원하는 목적과 방향에 맞도록 요구사항을 조정하며 수정합니다.\n\n서비스가 실제 사용자에게 닿은 이후에도 더 나은 방향을 고민하고, 맡은 역할 안에서 제가 할 수 있는 개선을 찾아 실행하는 사람이 되고 싶습니다.',
     },
     {
       id: 'personal',
       title: '개인적인 이야기',
       showInHome: false,
-      content: '육아와 학습을 병행하며 하루하루 성장 중입니다. 기록하는 걸 좋아해서 직접 WinterLog라는 블로그 서비스를 만들었고, 운동을 꾸준히 이어가고 싶어서 FitBuddy라는 운동 SNS도 개발했습니다. 일상의 불편함을 코드로 해결해가는 경험이 쌓일수록 개발이 점점 더 즐거워지고 있습니다. 지금은 AI 도구를 활용한 개발 방식을 익히며, 교사 시절에 길러온 사람을 이해하는 감각을 개발에 녹이는 방법을 탐구하고 있습니다.',
+      content: '유아교육을 전공하고 유치원 교사로 근무하며 사람마다 이해하는 방식과 필요한 도움이 다르다는 것을 가까이에서 경험했습니다. 이후 디자인과 웹에 관심을 갖게 되었고, 새로운 분야를 배우면서도 사용자가 무엇을 필요로 하는지 살펴보고 이해하기 쉽게 정리하는 경험이 자연스럽게 이어졌습니다.\n\n기록하고 정리하는 것을 좋아해 학습과 경험을 나눌 수 있는 WinterLog를 만들었습니다. 운동 서비스는 기능이 많고 복잡한 경우가 많아, 기본적인 운동을 하는 사람도 부담 없이 기록하고 꾸준히 이어갈 수 있는 서비스가 있으면 좋겠다는 생각에서 FitBuddy를 만들었습니다. 또 공부한 내용이 많아질수록 필요한 내용을 다시 찾기 어려웠던 경험에서 Winter Dev Archive를 만들어 학습 자료의 구조와 탐색 흐름을 정리했습니다.\n\n세 프로젝트 모두 제가 실제로 느낀 필요와 불편에서 시작했고, 만든 뒤에도 직접 사용하면서 화면과 기능을 계속 개선하고 있습니다. 이런 과정을 통해 사람의 필요를 발견하고, 아이디어를 실제로 사용할 수 있는 결과물로 만들어가는 과정에 흥미가 있다는 것을 알게 되었습니다.',
     },
   ],
   skills: [
-    { id: 1, icon: 'orange-diamond', name: 'HTML',       level: 75, category: 'Frontend',   description: '웹 페이지의 기본 구조를 작성할 수 있습니다.',                                         showInHome: true },
-    { id: 2, icon: 'palette',        name: 'CSS',        level: 70, category: 'Frontend',   description: '반응형 레이아웃과 카드형 UI를 구현할 수 있습니다.',                                     showInHome: true },
-    { id: 3, icon: 'zap',            name: 'JavaScript', level: 55, category: 'Frontend',   description: '기본 문법과 이벤트, 배열 메서드를 학습하며 프로젝트에 적용하고 있습니다.',               showInHome: true },
-    { id: 4, icon: 'atom',           name: 'React',      level: 55, category: 'Framework',  description: '컴포넌트 기반 UI를 만들고 상태 관리 흐름을 학습하고 있습니다.',                         showInHome: true },
-    { id: 5, icon: 'github',         name: 'GitHub',     level: 60, category: 'Tool',       description: '프로젝트 버전 관리와 협업 흐름을 익히고 있습니다.',                                     showInHome: true },
-    { id: 6, icon: 'figma',          name: 'Figma',      level: 50, category: 'Design',     description: '웹 UI 구조와 화면 기획을 정리할 때 활용할 수 있습니다.',                                showInHome: false },
-    { id: 7, icon: 'sparkles',       name: 'AI Tools',   level: 65, category: 'AI',         description: 'Claude와 ChatGPT를 활용해 학습, 기획, 코드 개선 작업을 진행하고 있습니다.',             showInHome: true },
+    { id: 1,  icon: 'orange-diamond', name: 'HTML',                      category: 'Web',             description: '기초 학습 · 프로젝트 적용 경험',                                   showInHome: true },
+    { id: 2,  icon: 'palette',        name: 'CSS',                       category: 'Web',             description: '기초 학습 · 프로젝트 적용 경험',                                   showInHome: true },
+    { id: 3,  icon: 'zap',            name: 'JavaScript',                category: 'Web',             description: '기초 학습 · 프로젝트 적용 경험',                                   showInHome: true },
+    { id: 4,  icon: 'atom',           name: 'React',                     category: 'Framework',       description: '기초 학습 · 프로젝트 적용 경험',                                   showInHome: true },
+    { id: 5,  icon: 'storage',        name: 'Zustand',                   category: 'Framework',       description: '프로젝트 적용 경험',                                               showInHome: true },
+    { id: 6,  icon: 'flow',           name: 'User Flow / Requirements',  category: 'Planning & UX',   description: '사용자 흐름 · 요구사항 정리 경험',                                 showInHome: true },
+    { id: 7,  icon: 'flow',           name: 'IA / Navigation',           category: 'Planning & UX',   description: '정보구조 · 카테고리 · 목차 · 탐색 흐름 설계 경험',                 showInHome: true },
+    { id: 8,  icon: 'flow',           name: 'QA / UX Review',            category: 'Planning & UX',   description: '화면과 기능을 직접 확인하고 문제와 개선 방향을 정리한 경험',       showInHome: true },
+    { id: 9,  icon: 'figma',          name: 'Figma',                     category: 'Design',          description: '화면 설계 사용 경험',                                               showInHome: false },
+    { id: 10, icon: 'palette',        name: 'Photoshop / Illustrator',   category: 'Design',          description: '교육 및 작업 경험',                                                 showInHome: false },
+    { id: 11, icon: 'cloud',          name: 'Supabase',                  category: 'Backend & Data',  description: '프로젝트 적용 경험',                                               showInHome: false },
+    { id: 12, icon: 'github',         name: 'Git / GitHub',              category: 'Tools',           description: '브랜치 · PR · 배포 과정 경험',                                     showInHome: false },
+    { id: 13, icon: 'sparkles',       name: 'AI Tools',                  category: 'AI Workflow',     description: '요구사항 정리 · 구현 결과 검토 · 오류 확인 · 반복 개선',           showInHome: false },
   ],
 };
 
+const mainSkillCards = [
+  { id: 'web-basics',   icon: 'orange-diamond', category: 'Web',           title: 'Web Basics',      techLine: 'HTML · CSS · JavaScript', description: '기초 학습 · 프로젝트 적용 경험' },
+  { id: 'react',        icon: 'atom',           category: 'Framework',     title: 'React',                                                 description: '기초 학습 · 프로젝트 적용 경험' },
+  { id: 'planning-ux',  icon: 'flow',           category: 'Planning & UX', title: 'Planning & UX',   techLine: 'User Flow · IA · QA',     description: '사용자 흐름 · 요구사항 · 정보구조 · 기능 검수 경험' },
+  { id: 'ai-workflow',  icon: 'sparkles',       category: 'AI Workflow',   title: 'AI Workflow',                                           description: '요구사항 정리 · 결과 검토 · 오류 확인 · 반복 개선' },
+];
+
 function getHomeData() {
-  const devStory = aboutMeData.sections.find((s) => s.id === 'dev-story');
-  const summary = devStory
-    ? devStory.content.length > 120
-      ? devStory.content.slice(0, 120) + '...'
-      : devStory.content
-    : '';
-
-  const topSkills = [...aboutMeData.skills]
-    .filter((s) => s.showInHome)
-    .sort((a, b) => b.level - a.level)
-    .slice(0, 4);
-
   return {
     basicInfo: aboutMeData.basicInfo,
-    devStorySummary: summary,
-    topSkills,
+    mainSkillCards,
   };
 }
 

@@ -30,7 +30,7 @@ import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../hooks/portfolio-
 const BASIC_INFO_ITEMS = [
   { icon: <PersonIcon />, label: '이름',  key: 'name' },
   { icon: <SchoolIcon />, label: '학력',  key: 'education' },
-  { icon: <CodeIcon />,   label: '전공',  key: 'major' },
+  { icon: <CodeIcon />,   label: '교육',  key: 'training' },
   { icon: <WorkIcon />,   label: '경력',  key: 'experience' },
 ];
 
@@ -105,7 +105,7 @@ function AboutMePage() {
               <Grid size={{ xs: 12, md: 9 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   { BASIC_INFO_ITEMS.map((item) => (
-                    <Box key={ item.key } sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Box key={ item.key } sx={{ display: 'flex', alignItems: 'center', gap: 1.5, minWidth: 0 }}>
                       <Box
                         sx={{
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -118,11 +118,11 @@ function AboutMePage() {
                       >
                         { item.icon }
                       </Box>
-                      <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1 }}>
-                        <Typography sx={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', minWidth: 44 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1, flex: 1, minWidth: 0 }}>
+                        <Typography sx={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', minWidth: 44, flexShrink: 0, pt: '0.15em' }}>
                           { item.label }
                         </Typography>
-                        <Typography sx={{ fontSize: { xs: '0.95rem', md: '1rem' }, fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                        <Typography sx={{ fontSize: { xs: '0.95rem', md: '1rem' }, fontWeight: 600, color: 'var(--color-text-primary)', flex: 1, minWidth: 0, wordBreak: 'keep-all' }}>
                           { basicInfo[item.key] }
                         </Typography>
                       </Box>
@@ -192,7 +192,7 @@ function AboutMePage() {
               </Typography>
             </Box>
 
-            <Typography sx={{ color: 'var(--color-text-secondary)', lineHeight: 1.9, fontSize: { xs: '0.95rem', md: '1.05rem' } }}>
+            <Typography sx={{ color: 'var(--color-text-secondary)', lineHeight: 1.9, fontSize: { xs: '0.95rem', md: '1.05rem' }, whiteSpace: 'pre-line' }}>
               { activeSection.content }
             </Typography>
           </CardContent>
@@ -258,7 +258,7 @@ function AboutMePage() {
                                 '&:hover': { transform: 'translate(-2px, -2px)', boxShadow: '5px 5px 0px var(--color-border)' },
                               }}
                             >
-                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.2 }}>
                                 <Box
                                   sx={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -274,15 +274,10 @@ function AboutMePage() {
                                 </Typography>
                               </Box>
 
-                              {/* 프로그레스 바 */}
-                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                                <Box sx={{ flex: 1, height: 10, bgcolor: '#E0D8D0', border: '1.5px solid var(--color-border)', borderRadius: '2px', overflow: 'hidden' }}>
-                                  <Box sx={{ height: '100%', width: `${ skill.level }%`, bgcolor: color, borderRadius: '1px' }} />
-                                </Box>
-                                <Typography sx={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-text-primary)', minWidth: 34, textAlign: 'right' }}>
-                                  { skill.level }%
-                                </Typography>
-                              </Box>
+                              {/* 경험 설명 */}
+                              <Typography sx={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                                { skill.description }
+                              </Typography>
                             </Box>
                           </Tooltip>
                         </Grid>

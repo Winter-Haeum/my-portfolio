@@ -26,7 +26,23 @@ function slugify(title) {
 const IMAGE_POSITIONS = {
   WinterLog: 'top center',
   FitBuddy: 'center center',
+  'Winter Dev Archive': 'top center',
 };
+
+const PROJECT_STATUS_MAP = {
+  'WinterLog': '완료',
+  'FitBuddy': '완료',
+};
+
+const STATUS_STYLE = {
+  '완료': { bgcolor: '#4BAE76', color: '#fff' },
+  '진행중': { bgcolor: '#F4845F', color: '#fff' },
+  '기획중': { bgcolor: '#F5C842', color: '#1A1A1A' },
+};
+
+function getProjectStatus(title) {
+  return PROJECT_STATUS_MAP[title] || '완료';
+}
 
 /**
  * ProjectCard - 홈 Projects 섹션 카드
@@ -41,6 +57,8 @@ const IMAGE_POSITIONS = {
 function ProjectCard({ project, onNavigate }) {
   const [imgError, setImgError] = useState(false);
   const imagePosition = IMAGE_POSITIONS[project.title] || 'center center';
+  const status = getProjectStatus(project.title);
+  const statusStyle = STATUS_STYLE[status];
 
   return (
     <Card
@@ -51,6 +69,9 @@ function ProjectCard({ project, onNavigate }) {
         flexDirection: 'column',
         cursor: 'pointer',
         bgcolor: 'var(--color-bg-card)',
+        border: '2px solid var(--color-border)',
+        boxShadow: '4px 4px 0px var(--color-border)',
+        borderRadius: '4px',
         transition: 'all 0.18s ease',
         '&:hover': {
           transform: 'translate(-4px, -4px)',
@@ -91,6 +112,24 @@ function ProjectCard({ project, onNavigate }) {
             <Typography sx={{ color: 'var(--color-border-light)', fontSize: '2.5rem' }}>🖥️</Typography>
           </Box>
         )}
+        {/* 상태 배지 */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 10,
+            left: 10,
+            px: 1,
+            py: 0.3,
+            bgcolor: statusStyle.bgcolor,
+            border: '1.5px solid var(--color-border)',
+            fontSize: '0.65rem',
+            fontWeight: 700,
+            color: statusStyle.color,
+            lineHeight: 1.4,
+          }}
+        >
+          { status }
+        </Box>
         {project.is_featured && (
           <Box sx={{ position: 'absolute', top: 10, right: 12 }}>
             <StarIcon
@@ -270,7 +309,6 @@ function ProjectsSection() {
     navigate(`/projects/${slugify(project.title)}`, { state: { project } });
   };
 
-  /* 실제 프로젝트가 3개 미만이면 Coming Soon으로 채움 */
   const comingSoonCount = Math.max(0, HOME_CARD_LIMIT - projects.length);
 
   return (
@@ -283,6 +321,7 @@ function ProjectsSection() {
       }}
     >
       <Container maxWidth='lg'>
+        {/* 섹션 타이틀 + 캐릭터 */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', mb: 4 }}>
           <Box
             sx={{
@@ -306,40 +345,53 @@ function ProjectsSection() {
             src={ characterProjectsImg }
             alt='Projects 캐릭터'
             sx={{
-              width: { xs: 112, md: 168 },
+              width: { xs: 124, md: 184 },
               height: 'auto',
               objectFit: 'contain',
               flexShrink: 0,
+              transform: 'translateY(32px)',
             }}
           />
         </Box>
 
-        {loading ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
-            <CircularProgress color='primary' />
+        {/* 콘텐츠 박스 */}
+        <Box sx={{ mb: 4 }}>
+          <Box
+            sx={{
+              border: '2px solid var(--color-border)',
+              boxShadow: '4px 4px 0px var(--color-border)',
+              bgcolor: 'var(--color-bg-card)',
+              p: { xs: 2.5, md: 3.5 },
+            }}
+          >
+            {loading ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
+                <CircularProgress color='primary' />
+              </Box>
+            ) : (
+              <Grid container spacing={3}>
+                {projects.map((project) => (
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={project.id}>
+                    <ProjectCard project={project} onNavigate={handleNavigate} />
+                  </Grid>
+                ))}
+                {Array.from({ length: comingSoonCount }).map((_, i) => (
+                  <Grid size={{ xs: 12, sm: 6, md: 4 }} key={`coming-soon-${i}`}>
+                    <ComingSoonCard />
+                  </Grid>
+                ))}
+              </Grid>
+            )}
           </Box>
-        ) : (
-          <Grid container spacing={3} sx={{ mb: 4 }}>
-            {projects.map((project) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={project.id}>
-                <ProjectCard project={project} onNavigate={handleNavigate} />
-              </Grid>
-            ))}
-            {Array.from({ length: comingSoonCount }).map((_, i) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={`coming-soon-${i}`}>
-                <ComingSoonCard />
-              </Grid>
-            ))}
-          </Grid>
-        )}
+        </Box>
 
-        {/* 더 보기 버튼 — 항상 표시 */}
+        {/* 더 보기 버튼 */}
         <Box sx={{ textAlign: 'center' }}>
           <Button
             onClick={() => navigate('/projects')}
             sx={{
-              bgcolor: 'var(--color-accent)',
-              color: 'var(--color-text-primary)',
+              bgcolor: 'var(--color-primary)',
+              color: '#fff',
               border: '2px solid var(--color-border)',
               borderRadius: '4px',
               boxShadow: '3px 3px 0px var(--color-border)',
@@ -350,7 +402,7 @@ function ProjectsSection() {
               py: 1.2,
               transition: 'background-color 0.18s, box-shadow 0.18s, transform 0.15s',
               '&:hover': {
-                bgcolor: 'var(--color-contact-deep)',
+                bgcolor: 'var(--color-primary-dark)',
                 boxShadow: '1px 1px 0px var(--color-border)',
                 transform: 'translate(1px, 1px)',
               },
