@@ -15,7 +15,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { supabase } from '../../utils/supabase-client';
 import TechBadge from '../ui/tech-badge';
-import characterProjectsImg from '../../assets/character-projects.webp';
+import characterProjectsImg from '../../assets/character-projects.png';
 
 const HOME_CARD_LIMIT = 3;
 
@@ -326,6 +326,7 @@ function ProjectsSection() {
           <Box
             sx={{
               display: 'inline-block',
+              alignSelf: 'flex-start',
               bgcolor: 'var(--color-primary)',
               border: '2px solid var(--color-border)',
               boxShadow: '4px 4px 0px var(--color-border)',

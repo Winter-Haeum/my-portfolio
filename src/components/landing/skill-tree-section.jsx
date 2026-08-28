@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../../hooks/portfolio-context';
-import characterSkillImg from '../../assets/character-skill.webp';
+import characterSkillImg from '../../assets/character-skill.png';
 
 const EXPERIENCE_ITEMS = [
   { label: 'Git / GitHub', color: '#1A1A1A', textColor: '#fff' },
@@ -37,6 +37,7 @@ function SkillTreeSection() {
           <Box
             sx={{
               display: 'inline-block',
+              alignSelf: 'flex-start',
               bgcolor: 'var(--color-tech-stack)',
               border: '2px solid var(--color-border)',
               boxShadow: '4px 4px 0px var(--color-border)',
@@ -60,7 +61,7 @@ function SkillTreeSection() {
               height: 'auto',
               objectFit: 'contain',
               flexShrink: 0,
-              transform: 'translateY(80px)',
+              transform: 'translateY(32px)',
             }}
           />
         </Box>

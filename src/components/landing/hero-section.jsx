@@ -9,7 +9,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import characterImg from '../../assets/character-hero.webp';
+import characterImg from '../../assets/character-hero.png';
 
 const TECH_BADGES = [
   'React',
@@ -36,7 +36,7 @@ function HeroSection() {
       }}
     >
       <Container maxWidth='lg'>
-        <Grid container spacing={{ xs: 5, md: 4 }} alignItems='center'>
+        <Grid container spacing={{ xs: 5, md: 4 }} sx={{ alignItems: 'center' }}>
 
           {/* ── 왼쪽: 텍스트 + 버튼 ── */}
           <Grid size={{ xs: 12, md: 6 }}>

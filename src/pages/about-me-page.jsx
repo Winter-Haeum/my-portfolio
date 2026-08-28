@@ -74,7 +74,7 @@ function AboutMePage() {
         {/* 기본 정보 카드 */}
         <Card sx={{ mb: 4, bgcolor: 'var(--color-bg-card)' }}>
           <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-            <Grid container spacing={3} alignItems='center'>
+            <Grid container spacing={3} sx={{ alignItems: 'center' }}>
               {/* 프로필 사진 */}
               <Grid size={{ xs: 12, md: 3 }}>
                 <Box

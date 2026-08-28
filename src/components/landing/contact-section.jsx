@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import EmailCopyArea from './email-copy-area';
 import SnsButtons from './sns-buttons';
 import GuestbookSection from './guestbook-section';
-import characterContactImg from '../../assets/character-contact.webp';
+import characterContactImg from '../../assets/character-contact.png';
 
 function ContactSection() {
   return (
@@ -25,6 +25,7 @@ function ContactSection() {
           <Box
             sx={{
               display: 'inline-block',
+              alignSelf: 'flex-start',
               bgcolor: 'var(--color-contact)',
               border: '2px solid var(--color-border)',
               boxShadow: '4px 4px 0px var(--color-border)',

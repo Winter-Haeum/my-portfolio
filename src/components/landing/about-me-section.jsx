@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import characterAboutImg from '../../assets/character-about.webp';
+import characterAboutImg from '../../assets/character-about.png';
 
 const JOURNEY_STEPS = [
   { emoji: '👩‍🏫', label: '교사' },
@@ -18,14 +18,14 @@ const JOURNEY_STEPS = [
 
 const TIMELINE_ITEMS = [
   { emoji: '🎓', label: '유아교육 전공' },
-  { emoji: '👩‍🏫', label: '유치원 교사' },
+  { emoji: '🧑‍🏫', label: '유치원 교사' },
   { emoji: '🎨', label: '웹디자인 학습' },
   { emoji: '💻', label: '프론트엔드 개발 입문' },
-  { emoji: '📚', label: '오르미 프론트엔드 과정 수료', isHighlight: true },
   { emoji: '🏆', label: '학습부문 우수상 수상', isHighlight: true },
-  { emoji: '🚀', label: 'WinterLog 개발' },
+  { emoji: '🖥️', label: '오르미 프론트엔드 과정 수료', isHighlight: true },
+  { emoji: '🚀', label: 'WinterLog 개발', groupLabel: 'AI 활용 개발 · 프로젝트 경험' },
   { emoji: '🏃', label: 'FitBuddy 개발' },
-  { emoji: '🤖', label: 'AI 기반 개발 학습', isCurrent: true },
+  { emoji: '📚', label: 'Winter Dev Archive 개발' },
 ];
 
 const HIGHLIGHTS = [
@@ -143,7 +143,7 @@ function AboutMeSection() {
         </Box>
 
         {/* ── 2단 그리드 ── */}
-        <Grid container spacing={3} alignItems='flex-start' sx={{ mb: 4 }}>
+        <Grid container spacing={3} sx={{ alignItems: 'flex-start', mb: 4 }}>
 
           {/* 왼쪽: 캐릭터 + 강점 */}
           <Grid size={{ xs: 12, md: 4 }}>
@@ -292,6 +292,20 @@ function AboutMeSection() {
 
                       {/* 오른쪽: 카드 */}
                       <Box sx={{ flex: 1, pb: isLast ? 0 : 1.4 }}>
+                        { item.groupLabel && (
+                          <Typography
+                            sx={{
+                              fontSize: '0.68rem',
+                              fontWeight: 700,
+                              color: 'var(--color-text-muted)',
+                              letterSpacing: '0.08em',
+                              textTransform: 'uppercase',
+                              mb: 0.6,
+                            }}
+                          >
+                            { item.groupLabel }
+                          </Typography>
+                        ) }
                         <Box
                           sx={{
                             display: 'flex',

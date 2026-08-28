@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import profileImg from '../assets/profile-id.webp';
+import profileImg from '../assets/profile-id-display.png';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import PaletteIcon from '@mui/icons-material/Palette';
 import BoltIcon from '@mui/icons-material/Bolt';
