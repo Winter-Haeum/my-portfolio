@@ -22,7 +22,7 @@ function App() {
       <ScrollToTop />
       <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', bgcolor: 'background.default' }}>
         <NavBar />
-        <Box component='main' sx={{ flex: 1 }}>
+        <Box component='main' sx={{ flex: 1, pb: { xs: 9, md: 10 } }}>
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/about' element={<AboutMePage />} />

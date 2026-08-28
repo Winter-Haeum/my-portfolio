@@ -10,7 +10,7 @@ function ScrollToTopButton() {
       sx={{
         position: 'fixed',
         right: { xs: 16, md: 24 },
-        bottom: { xs: 16, md: 24 },
+        bottom: { xs: 'calc(16px + env(safe-area-inset-bottom))', md: 24 },
         zIndex: 1300,
         width: { xs: 48, md: 52 },
         height: { xs: 48, md: 52 },
