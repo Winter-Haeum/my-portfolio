@@ -409,7 +409,7 @@ function ProjectsSection() {
               },
             }}
           >
-            더 보기
+            프로젝트 전체보기 →
           </Button>
         </Box>
       </Container>

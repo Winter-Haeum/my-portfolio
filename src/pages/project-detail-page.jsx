@@ -13,94 +13,118 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { supabase } from '../utils/supabase-client';
 import TechBadge from '../components/ui/tech-badge';
 
-/* 상세페이지 대표 이미지 표시 방식 — 프로젝트별 설정 */
+/* 상세페이지 대표 이미지 표시 방식 — 프로젝트별 설정 (기존 crop 유지, 신규 항목만 추가) */
 const DETAIL_IMAGE_STYLES = {
   WinterLog: { fit: 'cover', position: 'top center' },
   FitBuddy: { fit: 'cover', position: 'center center' },
+  'Winter Dev Archive': { fit: 'cover', position: 'top center' },
 };
+
+/* 섹션 라벨 색상 순환 — index.css의 기존 토큰(--color-primary/accent/secondary) 재사용 */
+const SECTION_COLORS = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)'];
+
+/* 본문 문단 공통 스타일 (15~16px, line-height 1.65~1.75) */
+const BODY_TEXT_SX = { color: '#333', fontSize: '0.95rem', lineHeight: 1.72 };
+const MICRO_LABEL_SX = { fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', mb: 0.5 };
 
 const PROJECT_DETAILS = {
   WinterLog: {
-    overview: [
-      '공부 기록을 자유롭게 남기고 공유할 수 있는 커뮤니티 스타일 웹 프로젝트입니다.',
-      '사용자가 게시글 형태로 학습 기록을 남기고,',
-      '카테고리와 상태 태그를 통해 기록을 구분할 수 있도록 구성했습니다.',
+    period: '2026.05 – 현재',
+    role: '개인 프로젝트 · 기획 / 프론트엔드',
+    statusBadge: '기본 구현 완료 · 개선 중',
+    tagline: '학습자들이 공부 정보를 나누고 다시 찾아볼 수 있는 정보 공유 웹 서비스',
+    intro: [
+      '학습자들이 공부하면서 얻은 정보와 경험을 기록하고 서로 공유할 수 있도록 만든 정보 공유 웹 서비스입니다.',
+      '서비스 콘셉트와 사용자 흐름을 정리하고 게시글 작성·상세, 인증, 댓글 등 정보 공유에 필요한 핵심 기능을 구현했습니다.',
     ],
     features: [
-      '공부 기록 게시글 UI',
-      '카테고리 사이드 메뉴',
-      '상태 태그 표시',
-      '공지사항 영역',
-      '반응형 커뮤니티 레이아웃',
+      '게시글 작성 및 상세',
+      '사용자 인증',
+      '댓글',
+      '마크다운 작성 및 렌더링',
+      '학습 정보 기록 및 공유',
     ],
-    techReasons: [
-      { tech: 'React', reason: '화면을 컴포넌트 단위로 나누어 관리하기 위해 사용했습니다.' },
-      { tech: 'JavaScript', reason: '사용자 인터랙션과 데이터 흐름을 구현하기 위해 사용했습니다.' },
-      { tech: 'MUI', reason: 'UI 요소를 빠르게 구성하기 위해 사용했습니다.' },
-      { tech: 'Supabase', reason: '데이터 저장과 백엔드 기능 연결을 위해 사용했습니다.' },
+    techStack: ['React', 'JavaScript', 'MUI', 'React Router', 'Zustand', 'Supabase', 'Vite', 'GitHub Pages'],
+    techHighlights: [
+      { tech: 'React Router', usage: '화면 이동 및 라우팅 구성' },
+      { tech: 'Zustand', usage: '인증 상태 관리' },
+      { tech: 'Supabase', usage: '인증·게시글·댓글 데이터 연결' },
+      { tech: 'Markdown', usage: '학습 내용을 구조적으로 작성하고 렌더링' },
     ],
-    implementationPoints: [
-      '게시글 카드 구조 설계',
-      '사이드바와 본문 영역 분리',
-      '커뮤니티 서비스처럼 보이는 화면 흐름 구성',
-      '학습 기록을 보기 쉽게 정리하는 UI 구성',
+    scopeLabel: '설계·구현 포인트',
+    scope: [
+      '서비스의 사용자 흐름을 먼저 정리하고 게시글 작성·상세, 인증, 댓글 등 정보 공유 서비스의 기본 흐름을 구현했습니다.',
+      'React Router로 화면 이동을 구성하고 Zustand로 인증 상태를 관리했으며 Supabase를 인증·게시글·댓글 데이터와 연결했습니다.',
     ],
-    learnings: [
-      'React 컴포넌트 구조를 나누는 방법을 익혔습니다.',
-      '게시글 중심 UI를 만들며 데이터가 화면에 배치되는 흐름을 이해했습니다.',
-      '추후에는 검색, 댓글, 좋아요 기능을 더 안정적으로 개선할 예정입니다.',
+    experienceLabel: '구현 특징',
+    experienceTitle: '마크다운 기반 학습 기록',
+    experience: [
+      '마크다운 작성·렌더링 기능을 적용해 학습 내용을 구조적으로 기록하고 공유할 수 있도록 구성했습니다.',
+      '단순한 짧은 게시글뿐 아니라 코드와 학습 내용을 정리해서 공유하는 서비스의 목적에 맞게 콘텐츠 작성 방식을 구성했습니다.',
     ],
+    status: '기본 기능 구현을 완료했으며 현재 화면과 기능을 계속 보완하고 있습니다.',
   },
   FitBuddy: {
-    shortDesc: '운동 타이머, 운동 기록, 캐릭터 성장, 챌린지와 피드 기능을 포함한 모바일 운동 웹 프로젝트.',
-    overview: [
-      'FitBuddy는 운동 기록과 캐릭터 성장을 하나로 묶은 모바일 퍼스트 운동 웹 서비스입니다.',
-      '운동 종류별 타이머부터 기록 저장, 캐릭터 이미지, 챌린지, 피드까지 — 운동 습관을 꾸준히 이어가는 데 필요한 기능들을 한 곳에 담았습니다.',
-      '단순한 운동 기록 앱이 아니라, 기록하고 공유하고 성장하는 흐름이 자연스럽게 이어지는 서비스를 만들어보고 싶어서 시작한 프로젝트입니다.',
+    period: '2026.05 – 현재',
+    role: '개인 프로젝트 · 기획 / 프론트엔드',
+    tagline: '익숙한 운동을 부담 없이 기록하고 꾸준히 이어가기 위한 운동 SNS 서비스',
+    intro: [
+      '기본적인 운동을 쉽게 기록하고 꾸준히 이어갈 수 있도록 사용자 흐름과 주요 기능을 직접 기획·구현한 운동 SNS 서비스입니다.',
+      '운동 기록뿐 아니라 게시글과 피드, 일기, 챌린지, 프로필을 함께 구성해 기록과 지속적인 사용이 연결될 수 있도록 제작했습니다.',
     ],
     features: [
-      '로그인 / 회원가입',
-      '운동 타이머',
-      '운동 종류 선택',
-      '운동 종류별 캐릭터 표시',
-      '운동 기록 저장',
-      '기록관 운동 기록 조회',
-      '운동 일기 작성',
-      '운동 피드 게시글 조회',
-      '챌린지 기능',
-      '오늘 모임 기능',
-      '프로필 관리',
-      '캐릭터 성장 시스템',
-      '식단 공유 기능',
-      '운동 진행 미니 플레이어',
-      '운동 데이터 저장 및 관리',
+      '게시글 작성 및 관리',
+      '피드',
+      '운동 기록',
+      '일기',
+      '챌린지',
+      '프로필',
     ],
-    techReasons: [
-      { tech: 'React', reason: '모바일 화면을 컴포넌트 단위로 구성하기 위해 사용했습니다.' },
-      { tech: 'Vite', reason: '빠른 개발 환경 구성을 위해 사용했습니다.' },
-      { tech: 'MUI', reason: '폼, 버튼, 카드 UI를 빠르게 구성하기 위해 사용했습니다.' },
-      { tech: 'Supabase', reason: '로그인, 사용자 정보, 운동 기록, 게시글 데이터를 저장하고 관리하기 위해 사용했습니다.' },
+    techStack: ['React', 'JavaScript', 'CSS', 'Vite', 'Supabase', 'GitHub Pages'],
+    techHighlights: [],
+    scopeLabel: '구현 범위',
+    scope: [
+      '게시글·피드·운동 기록·일기·챌린지·프로필 등 서비스 전반의 화면과 기능을 구현했습니다.',
+      '기능을 단순히 추가하는 것보다 실제 사용 과정에서 흐름이 복잡해지는 부분을 확인하고 사용성과 유지보수성을 함께 개선하는 방향으로 작업했습니다.',
     ],
-    implementationPoints: [
-      '모바일 퍼스트 UI 설계',
-      '로그인 및 회원가입 흐름 구현',
-      '운동 타이머 기능 구현',
-      '운동 데이터 저장 및 기록 관리',
-      '운동 종류별 캐릭터 이미지 연결',
-      '캐릭터 성장 시스템 설계',
-      '운동 진행 상태 유지 기능',
-      '피드 및 SNS 기능 구현',
-      '챌린지 / 오늘 모임 기능 구현',
-      '사용자 프로필 관리 기능 구현',
-      '운동 기록과 캐릭터를 연결한 UX 설계',
+    experienceLabel: '문제 → 해결',
+    experienceTitle: '게시글 수정 흐름 개선',
+    experience: [
+      '게시글 수정 기능을 별도의 복잡한 모달 구조로 구성하면서 작성 화면과 수정 화면의 관리가 복잡해지는 문제가 있었습니다.',
+      '기존 게시글 작성 페이지를 수정 화면에서도 재사용하도록 구조를 변경해 중복되는 관리 부담을 줄이고 사용자가 작성·수정 과정에서 느끼는 불편도 함께 줄였습니다.',
     ],
-    learnings: [
-      '모바일 환경을 기준으로 UI를 설계하는 방법을 연습했습니다.',
-      '운동 타이머, 운동 기록, 사용자 정보처럼 여러 화면에서 공유되는 데이터를 관리하는 흐름을 고민했습니다.',
-      '초기에는 단순 운동 기록 앱으로 시작했지만, 이후 캐릭터 성장, 운동별 캐릭터, 챌린지, 피드 기능을 추가하면서 서비스 구조로 확장했습니다.',
-      '사용자가 운동을 꾸준히 이어갈 수 있도록 기록, 성장, 커뮤니티 요소를 연결하는 방향으로 개선하고 있습니다.',
-      '앞으로는 만보기, 알림, 추천 루틴, 1대1 채팅 기능까지 확장할 예정입니다.',
+    status: '현재도 실제 사용 과정에서 발견한 문제를 기준으로 기능과 UX를 지속적으로 개선하고 있습니다.',
+  },
+  'Winter Dev Archive': {
+    period: '2026.06 – 현재',
+    role: '개인 프로젝트 · 기획 / 프론트엔드',
+    tagline: 'JavaScript·React 학습 내용을 다시 찾아보기 위한 개인 학습 아카이브',
+    intro: [
+      '프로젝트를 진행하면서 이전에 배운 내용을 다시 찾아보기 어려웠던 경험에서 시작한 개인 학습 아카이브입니다.',
+      'JavaScript와 React 학습 내용을 단순히 저장하는 것이 아니라 필요할 때 원하는 내용을 빠르게 다시 찾고 공부할 수 있도록 정보 구조와 이동 흐름을 중심으로 구성했습니다.',
     ],
+    features: [
+      '학습 콘텐츠 카테고리 구성',
+      '문서 목차',
+      '검색',
+      '내비게이션',
+      '문서 라우팅',
+      '학습 자료 구조화',
+    ],
+    techStack: ['React', 'JavaScript', 'CSS', 'Vite', 'GitHub Pages'],
+    techHighlights: [],
+    scopeLabel: '설계·구현 포인트',
+    scope: [
+      'IA(정보 구조), 카테고리, 목차, 검색, 내비게이션, 라우팅과 컴포넌트 구조를 직접 정리했습니다.',
+      '학습 자료가 계속 늘어나더라도 사용자가 원하는 내용을 빠르게 찾을 수 있도록 콘텐츠 구조와 이동 경로를 중요하게 설계했습니다.',
+    ],
+    experienceLabel: '개선 과정',
+    experienceTitle: null,
+    experience: [
+      '학습 자료가 늘어날수록 원하는 내용을 다시 찾기 어려워지는 문제를 기준으로 카테고리와 목차, 검색, 내비게이션 구조를 반복해서 검토했습니다.',
+      '단순히 콘텐츠를 추가하는 데 그치지 않고 필요한 정보에 빠르게 접근할 수 있는지를 실제 화면에서 확인하며 정보 구조와 이동 흐름을 계속 개선하고 있습니다.',
+    ],
+    status: '현재도 교안 콘텐츠와 기능을 계속 보완하며 학습 아카이브의 완성도를 높이고 있습니다.',
   },
 };
 
@@ -109,10 +133,12 @@ const PROJECT_DETAILS = {
  *
  * Props:
  * @param {string} label - 섹션 제목 [Required]
- * @param {string} labelColor - 라벨 배경색 [Optional, 기본값: '#F4845F']
+ * @param {string} labelColor - 라벨 배경색 [Optional, 기본값: 'var(--color-primary)']
+ * @param {boolean} isDense - 내용이 짧은 섹션용 compact padding [Optional, 기본값: false]
+ * @param {boolean} isAccent - 왼쪽 accent border로 위계를 한 단계 높임 (핵심 경험 섹션용) [Optional, 기본값: false]
  * @param {React.ReactNode} children [Required]
  */
-function SectionBlock({ label, labelColor = '#F4845F', children }) {
+function SectionBlock({ label, labelColor = 'var(--color-primary)', isDense = false, isAccent = false, children }) {
   return (
     <Box sx={{ mb: 3.5 }}>
       <Box
@@ -134,8 +160,9 @@ function SectionBlock({ label, labelColor = '#F4845F', children }) {
         sx={{
           bgcolor: '#fff',
           border: '2px solid #1A1A1A',
+          borderLeft: isAccent ? `5px solid ${labelColor}` : '2px solid #1A1A1A',
           boxShadow: '4px 4px 0px #1A1A1A',
-          p: { xs: 2.5, md: 3 },
+          p: isDense ? { xs: 1.75, md: 2 } : { xs: 2, md: 2.5 },
         }}
       >
         {children}
@@ -149,23 +176,85 @@ function SectionBlock({ label, labelColor = '#F4845F', children }) {
  *
  * Props:
  * @param {string} text [Required]
+ * @param {boolean} isDense - 항목 간 세로 간격을 축소 (features 목록 전용) [Optional, 기본값: false]
  */
-function BulletItem({ text }) {
+function BulletItem({ text, isDense = false }) {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.2, mb: 0.9 }}>
+    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.2, mb: isDense ? 0.75 : 1 }}>
       <Box
         sx={{
           width: 7,
           height: 7,
-          bgcolor: '#F4845F',
+          bgcolor: 'var(--color-primary)',
           border: '1.5px solid #1A1A1A',
           flexShrink: 0,
-          mt: 0.65,
+          mt: 0.75,
         }}
       />
-      <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.7, color: '#333' }}>
+      <Typography sx={BODY_TEXT_SX}>
         {text}
       </Typography>
+    </Box>
+  );
+}
+
+/**
+ * ProjectLinkButtons - LIVE DEMO / GITHUB 링크 버튼
+ *
+ * Props:
+ * @param {object} project - 프로젝트 데이터 (detail_url, github_url 사용) [Required]
+ */
+function ProjectLinkButtons({ project }) {
+  return (
+    <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+      {project.detail_url && (
+        <Button
+          startIcon={<OpenInNewIcon />}
+          href={project.detail_url}
+          target='_blank'
+          rel='noopener noreferrer'
+          sx={{
+            bgcolor: '#fff',
+            color: '#1A1A1A',
+            border: '2px solid #1A1A1A',
+            boxShadow: '4px 4px 0px #1A1A1A',
+            px: 3,
+            py: 1.2,
+            fontSize: '0.95rem',
+            '&:hover': {
+              bgcolor: '#F4845F',
+              boxShadow: '2px 2px 0px #1A1A1A',
+              transform: 'translate(2px, 2px)',
+            },
+          }}
+        >
+          Live Demo
+        </Button>
+      )}
+      {project.github_url && (
+        <Button
+          startIcon={<GitHubIcon />}
+          href={project.github_url}
+          target='_blank'
+          rel='noopener noreferrer'
+          sx={{
+            bgcolor: '#fff',
+            color: '#1A1A1A',
+            border: '2px solid #1A1A1A',
+            boxShadow: '4px 4px 0px #1A1A1A',
+            px: 3,
+            py: 1.2,
+            fontSize: '0.95rem',
+            '&:hover': {
+              bgcolor: '#E5E5E5',
+              boxShadow: '2px 2px 0px #1A1A1A',
+              transform: 'translate(2px, 2px)',
+            },
+          }}
+        >
+          GitHub
+        </Button>
+      )}
     </Box>
   );
 }
@@ -347,17 +436,39 @@ function ProjectDetailPage() {
           >
             {project.title}
           </Typography>
-          <Chip
-            label={project.project_type}
-            sx={{
-              border: '2px solid #1A1A1A',
-              boxShadow: '2px 2px 0px #1A1A1A',
-              bgcolor: 'transparent',
-              fontWeight: 700,
-              fontSize: '0.8rem',
-            }}
-          />
+          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+            {details?.statusBadge && (
+              <Chip
+                label={details.statusBadge}
+                sx={{
+                  border: '2px solid #1A1A1A',
+                  boxShadow: '2px 2px 0px #1A1A1A',
+                  bgcolor: 'var(--color-secondary)',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: '0.75rem',
+                }}
+              />
+            )}
+            <Chip
+              label={project.project_type}
+              sx={{
+                border: '2px solid #1A1A1A',
+                boxShadow: '2px 2px 0px #1A1A1A',
+                bgcolor: 'transparent',
+                fontWeight: 700,
+                fontSize: '0.8rem',
+              }}
+            />
+          </Box>
         </Box>
+
+        {/* 기간 · 역할 */}
+        {details && (
+          <Typography sx={{ color: '#888', fontSize: '0.85rem', fontWeight: 700, mb: 1 }}>
+            {details.period} · {details.role}
+          </Typography>
+        )}
 
         {/* 한 줄 요약 */}
         <Typography
@@ -368,132 +479,138 @@ function ProjectDetailPage() {
             mb: 4,
           }}
         >
-          {details?.shortDesc || project.description}
+          {details?.tagline || details?.shortDesc || project.description}
         </Typography>
 
         {details ? (
           <>
-            {/* 프로젝트 개요 */}
-            <SectionBlock label='프로젝트 개요' labelColor='#F4845F'>
-              {details.overview.map((sentence, i) => (
+            {/* 01. 프로젝트 소개 */}
+            <SectionBlock label='01. 프로젝트 소개' labelColor={SECTION_COLORS[0]}>
+              {details.intro.map((sentence, i) => (
                 <Typography
                   key={i}
-                  sx={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.9, mb: i < details.overview.length - 1 ? 0.8 : 0 }}
+                  sx={{ ...BODY_TEXT_SX, mb: i < details.intro.length - 1 ? 1.1 : 0 }}
                 >
                   {sentence}
                 </Typography>
               ))}
             </SectionBlock>
 
-            {/* 주요 기능 */}
-            <SectionBlock label='주요 기능' labelColor='#F5C842'>
+            {/* 02. 주요 기능 — bullet 간격만 compact (BulletItem 기본값은 유지) */}
+            <SectionBlock label='02. 주요 기능' labelColor={SECTION_COLORS[1]}>
               {details.features.map((f, i) => (
-                <BulletItem key={i} text={f} />
+                <BulletItem key={i} text={f} isDense />
               ))}
             </SectionBlock>
 
-            {/* 사용 기술과 이유 */}
-            <SectionBlock label='사용 기술과 이유' labelColor='#4BAE76'>
-              {details.techReasons.map(({ tech, reason }) => (
+            {/* 03. 기술 및 활용 */}
+            <SectionBlock label='03. 기술 및 활용' labelColor={SECTION_COLORS[2]}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 1,
+                  flexWrap: 'wrap',
+                  mb: details.techHighlights.length > 0 ? 2.5 : 0,
+                }}
+              >
+                {details.techStack.map((tech) => (
+                  <TechBadge key={tech} tech={tech} size='md' />
+                ))}
+              </Box>
+              {details.techHighlights.length > 0 && (
                 <Box
-                  key={tech}
                   sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 0.7,
-                    mb: 2.2,
-                    '&:last-child': { mb: 0 },
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+                    columnGap: 3,
+                    rowGap: 1.6,
                   }}
                 >
-                  <TechBadge tech={tech} size='md' />
-                  <Typography sx={{ color: '#555', fontSize: '0.9rem', lineHeight: 1.75, pl: 0.5 }}>
-                    {reason}
-                  </Typography>
+                  {details.techHighlights.map(({ tech, usage }) => (
+                    <Box key={tech} sx={{ display: 'flex', flexDirection: 'column', gap: 0.3 }}>
+                      <Typography sx={{ color: '#1A1A1A', fontSize: '0.9rem', fontWeight: 700 }}>
+                        {tech}
+                      </Typography>
+                      <Typography sx={{ color: '#555', fontSize: '0.88rem', lineHeight: 1.7, pl: 0.5 }}>
+                        → {usage}
+                      </Typography>
+                    </Box>
+                  ))}
                 </Box>
-              ))}
+              )}
             </SectionBlock>
 
-            {/* 구현 포인트 */}
-            <SectionBlock label='구현 포인트' labelColor='#F4845F'>
-              {details.implementationPoints.map((p, i) => (
-                <BulletItem key={i} text={p} />
-              ))}
-            </SectionBlock>
-
-            {/* 배운 점 / 개선한 점 */}
-            <SectionBlock label='배운 점 / 개선한 점' labelColor='#F5C842'>
-              {details.learnings.map((sentence, i) => (
+            {/* 04. 구현 범위 / 설계·구현 포인트 */}
+            <SectionBlock label={`04. ${details.scopeLabel}`} labelColor={SECTION_COLORS[0]}>
+              {details.scope.map((sentence, i) => (
                 <Typography
                   key={i}
-                  sx={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.9, mb: i < details.learnings.length - 1 ? 0.8 : 0 }}
+                  sx={{ ...BODY_TEXT_SX, mb: i < details.scope.length - 1 ? 1.1 : 0 }}
                 >
                   {sentence}
                 </Typography>
               ))}
+            </SectionBlock>
+
+            {/* 05. 문제 → 해결 / 개선 과정 / 구현 특징 — 핵심 경험 섹션이므로 accent border로 위계 강화 */}
+            <SectionBlock label={`05. ${details.experienceLabel}`} labelColor={SECTION_COLORS[1]} isAccent>
+              {details.experienceTitle && (
+                <Typography sx={{ color: '#1A1A1A', fontSize: '1.05rem', fontWeight: 900, mb: 1.3 }}>
+                  {details.experienceTitle}
+                </Typography>
+              )}
+              {details.experienceLabel === '문제 → 해결' && details.experience.length >= 2 ? (
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.8 }}>
+                  <Box>
+                    <Typography sx={{ ...MICRO_LABEL_SX, color: 'var(--color-primary)' }}>문제</Typography>
+                    <Typography sx={BODY_TEXT_SX}>{details.experience[0]}</Typography>
+                  </Box>
+                  <Box sx={{ borderTop: '1.5px dashed var(--color-border-light)', pt: 1.8 }}>
+                    <Typography sx={{ ...MICRO_LABEL_SX, color: 'var(--color-secondary)' }}>해결</Typography>
+                    <Typography sx={BODY_TEXT_SX}>{details.experience.slice(1).join(' ')}</Typography>
+                  </Box>
+                </Box>
+              ) : (
+                details.experience.map((sentence, i) => (
+                  <Typography
+                    key={i}
+                    sx={{ ...BODY_TEXT_SX, mb: i < details.experience.length - 1 ? 1.1 : 0 }}
+                  >
+                    {sentence}
+                  </Typography>
+                ))
+              )}
+            </SectionBlock>
+
+            {/* 06. 현재 상태 */}
+            <SectionBlock label='06. 현재 상태' labelColor={SECTION_COLORS[2]} isDense>
+              <Typography sx={BODY_TEXT_SX}>
+                {details.status}
+              </Typography>
+            </SectionBlock>
+
+            {/* 07. 프로젝트 링크 */}
+            <SectionBlock label='07. 프로젝트 링크' labelColor={SECTION_COLORS[0]} isDense>
+              <ProjectLinkButtons project={project} />
             </SectionBlock>
           </>
         ) : (
-          /* 상세 내용 미등록 시 기술 스택만 표시 */
-          <SectionBlock label='기술 스택' labelColor='#F5C842'>
-            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-              {project.tech_stack?.map((tech) => (
-                <TechBadge key={tech} tech={tech} size='md' />
-              ))}
-            </Box>
-          </SectionBlock>
-        )}
+          <>
+            {/* 상세 내용 미등록 시 기술 스택만 표시 */}
+            <SectionBlock label='기술 스택' labelColor={SECTION_COLORS[1]}>
+              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                {project.tech_stack?.map((tech) => (
+                  <TechBadge key={tech} tech={tech} size='md' />
+                ))}
+              </Box>
+            </SectionBlock>
 
-        {/* 액션 버튼 */}
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 1.5 }}>
-          {project.detail_url && (
-            <Button
-              startIcon={<OpenInNewIcon />}
-              href={project.detail_url}
-              target='_blank'
-              rel='noopener noreferrer'
-              sx={{
-                bgcolor: '#fff',
-                color: '#1A1A1A',
-                border: '2px solid #1A1A1A',
-                boxShadow: '4px 4px 0px #1A1A1A',
-                px: 3,
-                py: 1.2,
-                fontSize: '0.95rem',
-                '&:hover': {
-                  bgcolor: '#F4845F',
-                  boxShadow: '2px 2px 0px #1A1A1A',
-                  transform: 'translate(2px, 2px)',
-                },
-              }}
-            >
-              Live Demo
-            </Button>
-          )}
-          {project.github_url && (
-            <Button
-              startIcon={<GitHubIcon />}
-              href={project.github_url}
-              target='_blank'
-              rel='noopener noreferrer'
-              sx={{
-                bgcolor: '#fff',
-                color: '#1A1A1A',
-                border: '2px solid #1A1A1A',
-                boxShadow: '4px 4px 0px #1A1A1A',
-                px: 3,
-                py: 1.2,
-                fontSize: '0.95rem',
-                '&:hover': {
-                  bgcolor: '#E5E5E5',
-                  boxShadow: '2px 2px 0px #1A1A1A',
-                  transform: 'translate(2px, 2px)',
-                },
-              }}
-            >
-              GitHub
-            </Button>
-          )}
-        </Box>
+            {/* 액션 버튼 */}
+            <Box sx={{ mt: 1.5 }}>
+              <ProjectLinkButtons project={project} />
+            </Box>
+          </>
+        )}
       </Container>
     </Box>
   );
