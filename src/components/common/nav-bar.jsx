@@ -175,6 +175,7 @@ function NavBar() {
             {/* 다크모드 토글 */}
             <IconButton
               onClick={ toggleTheme }
+              aria-label={ isDark ? '라이트 모드로 전환' : '다크 모드로 전환' }
               size='small'
               sx={{
                 ml: 0.5,
@@ -203,6 +204,7 @@ function NavBar() {
           <Box sx={{ display: { xs: 'flex', sm: 'none' }, gap: 1, alignItems: 'center' }}>
             <IconButton
               onClick={ toggleTheme }
+              aria-label={ isDark ? '라이트 모드로 전환' : '다크 모드로 전환' }
               size='small'
               sx={{
                 border: '2px solid var(--color-border)',
@@ -226,6 +228,7 @@ function NavBar() {
 
             <IconButton
               onClick={ () => setDrawerOpen(true) }
+              aria-label='메뉴 열기'
               sx={{
                 border: '2px solid var(--color-border)',
                 borderRadius: '4px',
@@ -275,6 +278,7 @@ function NavBar() {
           </Typography>
           <IconButton
             onClick={ () => setDrawerOpen(false) }
+            aria-label='메뉴 닫기'
             size='small'
             sx={{
               border: '2px solid var(--color-border)',
