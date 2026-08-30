@@ -63,6 +63,14 @@ function ProjectCard({ project, onNavigate }) {
   return (
     <Card
       onClick={() => onNavigate(project)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          onNavigate(project);
+        }
+      }}
+      role='link'
+      tabIndex={0}
+      aria-label={`${project.title} 프로젝트 상세 보기`}
       sx={{
         height: '100%',
         display: 'flex',
@@ -80,6 +88,10 @@ function ProjectCard({ project, onNavigate }) {
         '&:active': {
           transform: 'translate(0px, 0px)',
           boxShadow: '2px 2px 0px var(--color-border)',
+        },
+        '&:focus-visible': {
+          outline: '3px solid var(--color-primary)',
+          outlineOffset: '2px',
         },
       }}
     >
@@ -185,6 +197,7 @@ function ProjectCard({ project, onNavigate }) {
         <Box
           sx={{ display: 'flex', gap: 1, pt: 0.3 }}
           onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
         >
           {project.detail_url && (
             <Button

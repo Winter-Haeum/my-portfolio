@@ -6,7 +6,10 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 function ScrollToTopButton() {
   return (
     <Box
+      component='button'
+      type='button'
       onClick={scrollToTop}
+      aria-label='페이지 맨 위로 이동'
       sx={{
         position: 'fixed',
         right: { xs: 16, md: 24 },
@@ -14,6 +17,9 @@ function ScrollToTopButton() {
         zIndex: 1300,
         width: { xs: 48, md: 52 },
         height: { xs: 48, md: 52 },
+        p: 0,
+        m: 0,
+        appearance: 'none',
         bgcolor: '#F4845F',
         border: '2.5px solid #1A1A1A',
         boxShadow: '4px 4px 0px #1A1A1A',
@@ -34,6 +40,10 @@ function ScrollToTopButton() {
         '&:active': {
           transform: 'translate(2px, 2px)',
           boxShadow: '2px 2px 0px #1A1A1A',
+        },
+        '&:focus-visible': {
+          outline: '3px solid var(--color-secondary)',
+          outlineOffset: '2px',
         },
       }}
     >
