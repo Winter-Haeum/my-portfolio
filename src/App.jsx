@@ -7,6 +7,7 @@ import HomePage from './pages/home-page';
 import AboutMePage from './pages/about-me-page';
 import ProjectsPage from './pages/projects-page';
 import ProjectDetailPage from './pages/project-detail-page';
+import NotFoundPage from './pages/not-found-page';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -28,6 +29,7 @@ function App() {
             <Route path='/about' element={<AboutMePage />} />
             <Route path='/projects' element={<ProjectsPage />} />
             <Route path='/projects/:slug' element={<ProjectDetailPage />} />
+            <Route path='*' element={<NotFoundPage />} />
           </Routes>
         </Box>
         <ScrollToTopButton />
