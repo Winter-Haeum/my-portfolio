@@ -124,7 +124,7 @@ const PROJECT_DETAILS = {
       '학습 자료가 늘어날수록 원하는 내용을 다시 찾기 어려워지는 문제를 기준으로 카테고리와 목차, 검색, 내비게이션 구조를 반복해서 검토했습니다.',
       '단순히 콘텐츠를 추가하는 데 그치지 않고 필요한 정보에 빠르게 접근할 수 있는지를 실제 화면에서 확인하며 정보 구조와 이동 흐름을 계속 개선하고 있습니다.',
     ],
-    status: '현재도 교안 콘텐츠와 기능을 계속 보완하며 학습 아카이브의 완성도를 높이고 있습니다.',
+    status: '현재도 학습 콘텐츠와 기능을 계속 보완하며 학습 아카이브의 완성도를 높이고 있습니다.',
   },
 };
 
@@ -274,7 +274,7 @@ function ProjectDetailPage() {
         .from('portfolio_projects')
         .select('*')
         .ilike('title', slug.replace(/-/g, ' '))
-        .single()
+        .maybeSingle()
         .then(({ data }) => {
           setProject(data);
           setLoading(false);
