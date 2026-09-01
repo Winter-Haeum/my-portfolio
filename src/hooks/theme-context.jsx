@@ -1,6 +1,5 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-
-const ThemeContext = createContext(null);
+import { useState, useEffect } from 'react';
+import { ThemeContext } from './use-app-theme';
 
 /**
  * AppThemeProvider - 다크/라이트 모드 전역 상태 관리
@@ -27,8 +26,4 @@ export function AppThemeProvider({ children }) {
       {children}
     </ThemeContext.Provider>
   );
-}
-
-export function useAppTheme() {
-  return useContext(ThemeContext);
 }

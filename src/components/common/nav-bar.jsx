@@ -15,7 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { useAppTheme } from '../../hooks/theme-context';
+import { useAppTheme } from '../../hooks/use-app-theme';
 
 const NAV_ITEMS = [
   { label: 'Home', to: '/' },
