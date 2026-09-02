@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../../hooks/portfolio-context';
+import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../../hooks/use-portfolio';
 import characterSkillImg from '../../assets/character-skill.png';
 
 const EXPERIENCE_ITEMS = [

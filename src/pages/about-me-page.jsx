@@ -16,7 +16,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import CodeIcon from '@mui/icons-material/Code';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../hooks/portfolio-context';
+import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../hooks/use-portfolio';
 
 /**
  * AboutMePage 컴포넌트
