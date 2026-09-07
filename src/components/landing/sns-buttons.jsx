@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import ArticleIcon from '@mui/icons-material/Article';
-import DescriptionIcon from '@mui/icons-material/Description';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 const SNS_LINKS = [
   {
@@ -10,14 +9,9 @@ const SNS_LINKS = [
     icon: <GitHubIcon sx={{ fontSize: 18 }} />,
   },
   {
-    label: 'Velog',
-    href: 'https://velog.io/@winter-haeum',
-    icon: <ArticleIcon sx={{ fontSize: 18 }} />,
-  },
-  {
-    label: 'Notion',
-    href: 'https://www.notion.so',
-    icon: <DescriptionIcon sx={{ fontSize: 18 }} />,
+    label: 'Instagram',
+    href: 'https://www.instagram.com/winterhaeum/',
+    icon: <InstagramIcon sx={{ fontSize: 18 }} />,
   },
 ];
 
