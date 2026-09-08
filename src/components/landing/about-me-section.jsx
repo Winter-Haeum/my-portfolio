@@ -107,9 +107,29 @@ function AboutMeSection() {
                     py: { xs: 1, md: 1.3 },
                     bgcolor: 'var(--color-bg-card)',
                     minWidth: { xs: 54, md: 72 },
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    '@media (hover: hover) and (pointer: fine)': {
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                        boxShadow: '5px 5px 0px var(--color-border)',
+                      },
+                      '&:hover .about-journey-emoji': { transform: 'scale(1.05)' },
+                    },
+                    '@media (prefers-reduced-motion: reduce)': {
+                      transition: 'box-shadow 0.2s ease',
+                      '&:hover': { transform: 'none' },
+                      '&:hover .about-journey-emoji': { transform: 'none' },
+                    },
                   }}
                 >
-                  <Typography sx={{ fontSize: { xs: '1.3rem', md: '1.6rem' }, lineHeight: 1 }}>
+                  <Typography
+                    className='about-journey-emoji'
+                    sx={{
+                      fontSize: { xs: '1.3rem', md: '1.6rem' },
+                      lineHeight: 1,
+                      transition: 'transform 0.2s ease',
+                    }}
+                  >
                     { step.emoji }
                   </Typography>
                   <Typography
@@ -160,18 +180,33 @@ function AboutMeSection() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   gap: 1.5,
+                  transition: 'box-shadow 0.25s ease, background-color 0.25s ease',
+                  '@media (hover: hover) and (pointer: fine)': {
+                    '&:hover': {
+                      boxShadow:
+                        '6px 6px 0px var(--color-border), 0 0 20px 2px rgba(245, 200, 66, 0.22)',
+                      backgroundImage:
+                        'radial-gradient(circle at 50% 40%, rgba(245, 200, 66, 0.10), transparent 70%)',
+                    },
+                    '&:hover .about-character-img': { transform: 'scale(1.03)' },
+                  },
+                  '@media (prefers-reduced-motion: reduce)': {
+                    '&:hover .about-character-img': { transform: 'none' },
+                  },
                 }}
               >
                 <Box
                   component='img'
                   src={ characterAboutImg }
                   alt='겨울하음 About Me 캐릭터'
+                  className='about-character-img'
                   sx={{
                     width: 175,
                     maxWidth: '70%',
                     height: 'auto',
                     objectFit: 'contain',
                     display: 'block',
+                    transition: 'transform 0.25s ease',
                   }}
                 />
                 <Box sx={{ textAlign: 'center' }}>
