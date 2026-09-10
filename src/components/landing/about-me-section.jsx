@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import characterAboutImg from '../../assets/character-about.png';
+import characterAboutImg from '../../assets/character-about.webp';
 
 const JOURNEY_STEPS = [
   { emoji: '👩‍🏫', label: '교사' },

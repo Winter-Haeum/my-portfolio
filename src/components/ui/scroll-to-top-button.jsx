@@ -21,8 +21,8 @@ function ScrollToTopButton() {
         m: 0,
         appearance: 'none',
         bgcolor: '#F4845F',
-        border: '2.5px solid #1A1A1A',
-        boxShadow: '4px 4px 0px #1A1A1A',
+        border: '2.5px solid var(--color-border)',
+        boxShadow: '4px 4px 0px var(--color-border)',
         borderRadius: '4px',
         display: 'flex',
         flexDirection: 'column',
@@ -34,12 +34,12 @@ function ScrollToTopButton() {
         transition: 'all 0.15s ease',
         '&:hover': {
           transform: 'translate(-2px, -2px)',
-          boxShadow: '6px 6px 0px #1A1A1A',
+          boxShadow: '6px 6px 0px var(--color-border)',
           bgcolor: '#F5956F',
         },
         '&:active': {
           transform: 'translate(2px, 2px)',
-          boxShadow: '2px 2px 0px #1A1A1A',
+          boxShadow: '2px 2px 0px var(--color-border)',
         },
         '&:focus-visible': {
           outline: '3px solid var(--color-secondary)',
@@ -47,10 +47,10 @@ function ScrollToTopButton() {
         },
       }}
     >
-      <Typography sx={{ fontSize: '1rem', fontWeight: 900, lineHeight: 1, color: '#1A1A1A' }}>
+      <Typography sx={{ fontSize: '1rem', fontWeight: 900, lineHeight: 1, color: 'var(--color-text-primary)' }}>
         ↑
       </Typography>
-      <Typography sx={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.08em', lineHeight: 1, color: '#1A1A1A' }}>
+      <Typography sx={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.08em', lineHeight: 1, color: 'var(--color-text-primary)' }}>
         TOP
       </Typography>
     </Box>

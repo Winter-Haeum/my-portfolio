@@ -15,7 +15,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { supabase } from '../../utils/supabase-client';
 import TechBadge from '../ui/tech-badge';
-import characterProjectsImg from '../../assets/character-projects.png';
+import characterProjectsImg from '../../assets/character-projects.webp';
 
 const HOME_CARD_LIMIT = 3;
 

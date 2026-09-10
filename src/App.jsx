@@ -21,7 +21,7 @@ function App() {
   return (
     <BrowserRouter basename='/my-portfolio'>
       <ScrollToTop />
-      <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', bgcolor: 'background.default' }}>
+      <Box sx={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', bgcolor: 'var(--color-bg-primary)' }}>
         <NavBar />
         <Box component='main' sx={{ flex: 1, pb: { xs: 9, md: 10 } }}>
           <Routes>

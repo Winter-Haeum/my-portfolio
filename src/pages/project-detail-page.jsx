@@ -24,7 +24,7 @@ const DETAIL_IMAGE_STYLES = {
 const SECTION_COLORS = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)'];
 
 /* 본문 문단 공통 스타일 (15~16px, line-height 1.65~1.75) */
-const BODY_TEXT_SX = { color: '#333', fontSize: '0.95rem', lineHeight: 1.72 };
+const BODY_TEXT_SX = { color: 'var(--color-text-secondary)', fontSize: '0.95rem', lineHeight: 1.72 };
 const MICRO_LABEL_SX = { fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', mb: 0.5 };
 
 const PROJECT_DETAILS = {
@@ -146,23 +146,23 @@ function SectionBlock({ label, labelColor = 'var(--color-primary)', isDense = fa
         sx={{
           display: 'inline-block',
           bgcolor: labelColor,
-          border: '2px solid #1A1A1A',
-          boxShadow: '2px 2px 0px #1A1A1A',
+          border: '2px solid var(--color-border)',
+          boxShadow: '2px 2px 0px var(--color-border)',
           px: 2,
           py: 0.4,
           mb: 1.5,
         }}
       >
-        <Typography sx={{ fontWeight: 700, fontSize: '0.82rem', color: '#1A1A1A' }}>
+        <Typography sx={{ fontWeight: 700, fontSize: '0.82rem', color: 'var(--color-text-primary)' }}>
           {label}
         </Typography>
       </Box>
       <Box
         sx={{
-          bgcolor: '#fff',
-          border: '2px solid #1A1A1A',
-          borderLeft: isAccent ? `5px solid ${labelColor}` : '2px solid #1A1A1A',
-          boxShadow: '4px 4px 0px #1A1A1A',
+          bgcolor: 'var(--color-bg-card)',
+          border: '2px solid var(--color-border)',
+          borderLeft: isAccent ? `5px solid ${labelColor}` : '2px solid var(--color-border)',
+          boxShadow: '4px 4px 0px var(--color-border)',
           p: isDense ? { xs: 1.75, md: 2 } : { xs: 2, md: 2.5 },
         }}
       >
@@ -187,7 +187,7 @@ function BulletItem({ text, isDense = false }) {
           width: 7,
           height: 7,
           bgcolor: 'var(--color-primary)',
-          border: '1.5px solid #1A1A1A',
+          border: '1.5px solid var(--color-border)',
           flexShrink: 0,
           mt: 0.75,
         }}
@@ -215,16 +215,16 @@ function ProjectLinkButtons({ project }) {
           target='_blank'
           rel='noopener noreferrer'
           sx={{
-            bgcolor: '#fff',
-            color: '#1A1A1A',
-            border: '2px solid #1A1A1A',
-            boxShadow: '4px 4px 0px #1A1A1A',
+            bgcolor: 'var(--color-bg-card)',
+            color: 'var(--color-text-primary)',
+            border: '2px solid var(--color-border)',
+            boxShadow: '4px 4px 0px var(--color-border)',
             px: 3,
             py: 1.2,
             fontSize: '0.95rem',
             '&:hover': {
               bgcolor: '#F4845F',
-              boxShadow: '2px 2px 0px #1A1A1A',
+              boxShadow: '2px 2px 0px var(--color-border)',
               transform: 'translate(2px, 2px)',
             },
           }}
@@ -239,16 +239,16 @@ function ProjectLinkButtons({ project }) {
           target='_blank'
           rel='noopener noreferrer'
           sx={{
-            bgcolor: '#fff',
-            color: '#1A1A1A',
-            border: '2px solid #1A1A1A',
-            boxShadow: '4px 4px 0px #1A1A1A',
+            bgcolor: 'var(--color-bg-card)',
+            color: 'var(--color-text-primary)',
+            border: '2px solid var(--color-border)',
+            boxShadow: '4px 4px 0px var(--color-border)',
             px: 3,
             py: 1.2,
             fontSize: '0.95rem',
             '&:hover': {
-              bgcolor: '#E5E5E5',
-              boxShadow: '2px 2px 0px #1A1A1A',
+              bgcolor: 'var(--color-btn-hover)',
+              boxShadow: '2px 2px 0px var(--color-border)',
               transform: 'translate(2px, 2px)',
             },
           }}
@@ -311,13 +311,13 @@ function ProjectDetailPage() {
             startIcon={<ArrowBackIcon />}
             onClick={() => navigate('/projects')}
             sx={{
-              bgcolor: '#fff',
-              color: '#1A1A1A',
-              border: '2px solid #1A1A1A',
-              boxShadow: '3px 3px 0px #1A1A1A',
+              bgcolor: 'var(--color-bg-card)',
+              color: 'var(--color-text-primary)',
+              border: '2px solid var(--color-border)',
+              boxShadow: '3px 3px 0px var(--color-border)',
               '&:hover': {
-                bgcolor: '#F5F5F5',
-                boxShadow: '1px 1px 0px #1A1A1A',
+                bgcolor: 'var(--color-btn-hover)',
+                boxShadow: '1px 1px 0px var(--color-border)',
                 transform: 'translate(2px, 2px)',
               },
             }}
@@ -347,15 +347,15 @@ function ProjectDetailPage() {
             startIcon={<ArrowBackIcon />}
             onClick={() => navigate(-1)}
             sx={{
-              bgcolor: '#fff',
-              color: '#1A1A1A',
-              border: '2px solid #1A1A1A',
-              boxShadow: '3px 3px 0px #1A1A1A',
+              bgcolor: 'var(--color-bg-card)',
+              color: 'var(--color-text-primary)',
+              border: '2px solid var(--color-border)',
+              boxShadow: '3px 3px 0px var(--color-border)',
               fontWeight: 700,
               textTransform: 'none',
               '&:hover': {
-                bgcolor: '#F5F5F5',
-                boxShadow: '1px 1px 0px #1A1A1A',
+                bgcolor: 'var(--color-btn-hover)',
+                boxShadow: '1px 1px 0px var(--color-border)',
                 transform: 'translate(2px, 2px)',
               },
             }}
@@ -366,15 +366,15 @@ function ProjectDetailPage() {
             startIcon={<FormatListBulletedIcon />}
             onClick={() => navigate('/projects')}
             sx={{
-              bgcolor: '#fff',
-              color: '#1A1A1A',
-              border: '2px solid #1A1A1A',
-              boxShadow: '3px 3px 0px #1A1A1A',
+              bgcolor: 'var(--color-bg-card)',
+              color: 'var(--color-text-primary)',
+              border: '2px solid var(--color-border)',
+              boxShadow: '3px 3px 0px var(--color-border)',
               fontWeight: 700,
               textTransform: 'none',
               '&:hover': {
-                bgcolor: '#F5F5F5',
-                boxShadow: '1px 1px 0px #1A1A1A',
+                bgcolor: 'var(--color-btn-hover)',
+                boxShadow: '1px 1px 0px var(--color-border)',
                 transform: 'translate(2px, 2px)',
               },
             }}
@@ -397,8 +397,8 @@ function ProjectDetailPage() {
               objectFit: detailStyle.fit,
               objectPosition: detailStyle.position,
               display: 'block',
-              border: '2px solid #1A1A1A',
-              boxShadow: '6px 6px 0px #1A1A1A',
+              border: '2px solid var(--color-border)',
+              boxShadow: '6px 6px 0px var(--color-border)',
               mb: 4,
             }}
           />
@@ -407,16 +407,16 @@ function ProjectDetailPage() {
             sx={{
               width: '100%',
               height: { xs: 240, md: 480 },
-              bgcolor: '#FAF0E8',
-              border: '2px solid #1A1A1A',
-              boxShadow: '6px 6px 0px #1A1A1A',
+              bgcolor: 'var(--color-bg-primary)',
+              border: '2px solid var(--color-border)',
+              boxShadow: '6px 6px 0px var(--color-border)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               mb: 4,
             }}
           >
-            <Typography sx={{ color: '#1A1A1A22', fontSize: '4rem' }}>🖥️</Typography>
+            <Typography sx={{ color: 'var(--color-border-light)', fontSize: '4rem' }}>🖥️</Typography>
           </Box>
         )}
 
@@ -442,8 +442,8 @@ function ProjectDetailPage() {
               <Chip
                 label={details.statusBadge}
                 sx={{
-                  border: '2px solid #1A1A1A',
-                  boxShadow: '2px 2px 0px #1A1A1A',
+                  border: '2px solid var(--color-border)',
+                  boxShadow: '2px 2px 0px var(--color-border)',
                   bgcolor: 'var(--color-secondary)',
                   color: '#fff',
                   fontWeight: 700,
@@ -454,8 +454,8 @@ function ProjectDetailPage() {
             <Chip
               label={project.project_type}
               sx={{
-                border: '2px solid #1A1A1A',
-                boxShadow: '2px 2px 0px #1A1A1A',
+                border: '2px solid var(--color-border)',
+                boxShadow: '2px 2px 0px var(--color-border)',
                 bgcolor: 'transparent',
                 fontWeight: 700,
                 fontSize: '0.8rem',
@@ -466,7 +466,7 @@ function ProjectDetailPage() {
 
         {/* 기간 · 역할 */}
         {details && (
-          <Typography sx={{ color: '#888', fontSize: '0.85rem', fontWeight: 700, mb: 1 }}>
+          <Typography sx={{ color: 'var(--color-text-muted)', fontSize: '0.85rem', fontWeight: 700, mb: 1 }}>
             {details.period} · {details.role}
           </Typography>
         )}
@@ -474,7 +474,7 @@ function ProjectDetailPage() {
         {/* 한 줄 요약 */}
         <Typography
           sx={{
-            color: '#666',
+            color: 'var(--color-text-secondary)',
             fontSize: { xs: '0.95rem', md: '1.05rem' },
             lineHeight: 1.75,
             mb: 4,
@@ -529,10 +529,10 @@ function ProjectDetailPage() {
                 >
                   {details.techHighlights.map(({ tech, usage }) => (
                     <Box key={tech} sx={{ display: 'flex', flexDirection: 'column', gap: 0.3 }}>
-                      <Typography sx={{ color: '#1A1A1A', fontSize: '0.9rem', fontWeight: 700 }}>
+                      <Typography sx={{ color: 'var(--color-text-primary)', fontSize: '0.9rem', fontWeight: 700 }}>
                         {tech}
                       </Typography>
-                      <Typography sx={{ color: '#555', fontSize: '0.88rem', lineHeight: 1.7, pl: 0.5 }}>
+                      <Typography sx={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.7, pl: 0.5 }}>
                         → {usage}
                       </Typography>
                     </Box>
@@ -556,7 +556,7 @@ function ProjectDetailPage() {
             {/* 05. 문제 → 해결 / 개선 과정 / 구현 특징 — 핵심 경험 섹션이므로 accent border로 위계 강화 */}
             <SectionBlock label={`05. ${details.experienceLabel}`} labelColor={SECTION_COLORS[1]} isAccent>
               {details.experienceTitle && (
-                <Typography sx={{ color: '#1A1A1A', fontSize: '1.05rem', fontWeight: 900, mb: 1.3 }}>
+                <Typography sx={{ color: 'var(--color-text-primary)', fontSize: '1.05rem', fontWeight: 900, mb: 1.3 }}>
                   {details.experienceTitle}
                 </Typography>
               )}

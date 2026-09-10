@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import EmailCopyArea from './email-copy-area';
 import SnsButtons from './sns-buttons';
 import GuestbookSection from './guestbook-section';
-import characterContactImg from '../../assets/character-contact.png';
+import characterContactImg from '../../assets/character-contact.webp';
 
 function ContactSection() {
   return (

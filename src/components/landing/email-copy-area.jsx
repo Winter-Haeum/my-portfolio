@@ -44,7 +44,7 @@ function EmailCopyArea() {
           px: 2,
           py: 1.5,
           cursor: 'pointer',
-          bgcolor: '#FFFFFF',
+          bgcolor: 'var(--color-bg-card)',
           transition: 'box-shadow 0.2s, transform 0.15s',
           '&:hover': {
             boxShadow: '3px 3px 0px var(--color-border)',

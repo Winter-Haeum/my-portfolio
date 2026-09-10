@@ -8,7 +8,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import characterImg from '../../assets/character-hero.png';
+import characterImg from '../../assets/character-hero.webp';
 
 const TECH_BADGES = [
   'React',

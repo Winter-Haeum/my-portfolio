@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { usePortfolio, getSkillIcon, CATEGORY_COLORS } from '../../hooks/use-portfolio';
-import characterSkillImg from '../../assets/character-skill.png';
+import characterSkillImg from '../../assets/character-skill.webp';
 
 const EXPERIENCE_ITEMS = [
   { label: 'Git / GitHub', color: '#1A1A1A', textColor: '#fff' },

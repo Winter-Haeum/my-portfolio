@@ -91,7 +91,7 @@ function NotFoundPage() {
             <Button
               onClick={() => navigate('/projects')}
               sx={{
-                bgcolor: '#fff',
+                bgcolor: 'var(--color-bg-card)',
                 color: 'var(--color-text-primary)',
                 border: '2px solid var(--color-border)',
                 boxShadow: '3px 3px 0px var(--color-border)',
@@ -100,7 +100,7 @@ function NotFoundPage() {
                 px: 3,
                 py: 1.2,
                 '&:hover': {
-                  bgcolor: '#F5F5F5',
+                  bgcolor: 'var(--color-btn-hover)',
                   boxShadow: '1px 1px 0px var(--color-border)',
                   transform: 'translate(2px, 2px)',
                 },

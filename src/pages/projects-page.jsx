@@ -57,11 +57,11 @@ function ProjectCard({ project, onNavigate }) {
         transition: 'all 0.18s ease',
         '&:hover': {
           transform: 'translate(-3px, -3px)',
-          boxShadow: '7px 7px 0px #1A1A1A',
+          boxShadow: '7px 7px 0px var(--color-border)',
         },
         '&:active': {
           transform: 'translate(0px, 0px)',
-          boxShadow: '2px 2px 0px #1A1A1A',
+          boxShadow: '2px 2px 0px var(--color-border)',
         },
         '&:focus-visible': {
           outline: '3px solid var(--color-primary)',
@@ -102,13 +102,13 @@ function ProjectCard({ project, onNavigate }) {
             sx={{
               width: '100%',
               height: '100%',
-              bgcolor: '#FAF0E8',
+              bgcolor: 'var(--color-bg-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Typography sx={{ color: '#1A1A1A22', fontSize: '2.5rem' }}>🖥️</Typography>
+            <Typography sx={{ color: 'var(--color-border-light)', fontSize: '2.5rem' }}>🖥️</Typography>
           </Box>
         )}
         {project.is_featured && (
@@ -147,7 +147,7 @@ function ProjectCard({ project, onNavigate }) {
             sx={{
               fontWeight: 800,
               fontSize: { xs: '1.1rem', md: '1.25rem' },
-              color: '#1A1A1A',
+              color: 'var(--color-text-primary)',
               lineHeight: 1.3,
             }}
           >
@@ -157,7 +157,7 @@ function ProjectCard({ project, onNavigate }) {
             label={project.project_type}
             size='small'
             sx={{
-              border: '1.5px solid #1A1A1A',
+              border: '1.5px solid var(--color-border)',
               bgcolor: 'transparent',
               fontWeight: 600,
               fontSize: '0.65rem',
@@ -168,7 +168,7 @@ function ProjectCard({ project, onNavigate }) {
 
         {/* 설명 */}
         <Typography
-          sx={{ color: '#555', lineHeight: 1.75, fontSize: '0.9rem', flex: 1 }}
+          sx={{ color: 'var(--color-text-secondary)', lineHeight: 1.75, fontSize: '0.9rem', flex: 1 }}
         >
           {project.description}
         </Typography>
@@ -194,14 +194,14 @@ function ProjectCard({ project, onNavigate }) {
               target='_blank'
               rel='noopener noreferrer'
               sx={{
-                bgcolor: '#fff',
-                color: '#1A1A1A',
-                border: '2px solid #1A1A1A',
-                boxShadow: '3px 3px 0px #1A1A1A',
+                bgcolor: 'var(--color-bg-card)',
+                color: 'var(--color-text-primary)',
+                border: '2px solid var(--color-border)',
+                boxShadow: '3px 3px 0px var(--color-border)',
                 fontSize: '0.75rem',
                 '&:hover': {
                   bgcolor: '#F4845F',
-                  boxShadow: '1px 1px 0px #1A1A1A',
+                  boxShadow: '1px 1px 0px var(--color-border)',
                   transform: 'translate(2px, 2px)',
                 },
               }}
@@ -217,14 +217,14 @@ function ProjectCard({ project, onNavigate }) {
               target='_blank'
               rel='noopener noreferrer'
               sx={{
-                bgcolor: '#fff',
-                color: '#1A1A1A',
-                border: '2px solid #1A1A1A',
-                boxShadow: '3px 3px 0px #1A1A1A',
+                bgcolor: 'var(--color-bg-card)',
+                color: 'var(--color-text-primary)',
+                border: '2px solid var(--color-border)',
+                boxShadow: '3px 3px 0px var(--color-border)',
                 fontSize: '0.75rem',
                 '&:hover': {
-                  bgcolor: '#E5E5E5',
-                  boxShadow: '1px 1px 0px #1A1A1A',
+                  bgcolor: 'var(--color-btn-hover)',
+                  boxShadow: '1px 1px 0px var(--color-border)',
                   transform: 'translate(2px, 2px)',
                 },
               }}
@@ -274,8 +274,8 @@ function ProjectsPage() {
           sx={{
             display: 'inline-block',
             bgcolor: 'var(--color-primary)',
-            border: '2px solid #1A1A1A',
-            boxShadow: '4px 4px 0px #1A1A1A',
+            border: '2px solid var(--color-border)',
+            boxShadow: '4px 4px 0px var(--color-border)',
             px: 3,
             py: 1,
             mb: 4,
@@ -283,7 +283,7 @@ function ProjectsPage() {
         >
           <Typography
             variant='h2'
-            sx={{ fontSize: { xs: '1.6rem', md: '2.2rem' }, color: '#1A1A1A', m: 0 }}
+            sx={{ fontSize: { xs: '1.6rem', md: '2.2rem' }, color: 'var(--color-text-primary)', m: 0 }}
           >
             Projects
           </Typography>
