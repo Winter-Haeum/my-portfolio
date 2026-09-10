@@ -214,7 +214,7 @@ function AboutMeSection() {
                     장미진
                   </Typography>
                   <Typography sx={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.65 }}>
-                    꾸준함을 무기로 성장하는<br />프론트엔드 개발자
+                    사용자 관점으로<br />웹을 만드는 사람
                   </Typography>
                 </Box>
               </Box>

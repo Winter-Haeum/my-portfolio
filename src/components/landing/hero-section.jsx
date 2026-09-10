@@ -70,7 +70,7 @@ function HeroSection() {
                   textTransform: 'uppercase',
                 }}
               >
-                Frontend Developer
+                Web · AI Projects
               </Typography>
             </Box>
 
