@@ -99,11 +99,17 @@ function GuestbookForm({ onSubmitSuccess }) {
             {EMOJIS.map((emoji) => (
               <Box
                 key={emoji}
+                component='button'
+                type='button'
                 onClick={() => handleEmoji(emoji)}
+                aria-pressed={form.emoji === emoji}
+                aria-label={`${emoji} 선택`}
                 sx={{
                   fontSize: '1.4rem',
                   cursor: 'pointer',
                   p: 0.6,
+                  m: 0,
+                  appearance: 'none',
                   border: '2px solid',
                   borderColor: form.emoji === emoji ? 'var(--color-border)' : 'var(--color-border-light)',
                   borderRadius: 1,
@@ -114,6 +120,10 @@ function GuestbookForm({ onSubmitSuccess }) {
                   '&:hover': {
                     borderColor: 'var(--color-border)',
                     bgcolor: form.emoji === emoji ? 'var(--color-btn-active)' : 'var(--color-btn-hover)',
+                  },
+                  '&:focus-visible': {
+                    outline: '2px solid var(--color-secondary)',
+                    outlineOffset: '2px',
                   },
                 }}
               >
@@ -165,11 +175,16 @@ function GuestbookForm({ onSubmitSuccess }) {
             {KEYWORDS.map((kw) => (
               <Box
                 key={kw}
+                component='button'
+                type='button'
                 onClick={() => handleKeyword(kw)}
+                aria-pressed={form.keyword === kw}
                 sx={{
                   fontSize: '0.8rem',
                   px: 1.5,
                   py: 0.5,
+                  m: 0,
+                  appearance: 'none',
                   border: '2px solid',
                   borderColor: form.keyword === kw ? 'var(--color-border)' : 'var(--color-border-light)',
                   cursor: 'pointer',
@@ -180,6 +195,10 @@ function GuestbookForm({ onSubmitSuccess }) {
                   '&:hover': {
                     borderColor: 'var(--color-border)',
                     bgcolor: form.keyword === kw ? 'var(--color-btn-active)' : 'var(--color-btn-hover)',
+                  },
+                  '&:focus-visible': {
+                    outline: '2px solid var(--color-secondary)',
+                    outlineOffset: '2px',
                   },
                 }}
               >
@@ -192,27 +211,49 @@ function GuestbookForm({ onSubmitSuccess }) {
         {/* 비공개 옵션 */}
         <Box>
           <Box
-            onClick={handlePrivateToggle}
+            component='label'
             sx={{ display: 'flex', alignItems: 'center', gap: 1, cursor: 'pointer', width: 'fit-content' }}
           >
-            <Box
-              sx={{
-                width: 18,
-                height: 18,
-                border: '2px solid var(--color-border)',
-                bgcolor: form.is_private ? 'var(--color-btn-active)' : '#FFFFFF',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                transition: 'background-color 0.15s',
-              }}
-            >
-              {form.is_private && (
-                <Box component='span' sx={{ fontSize: '0.65rem', fontWeight: 900, lineHeight: 1, color: '#222' }}>
-                  ✓
-                </Box>
-              )}
+            <Box sx={{ position: 'relative', width: 18, height: 18, flexShrink: 0 }}>
+              <Box
+                component='input'
+                type='checkbox'
+                checked={form.is_private}
+                onChange={handlePrivateToggle}
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  m: 0,
+                  opacity: 0,
+                  cursor: 'pointer',
+                  '&:focus-visible ~ .private-checkbox-visual': {
+                    outline: '2px solid var(--color-secondary)',
+                    outlineOffset: '2px',
+                  },
+                }}
+              />
+              <Box
+                className='private-checkbox-visual'
+                sx={{
+                  width: 18,
+                  height: 18,
+                  border: '2px solid var(--color-border)',
+                  bgcolor: form.is_private ? 'var(--color-btn-active)' : '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'background-color 0.15s',
+                  pointerEvents: 'none',
+                }}
+              >
+                {form.is_private && (
+                  <Box component='span' sx={{ fontSize: '0.65rem', fontWeight: 900, lineHeight: 1, color: '#222' }}>
+                    ✓
+                  </Box>
+                )}
+              </Box>
             </Box>
             <Typography sx={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', userSelect: 'none' }}>
               비공개로 작성하기 🔒

@@ -277,6 +277,9 @@ function HeroSection() {
                   '50%': { transform: 'translateY(6px)' },
                 },
                 animation: 'bounce 1.6s ease-in-out infinite',
+                '@media (prefers-reduced-motion: reduce)': {
+                  animation: 'none',
+                },
               }}
             />
           </Box>

@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAppTheme } from '../../hooks/use-app-theme';
 
 const NAV_ITEMS = [
@@ -55,14 +55,6 @@ function NavBar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleLogoClick = () => {
-    if (location.pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      navigate('/');
-    }
-  };
 
   const handleContactNav = () => {
     setDrawerOpen(false);
@@ -125,14 +117,24 @@ function NavBar() {
           boxShadow: '0 2px 0px var(--color-border)',
           transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
           transition: 'transform 0.32s ease, background-color 0.3s ease',
+          '@media (prefers-reduced-motion: reduce)': {
+            transition: 'background-color 0.3s ease',
+          },
           top: 0,
         }}
       >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
 
-          {/* 로고 */}
+          {/* 로고 — 내부 이동 링크이므로 시맨틱 Link 요소 사용 */}
           <Typography
-            onClick={ handleLogoClick }
+            component={ Link }
+            to='/'
+            onClick={ (e) => {
+              if (location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            } }
             variant='h6'
             sx={{
               fontWeight: 900,
@@ -143,12 +145,17 @@ function NavBar() {
               bgcolor: 'var(--color-primary)',
               boxShadow: '3px 3px 0px var(--color-border)',
               display: 'inline-block',
+              textDecoration: 'none',
               cursor: 'pointer',
               transition: 'all 0.15s ease',
               userSelect: 'none',
               '&:hover': {
                 boxShadow: '5px 5px 0px var(--color-border)',
                 transform: 'translate(-1px, -1px)',
+              },
+              '&:focus-visible': {
+                outline: '3px solid var(--color-secondary)',
+                outlineOffset: '2px',
               },
             }}
           >

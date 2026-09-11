@@ -22,11 +22,21 @@ const DIRECTION_TRANSFORM = {
  *   <SomeSection />
  * </FadeInSection>
  */
+/* prefers-reduced-motion 사용자에게는 스크롤 슬라이드-인 없이 즉시 표시 */
+function prefersReducedMotion() {
+  return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+}
+
 function FadeInSection({ children, direction = 'up', delay = 0, threshold = 0.12 }) {
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
+  const reducedMotion = prefersReducedMotion();
 
   useEffect(() => {
+    /* reduced-motion에서는 렌더링에서 이미 항상 보이는 상태로 계산되므로
+       관찰자를 등록하거나 state를 바꿀 필요가 없다 */
+    if (reducedMotion) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -40,15 +50,15 @@ function FadeInSection({ children, direction = 'up', delay = 0, threshold = 0.12
     const el = ref.current;
     if (el) observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [threshold, reducedMotion]);
 
   return (
     <Box
       ref={ ref }
       sx={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'none' : (DIRECTION_TRANSFORM[direction] ?? DIRECTION_TRANSFORM.up),
-        transition: `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
+        opacity: reducedMotion ? 1 : (visible ? 1 : 0),
+        transform: reducedMotion ? 'none' : (visible ? 'none' : (DIRECTION_TRANSFORM[direction] ?? DIRECTION_TRANSFORM.up)),
+        transition: reducedMotion ? 'none' : `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
         width: '100%',
       }}
     >

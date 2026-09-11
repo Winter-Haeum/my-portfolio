@@ -34,7 +34,10 @@ function EmailCopyArea() {
   return (
     <>
       <Box
+        component='button'
+        type='button'
         onClick={handleCopy}
+        aria-label='이메일 주소 복사'
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -43,6 +46,10 @@ function EmailCopyArea() {
           borderRadius: 1,
           px: 2,
           py: 1.5,
+          m: 0,
+          appearance: 'none',
+          font: 'inherit',
+          textAlign: 'left',
           cursor: 'pointer',
           bgcolor: 'var(--color-bg-card)',
           transition: 'box-shadow 0.2s, transform 0.15s',
@@ -50,10 +57,12 @@ function EmailCopyArea() {
             boxShadow: '3px 3px 0px var(--color-border)',
             transform: 'translate(-1px, -1px)',
           },
+          '&:focus-visible': {
+            outline: '3px solid var(--color-secondary)',
+            outlineOffset: '2px',
+          },
           width: 'fit-content',
         }}
-        role='button'
-        aria-label='이메일 주소 복사'
       >
         <EmailIcon sx={{ fontSize: 20, color: 'var(--color-text-secondary)' }} />
         <Typography sx={{ fontSize: { xs: '0.9rem', md: '1rem' }, color: 'var(--color-text-primary)' }}>

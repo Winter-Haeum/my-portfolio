@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -9,6 +9,23 @@ import GuestbookCard from './guestbook-card';
 import { supabase } from '../../utils/supabase-client';
 
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+
+/* 관리자 영역의 텍스트 링크형 버튼 공통 스타일 (기존 디자인 그대로, 시맨틱만 button으로) */
+const ADMIN_LINK_BTN_SX = {
+  fontSize: '0.7rem',
+  color: 'var(--color-text-muted)',
+  bgcolor: 'transparent',
+  border: 'none',
+  p: 0,
+  m: 0,
+  appearance: 'none',
+  cursor: 'pointer',
+  '&:hover': { color: 'var(--color-text-secondary)' },
+  '&:focus-visible': {
+    outline: '2px solid var(--color-secondary)',
+    outlineOffset: '2px',
+  },
+};
 
 /**
  * GuestbookSection 컴포넌트
@@ -26,21 +43,33 @@ function GuestbookSection() {
   const [adminInput, setAdminInput] = useState('');
   const [adminError, setAdminError] = useState(false);
 
-  const fetchEntries = useCallback(async () => {
-    setLoading(true);
-    const { data, error } = await supabase
+  /* 최초 로드 — effect 안에서 직접 Promise 체인을 사용해
+     setState가 항상 then() 콜백(비동기 시점)에서만 호출되도록 한다 */
+  useEffect(() => {
+    supabase
       .from('portfolio_guestbook')
       .select('id, name, message, emoji, keyword, role, created_at, is_private')
       .order('created_at', { ascending: false })
-      .limit(30);
-
-    if (!error && data) setEntries(data);
-    setLoading(false);
+      .limit(30)
+      .then(({ data, error }) => {
+        if (!error && data) setEntries(data);
+        setLoading(false);
+      });
   }, []);
 
-  useEffect(() => {
-    fetchEntries();
-  }, [fetchEntries]);
+  /* 새 글 작성 후 재조회 — 이벤트 핸들러에서 호출되므로 로딩 표시를 다시 켠다 */
+  const refetchEntries = () => {
+    setLoading(true);
+    supabase
+      .from('portfolio_guestbook')
+      .select('id, name, message, emoji, keyword, role, created_at, is_private')
+      .order('created_at', { ascending: false })
+      .limit(30)
+      .then(({ data, error }) => {
+        if (!error && data) setEntries(data);
+        setLoading(false);
+      });
+  };
 
   const handleAdminLogin = () => {
     if (adminInput === ADMIN_PASSWORD) {
@@ -76,7 +105,7 @@ function GuestbookSection() {
         방명록
       </Typography>
 
-      <GuestbookForm onSubmitSuccess={fetchEntries} />
+      <GuestbookForm onSubmitSuccess={refetchEntries} />
 
       <Box sx={{ mt: 3 }}>
         {loading ? (
@@ -104,8 +133,10 @@ function GuestbookSection() {
               관리자 모드 ✓
             </Typography>
             <Typography
+              component='button'
+              type='button'
               onClick={handleAdminLogout}
-              sx={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', cursor: 'pointer', '&:hover': { color: 'var(--color-text-secondary)' } }}
+              sx={ADMIN_LINK_BTN_SX}
             >
               나가기
             </Typography>
@@ -143,16 +174,20 @@ function GuestbookSection() {
               확인
             </Button>
             <Typography
+              component='button'
+              type='button'
               onClick={() => { setShowAdminLogin(false); setAdminInput(''); setAdminError(false); }}
-              sx={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', cursor: 'pointer', alignSelf: 'center', '&:hover': { color: 'var(--color-text-secondary)' } }}
+              sx={{ ...ADMIN_LINK_BTN_SX, alignSelf: 'center' }}
             >
               취소
             </Typography>
           </Box>
         ) : (
           <Typography
+            component='button'
+            type='button'
             onClick={() => setShowAdminLogin(true)}
-            sx={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', cursor: 'pointer', '&:hover': { color: 'var(--color-text-secondary)' } }}
+            sx={ADMIN_LINK_BTN_SX}
           >
             관리자
           </Typography>

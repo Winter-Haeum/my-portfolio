@@ -66,7 +66,7 @@ function AboutMePage() {
             px: 3, py: 1, mb: 5,
           }}
         >
-          <Typography variant='h2' sx={{ fontSize: { xs: '1.6rem', md: '2.2rem' }, color: 'var(--color-text-primary)', m: 0 }}>
+          <Typography component='h1' variant='h2' sx={{ fontSize: { xs: '1.6rem', md: '2.2rem' }, color: 'var(--color-text-primary)', m: 0 }}>
             About Me
           </Typography>
         </Box>

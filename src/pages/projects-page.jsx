@@ -241,18 +241,33 @@ function ProjectCard({ project, onNavigate }) {
 function ProjectsPage() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    let ignore = false;
+
     supabase
       .from('portfolio_projects')
       .select('*')
       .eq('is_published', true)
       .order('sort_order')
-      .then(({ data }) => {
-        setProjects(data || []);
+      .then(({ data, error }) => {
+        if (ignore) return;
+        if (error) {
+          setFetchError(true);
+        } else {
+          setProjects(data || []);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        if (ignore) return;
+        setFetchError(true);
         setLoading(false);
       });
+
+    return () => { ignore = true; };
   }, []);
 
   const handleNavigate = (project) => {
@@ -282,6 +297,7 @@ function ProjectsPage() {
           }}
         >
           <Typography
+            component='h1'
             variant='h2'
             sx={{ fontSize: { xs: '1.6rem', md: '2.2rem' }, color: 'var(--color-text-primary)', m: 0 }}
           >
@@ -293,6 +309,10 @@ function ProjectsPage() {
           <Box sx={{ display: 'flex', justifyContent: 'center', py: 10 }}>
             <CircularProgress color='primary' />
           </Box>
+        ) : fetchError ? (
+          <Typography sx={{ color: 'var(--color-text-secondary)', textAlign: 'center', py: 6 }}>
+            프로젝트 정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.
+          </Typography>
         ) : (
           /* 세로 리스트 */
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
@@ -300,7 +320,7 @@ function ProjectsPage() {
               <ProjectCard key={project.id} project={project} onNavigate={handleNavigate} />
             ))}
             {projects.length === 0 && (
-              <Typography sx={{ color: 'text.secondary', textAlign: 'center', py: 6 }}>
+              <Typography sx={{ color: 'var(--color-text-secondary)', textAlign: 'center', py: 6 }}>
                 등록된 프로젝트가 없습니다.
               </Typography>
             )}

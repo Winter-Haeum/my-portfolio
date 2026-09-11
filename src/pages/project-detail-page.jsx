@@ -13,6 +13,10 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { supabase } from '../utils/supabase-client';
 import TechBadge from '../components/ui/tech-badge';
 
+function slugify(title) {
+  return title.toLowerCase().replace(/\s+/g, '-');
+}
+
 /* 상세페이지 대표 이미지 표시 방식 — 프로젝트별 설정 (기존 crop 유지, 신규 항목만 추가) */
 const DETAIL_IMAGE_STYLES = {
   WinterLog: { fit: 'cover', position: 'top center' },
@@ -264,24 +268,60 @@ function ProjectDetailPage() {
   const { slug } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [project, setProject] = useState(state?.project || null);
-  const [loading, setLoading] = useState(!state?.project);
+
+  const stateProject = state?.project;
+  const stateMatchesSlug = Boolean(stateProject && slugify(stateProject.title) === slug);
+
+  const [resolvedSlug, setResolvedSlug] = useState(null);
+  const [project, setProject] = useState(stateMatchesSlug ? stateProject : null);
+  const [loading, setLoading] = useState(!stateMatchesSlug);
+  const [fetchError, setFetchError] = useState(false);
   const [imgError, setImgError] = useState(false);
+
+  /* slug가 바뀌면(최초 mount 포함) 렌더링 중에 즉시 상태를 재설정한다.
+     router state에 남아있는 이전 프로젝트가 새 slug와 일치하지 않으면
+     (예: detail → detail 이동) 이전 프로젝트가 잠깐이라도 보이지 않도록 한다.
+     (React 공식 "Adjusting state when a prop changes" 패턴 — effect 아님) */
+  if (slug !== resolvedSlug) {
+    setResolvedSlug(slug);
+    setProject(stateMatchesSlug ? stateProject : null);
+    setLoading(!stateMatchesSlug);
+    setFetchError(false);
+    setImgError(false);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!project) {
-      supabase
-        .from('portfolio_projects')
-        .select('*')
-        .ilike('title', slug.replace(/-/g, ' '))
-        .maybeSingle()
-        .then(({ data }) => {
-          setProject(data);
-          setLoading(false);
-        });
-    }
   }, [slug]);
+
+  /* 위에서 이미 확보된 프로젝트가 없을 때만 Supabase에서 조회한다 */
+  useEffect(() => {
+    if (stateMatchesSlug) return undefined;
+
+    let ignore = false;
+
+    supabase
+      .from('portfolio_projects')
+      .select('*')
+      .ilike('title', slug.replace(/-/g, ' '))
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (ignore) return;
+        if (error) {
+          setFetchError(true);
+        } else {
+          setProject(data);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        if (ignore) return;
+        setFetchError(true);
+        setLoading(false);
+      });
+
+    return () => { ignore = true; };
+  }, [slug, stateMatchesSlug]);
 
   if (loading) {
     return (
@@ -304,8 +344,10 @@ function ProjectDetailPage() {
         sx={{ bgcolor: 'var(--color-bg-primary)', minHeight: 'calc(100vh - 64px)', py: 8 }}
       >
         <Container maxWidth='md'>
-          <Typography sx={{ color: 'text.secondary', mb: 2 }}>
-            프로젝트를 찾을 수 없습니다.
+          <Typography sx={{ color: 'var(--color-text-secondary)', mb: 2 }}>
+            {fetchError
+              ? '프로젝트 정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.'
+              : '프로젝트를 찾을 수 없습니다.'}
           </Typography>
           <Button
             startIcon={<ArrowBackIcon />}
@@ -432,6 +474,7 @@ function ProjectDetailPage() {
           }}
         >
           <Typography
+            component='h1'
             variant='h2'
             sx={{ fontWeight: 900, fontSize: { xs: '2rem', md: '2.6rem' } }}
           >

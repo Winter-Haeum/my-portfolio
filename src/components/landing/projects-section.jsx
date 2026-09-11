@@ -303,19 +303,34 @@ function ComingSoonCard() {
 function ProjectsSection() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    let ignore = false;
+
     supabase
       .from('portfolio_projects')
       .select('*')
       .eq('is_published', true)
       .order('sort_order')
       .limit(HOME_CARD_LIMIT)
-      .then(({ data }) => {
-        setProjects(data || []);
+      .then(({ data, error }) => {
+        if (ignore) return;
+        if (error) {
+          setFetchError(true);
+        } else {
+          setProjects(data || []);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        if (ignore) return;
+        setFetchError(true);
         setLoading(false);
       });
+
+    return () => { ignore = true; };
   }, []);
 
   const handleNavigate = (project) => {
@@ -382,6 +397,10 @@ function ProjectsSection() {
               <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
                 <CircularProgress color='primary' />
               </Box>
+            ) : fetchError ? (
+              <Typography sx={{ color: 'var(--color-text-secondary)', textAlign: 'center', py: 4 }}>
+                프로젝트 정보를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.
+              </Typography>
             ) : (
               <Grid container spacing={3}>
                 {projects.map((project) => (
