@@ -260,7 +260,10 @@ function GuestbookForm({ onSubmitSuccess }) {
         </Box>
 
         {/* 제출 버튼 */}
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 0.6 }}>
+          <Typography sx={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>
+            등록한 방명록은 작성 후 수정할 수 없습니다.
+          </Typography>
           <Button
             type='submit'
             disabled={loading || !isSubmittable}

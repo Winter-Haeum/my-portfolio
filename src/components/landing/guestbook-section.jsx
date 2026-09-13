@@ -98,6 +98,11 @@ function GuestbookSection() {
     return () => { ignore = true; };
   }, [isAdmin]);
 
+  /* 관리자 삭제 성공 시 — 재조회 없이 현재 목록에서 바로 제거 */
+  const handleEntryDeleted = (deletedId) => {
+    setEntries((prev) => prev.filter((entry) => entry.id !== deletedId));
+  };
+
   /* 새 글 작성 후 재조회 — 이벤트 핸들러에서 호출되므로 로딩 표시를 다시 켠다 */
   const refetchEntries = () => {
     const table = isAdmin ? 'portfolio_guestbook' : 'portfolio_guestbook_public';
@@ -177,7 +182,7 @@ function GuestbookSection() {
         ) : (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {entries.map((entry) => (
-              <GuestbookCard key={entry.id} {...entry} isAdmin={isAdmin} />
+              <GuestbookCard key={entry.id} {...entry} isAdmin={isAdmin} onDeleted={handleEntryDeleted} />
             ))}
           </Box>
         )}
