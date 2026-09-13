@@ -60,7 +60,6 @@ npm run build
 ```
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_ADMIN_PASSWORD=your_admin_password
 ```
 
 `main` 브랜치에 push하면 GitHub Actions가 빌드 후 GitHub Pages로 배포합니다.

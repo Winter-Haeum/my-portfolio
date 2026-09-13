@@ -34,7 +34,6 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-          VITE_ADMIN_PASSWORD: ${{ secrets.VITE_ADMIN_PASSWORD }}
 
       - name: Add SPA fallback for React Router (GitHub Pages has no server-side routing)
         run: cp dist/index.html dist/404.html
