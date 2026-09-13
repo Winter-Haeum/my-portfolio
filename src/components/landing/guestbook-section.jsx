@@ -8,7 +8,11 @@ import GuestbookForm from './guestbook-form';
 import GuestbookCard from './guestbook-card';
 import { supabase } from '../../utils/supabase-client';
 
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+/* 관리자 Auth UID — 비밀값 아님(RLS의 guestbook_admin_select가 실제 보안 경계).
+   여기서는 UI 표시/흐름 제어(로그인 성공 시 관리자 화면으로 전환)에만 사용 */
+const ADMIN_USER_ID = '23efe695-6062-48bc-bc1c-d1f45f1bdbfa';
+
+const GUESTBOOK_COLUMNS = 'id, name, message, emoji, keyword, role, created_at, is_private';
 
 /* 관리자 영역의 텍스트 링크형 버튼 공통 스타일 (기존 디자인 그대로, 시맨틱만 button으로) */
 const ADMIN_LINK_BTN_SX = {
@@ -39,30 +43,68 @@ function GuestbookSection() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [fetchedFor, setFetchedFor] = useState(null);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
-  const [adminInput, setAdminInput] = useState('');
-  const [adminError, setAdminError] = useState(false);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState('');
 
-  /* 최초 로드 — effect 안에서 직접 Promise 체인을 사용해
-     setState가 항상 then() 콜백(비동기 시점)에서만 호출되도록 한다 */
+  /* Supabase Auth 세션 확인 + 구독 — 실제 보안 경계는 RLS(guestbook_admin_select),
+     이 UID 비교는 화면 전환(공개 view ↔ 원본 테이블)용 */
   useEffect(() => {
+    let ignore = false;
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (ignore) return;
+      setIsAdmin(session?.user?.id === ADMIN_USER_ID);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAdmin(session?.user?.id === ADMIN_USER_ID);
+    });
+
+    return () => {
+      ignore = true;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  /* isAdmin이 바뀌는 순간(로그인/로그아웃/새로고침 시 세션 복원) 렌더링 중에 즉시
+     로딩 상태로 전환한다 (effect 안에서 setState를 동기 호출하지 않기 위한 패턴 —
+     project-detail-page.jsx의 slug 전환과 동일한 방식) */
+  if (isAdmin !== fetchedFor) {
+    setFetchedFor(isAdmin);
+    setLoading(true);
+  }
+
+  /* 목록 조회 — 비관리자는 공개 view, 관리자는 원본 테이블.
+     setState는 항상 then() 콜백(비동기 시점)에서만 호출 */
+  useEffect(() => {
+    const table = isAdmin ? 'portfolio_guestbook' : 'portfolio_guestbook_public';
+    let ignore = false;
+
     supabase
-      .from('portfolio_guestbook')
-      .select('id, name, message, emoji, keyword, role, created_at, is_private')
+      .from(table)
+      .select(GUESTBOOK_COLUMNS)
       .order('created_at', { ascending: false })
       .limit(30)
       .then(({ data, error }) => {
+        if (ignore) return;
         if (!error && data) setEntries(data);
         setLoading(false);
       });
-  }, []);
+
+    return () => { ignore = true; };
+  }, [isAdmin]);
 
   /* 새 글 작성 후 재조회 — 이벤트 핸들러에서 호출되므로 로딩 표시를 다시 켠다 */
   const refetchEntries = () => {
+    const table = isAdmin ? 'portfolio_guestbook' : 'portfolio_guestbook_public';
     setLoading(true);
     supabase
-      .from('portfolio_guestbook')
-      .select('id, name, message, emoji, keyword, role, created_at, is_private')
+      .from(table)
+      .select(GUESTBOOK_COLUMNS)
       .order('created_at', { ascending: false })
       .limit(30)
       .then(({ data, error }) => {
@@ -71,20 +113,36 @@ function GuestbookSection() {
       });
   };
 
-  const handleAdminLogin = () => {
-    if (adminInput === ADMIN_PASSWORD) {
-      setIsAdmin(true);
-      setShowAdminLogin(false);
-      setAdminInput('');
-      setAdminError(false);
-    } else {
-      setAdminError(true);
+  const handleAdminLogin = async () => {
+    setAuthError('');
+    setAuthLoading(true);
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: loginEmail.trim(),
+      password: loginPassword,
+    });
+
+    setAuthLoading(false);
+
+    if (error) {
+      setAuthError('로그인 정보를 확인해주세요.');
+      return;
     }
+
+    if (data.user?.id !== ADMIN_USER_ID) {
+      setAuthError('관리자 계정이 아닙니다.');
+      await supabase.auth.signOut();
+      return;
+    }
+
+    setShowAdminLogin(false);
+    setLoginEmail('');
+    setLoginPassword('');
   };
 
-  const handleAdminLogout = () => {
-    setIsAdmin(false);
-    setAdminError(false);
+  const handleAdminLogout = async () => {
+    await supabase.auth.signOut();
+    setAuthError('');
   };
 
   const inputSx = {
@@ -142,24 +200,36 @@ function GuestbookSection() {
             </Typography>
           </>
         ) : showAdminLogin ? (
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
+          <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start', flexWrap: 'wrap' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-              <TextField
-                size='small'
-                type='password'
-                placeholder='관리자 비밀번호'
-                value={adminInput}
-                onChange={(e) => { setAdminInput(e.target.value); setAdminError(false); }}
-                onKeyDown={(e) => e.key === 'Enter' && handleAdminLogin()}
-                error={adminError}
-                sx={{ ...inputSx, width: 180 }}
-              />
-              {adminError && (
-                <Typography sx={{ fontSize: '0.7rem', color: '#d32f2f' }}>비밀번호가 틀렸어요.</Typography>
+              <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+                <TextField
+                  size='small'
+                  type='email'
+                  label='관리자 이메일'
+                  value={loginEmail}
+                  onChange={(e) => { setLoginEmail(e.target.value); setAuthError(''); }}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAdminLogin()}
+                  sx={{ ...inputSx, width: 190 }}
+                />
+                <TextField
+                  size='small'
+                  type='password'
+                  label='비밀번호'
+                  value={loginPassword}
+                  onChange={(e) => { setLoginPassword(e.target.value); setAuthError(''); }}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAdminLogin()}
+                  error={Boolean(authError)}
+                  sx={{ ...inputSx, width: 150 }}
+                />
+              </Box>
+              {authError && (
+                <Typography sx={{ fontSize: '0.7rem', color: '#d32f2f' }}>{authError}</Typography>
               )}
             </Box>
             <Button
               onClick={handleAdminLogin}
+              disabled={authLoading}
               size='small'
               sx={{
                 fontSize: '0.75rem',
@@ -171,12 +241,12 @@ function GuestbookSection() {
                 '&:hover': { bgcolor: 'var(--color-btn-hover)' },
               }}
             >
-              확인
+              {authLoading ? '확인 중...' : '확인'}
             </Button>
             <Typography
               component='button'
               type='button'
-              onClick={() => { setShowAdminLogin(false); setAdminInput(''); setAdminError(false); }}
+              onClick={() => { setShowAdminLogin(false); setLoginEmail(''); setLoginPassword(''); setAuthError(''); }}
               sx={{ ...ADMIN_LINK_BTN_SX, alignSelf: 'center' }}
             >
               취소

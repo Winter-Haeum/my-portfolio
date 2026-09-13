@@ -26,7 +26,6 @@ function GuestbookForm({ onSubmitSuccess }) {
     emoji: '🌱',
     keyword: '',
     is_private: false,
-    private_password: '',
   });
   const [loading, setLoading] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, msg: '' });
@@ -44,7 +43,7 @@ function GuestbookForm({ onSubmitSuccess }) {
   };
 
   const handlePrivateToggle = () => {
-    setForm((prev) => ({ ...prev, is_private: !prev.is_private, private_password: '' }));
+    setForm((prev) => ({ ...prev, is_private: !prev.is_private }));
   };
 
   const handleSubmit = async (e) => {
@@ -60,7 +59,6 @@ function GuestbookForm({ onSubmitSuccess }) {
         emoji: form.emoji,
         keyword: form.keyword || null,
         is_private: form.is_private,
-        private_password: form.is_private ? (form.private_password.trim() || null) : null,
       },
     ]);
     setLoading(false);
@@ -71,7 +69,7 @@ function GuestbookForm({ onSubmitSuccess }) {
     }
 
     setSnackbar({ open: true, msg: '방명록이 등록되었어요 🌱' });
-    setForm({ name: '', message: '', role: '', emoji: '🌱', keyword: '', is_private: false, private_password: '' });
+    setForm({ name: '', message: '', role: '', emoji: '🌱', keyword: '', is_private: false });
     onSubmitSuccess();
   };
 
@@ -259,18 +257,6 @@ function GuestbookForm({ onSubmitSuccess }) {
               비공개로 작성하기 🔒
             </Typography>
           </Box>
-
-          {form.is_private && (
-            <TextField
-              label='비공개 글 확인용 비밀번호 (선택)'
-              value={form.private_password}
-              onChange={handleChange('private_password')}
-              size='small'
-              type='password'
-              placeholder='관리자 확인용 비밀번호'
-              sx={{ ...inputSx, mt: 1.5, width: '100%' }}
-            />
-          )}
         </Box>
 
         {/* 제출 버튼 */}
