@@ -238,7 +238,7 @@ function GuestbookForm({ onSubmitSuccess }) {
                   width: 18,
                   height: 18,
                   border: '2px solid var(--color-border)',
-                  bgcolor: form.is_private ? 'var(--color-btn-active)' : '#FFFFFF',
+                  bgcolor: form.is_private ? 'var(--color-btn-active)' : 'var(--color-bg-card)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

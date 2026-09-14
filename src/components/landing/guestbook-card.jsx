@@ -115,7 +115,7 @@ function GuestbookCard({ id, name, message, emoji = '🌱', keyword, role, creat
   /* 공개 또는 관리자 */
   return (
     <Box sx={{ ...cardBaseSx, bgcolor: 'var(--color-bg-primary)' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', rowGap: 0.6, columnGap: 1, mb: 1 }}>
         <Box sx={{ fontSize: '1.2rem', lineHeight: 1 }}>{emoji}</Box>
         <Typography sx={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--color-text-primary)' }}>
           {name}
@@ -125,7 +125,7 @@ function GuestbookCard({ id, name, message, emoji = '🌱', keyword, role, creat
             · {role}
           </Typography>
         )}
-        <Box sx={{ ml: 'auto', display: 'flex', gap: 0.8, alignItems: 'center' }}>
+        <Box sx={{ ml: 'auto', display: 'flex', flexWrap: 'wrap', gap: 0.8, alignItems: 'center' }}>
           {is_private && (
             <Box
               sx={{

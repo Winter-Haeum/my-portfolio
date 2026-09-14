@@ -54,6 +54,8 @@ function ProjectCard({ project, onNavigate }) {
         flexDirection: { xs: 'column', md: 'row' },
         cursor: 'pointer',
         overflow: 'hidden',
+        border: '2px solid var(--color-border)',
+        boxShadow: '4px 4px 0px var(--color-border)',
         transition: 'all 0.18s ease',
         '&:hover': {
           transform: 'translate(-3px, -3px)',

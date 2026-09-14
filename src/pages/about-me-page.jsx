@@ -72,7 +72,7 @@ function AboutMePage() {
         </Box>
 
         {/* 기본 정보 카드 */}
-        <Card sx={{ mb: 4, bgcolor: 'var(--color-bg-card)' }}>
+        <Card sx={{ mb: 4, bgcolor: 'var(--color-bg-card)', border: '2px solid var(--color-border)', boxShadow: '4px 4px 0px var(--color-border)' }}>
           <CardContent sx={{ p: { xs: 3, md: 4 } }}>
             <Grid container spacing={3} sx={{ alignItems: 'center' }}>
               {/* 프로필 사진 */}
@@ -135,7 +135,7 @@ function AboutMePage() {
         </Card>
 
         {/* 콘텐츠 섹션 — 탭 네비게이션 */}
-        <Card sx={{ bgcolor: 'var(--color-bg-card)', mb: 4 }}>
+        <Card sx={{ bgcolor: 'var(--color-bg-card)', mb: 4, border: '2px solid var(--color-border)', boxShadow: '4px 4px 0px var(--color-border)' }}>
           <Box sx={{ borderBottom: '2px solid var(--color-border)', bgcolor: 'var(--color-bg-primary)' }}>
             <Tabs
               value={ activeTab }
@@ -199,7 +199,7 @@ function AboutMePage() {
         </Card>
 
         {/* 스킬 섹션 — 카테고리별 그룹핑 */}
-        <Card sx={{ bgcolor: 'var(--color-bg-card)' }}>
+        <Card sx={{ bgcolor: 'var(--color-bg-card)', border: '2px solid var(--color-border)', boxShadow: '4px 4px 0px var(--color-border)' }}>
           <CardContent sx={{ p: { xs: 3, md: 4 } }}>
             {/* 스킬 헤더 */}
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3, flexWrap: 'wrap', gap: 2 }}>

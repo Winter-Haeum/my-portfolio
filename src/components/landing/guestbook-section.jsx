@@ -240,7 +240,7 @@ function GuestbookSection() {
                 fontSize: '0.75rem',
                 border: '1.5px solid var(--color-border)',
                 color: 'var(--color-text-primary)',
-                bgcolor: '#FFFFFF',
+                bgcolor: 'var(--color-bg-card)',
                 textTransform: 'none',
                 px: 1.5,
                 '&:hover': { bgcolor: 'var(--color-btn-hover)' },

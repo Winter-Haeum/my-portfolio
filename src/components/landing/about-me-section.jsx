@@ -280,7 +280,7 @@ function AboutMeSection() {
                     ? 'var(--color-primary)'
                     : item.isHighlight
                     ? 'var(--color-secondary)'
-                    : '#fff';
+                    : 'var(--color-bg-card)';
                   const cardBg = item.isCurrent
                     ? 'var(--color-accent)'
                     : item.isHighlight
