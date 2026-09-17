@@ -44,10 +44,11 @@ const PROJECT_DETAILS = {
     features: [
       '게시글 작성 · 상세 · 수정, 마크다운 렌더링',
       '사용자 인증',
-      '댓글 · 대댓글',
+      '댓글 · 대댓글 및 댓글 페이지네이션',
       '카테고리 · 상태 태그(질문 · 해결완료 등) 분류',
       '정렬 · 태그 필터, 키워드 검색',
-      '학습 기록 공유와 질문 · 답변',
+      '마이페이지 — 내 게시글 · 공부 잔디 · 오늘 할 일',
+      '방명록',
     ],
     techStack: ['React', 'JavaScript', 'MUI', 'React Router', 'Zustand', 'Supabase', 'Vite', 'GitHub Pages'],
     techHighlights: [
@@ -75,18 +76,26 @@ const PROJECT_DETAILS = {
     tagline: '익숙한 운동을 부담 없이 기록하고 꾸준히 이어가기 위한 운동 SNS 서비스',
     intro: [
       '기본적인 운동을 쉽게 기록하고 꾸준히 이어갈 수 있도록 사용자 흐름과 주요 기능을 직접 기획·구현한 운동 SNS 서비스입니다.',
-      '운동 기록뿐 아니라 게시글과 피드, 일기, 챌린지, 프로필을 함께 구성해 기록과 지속적인 사용이 연결될 수 있도록 제작했습니다.',
+      '운동 기록뿐 아니라 게시글과 피드, 일기, 챌린지, 성장형 캐릭터를 함께 구성해 기록과 지속적인 사용이 연결될 수 있도록 제작했습니다.',
     ],
     features: [
-      '게시글 작성 및 관리',
-      '피드',
-      '운동 기록',
-      '일기',
-      '챌린지',
+      '이메일 회원가입 · 로그인, 접근 제어',
+      '운동 타이머와 운동 기록 저장',
+      '운동 기록관과 운동 일기',
+      '게시글 · 피드 · 좋아요',
+      '운동 기록 기반 캐릭터 XP · 레벨 성장',
+      '식단 기록',
+      '챌린지 생성 · 참여 · 진행률',
+      '일일 걸음 수 연동 (Android Health Connect)',
       '프로필',
     ],
-    techStack: ['React', 'JavaScript', 'CSS', 'Vite', 'Supabase', 'GitHub Pages'],
-    techHighlights: [],
+    techStack: ['React', 'JavaScript', 'MUI', 'React Router', 'Supabase', 'Capacitor', 'Vite', 'GitHub Pages'],
+    techHighlights: [
+      { tech: 'MUI', usage: '화면 전반의 UI 컴포넌트 구성' },
+      { tech: 'React Router', usage: '라우팅 및 로그인 상태별 접근 제어' },
+      { tech: 'Supabase', usage: '인증 · 운동 기록 · 게시글 데이터 연결' },
+      { tech: 'Capacitor', usage: 'Android 앱 빌드 및 Health Connect 걸음 수 연동' },
+    ],
     scopeLabel: '구현 범위',
     scope: [
       '게시글·피드·운동 기록·일기·챌린지·프로필 등 서비스 전반의 화면과 기능을 구현했습니다.',
@@ -106,7 +115,7 @@ const PROJECT_DETAILS = {
     tagline: '개발·AI·디지털 도구 학습 내용을 정리하고 다시 찾아보기 위한 개인 학습 아카이브',
     intro: [
       '개발, AI 활용, 디지털 도구 등 학습한 내용을 주제별로 정리하고 필요할 때 다시 참고하기 위해 만든 웹 기반 학습 아카이브입니다.',
-      '현재는 JavaScript, React, 코딩 테스트, AI·바이브 코딩 등을 중심으로 구성하고 있으며, 필요한 내용을 빠르게 찾을 수 있도록 정보 구조와 이동 흐름을 중심으로 설계했습니다.',
+      '현재 HTML · CSS · JavaScript · React · TypeScript · 코딩 테스트 · AI 바이브 코딩 등 17개 카테고리로 구성되어 있으며, 필요한 내용을 빠르게 찾을 수 있도록 정보 구조와 이동 흐름을 중심으로 설계했습니다.',
     ],
     features: [
       '카테고리 · 섹션 · 문서 3단계 구조 탐색',
@@ -115,8 +124,9 @@ const PROJECT_DETAILS = {
       '라이트 / 다크 모드',
       '문서별 댓글',
       '방문자 수 표시',
+      '문서별 체크리스트 — 체크 상태 저장',
     ],
-    techStack: ['React', 'JavaScript', 'CSS', 'Vite', 'React Router', 'Supabase', 'GitHub Pages'],
+    techStack: ['React', 'JavaScript', 'MUI', 'Vite', 'React Router', 'Supabase', 'GitHub Pages'],
     techHighlights: [],
     scopeLabel: '설계·구현 포인트',
     scope: [
